@@ -1,0 +1,83 @@
+@charset "UTF-8";
+/*Felicity Aldava */
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  font-family: sans-serif;
+  line-height: 1.15;
+  height: 100%;
+  background-image: linear-gradient(0deg, #F9E1CB 0%, #FA7F0D 90%);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.outer_wrap{
+	height: 100%;
+	position: relative;
+}
+
+.login_pannel{
+	width: 400px;
+	height: 300px
+	position: absolute;
+	top: 50%;
+	left: 50%
+	margin-top: -150px;
+	margin-left: -200px;
+}
+
+.button {
+	background-color: white;
+	border-radius: 5px;
+	display: inline-block;
+}
+.color_orange{
+	color: #fd7e14;
+}
+
+.background_gray{
+	background: #EEEAE7;
+}
+
+.color_gray{
+	color: #A7A4A1 ;
+}
+
+.banner{
+	width:100%;
+	height:50px;
+	color: white;
+	font-size: 1.75rem;
+	font-family:Times New Roman;
+	text-align:center;
+	padding-top:20px
+}
+
+.second_layer_title{
+	color: #A7A4A1;
+	font-size: 1.25rem;
+	padding: 10px;
+}
+
+.third_layer_title{
+	color: #A7A4A1;
+	font-size:0.75rem;
+	padding: 0px 10px 10px 20px;
+}
+
+.form_row{
+	height: 2rem;
+	margin-top:10px;
+	background: white;
+	margin-left:20px;
+	margin-right: 20px;
+	border:1px solid #8E8C8A ;
+	padding-left: 10px;
+}
+
