@@ -12,8 +12,9 @@ body {
   font-family: sans-serif;
   line-height: 1.15;
   height: 100%;
-  background-image: linear-gradient(0deg, #F9E1CB 0%, #FA7F0D 90%);
-  -webkit-text-size-adjust: 100%;
+  background-color: #F9E1CB;
+  /*background-image: linear-gradient(0deg, #F9E1CB 0%, #FA7F0D 90%);
+  -webkit-text-size-adjust: 100%;*/
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
@@ -52,7 +53,7 @@ body {
 .banner{
 	width:100%;
 	height:50px;
-	color: white;
+	color: black;
 	font-size: 1.75rem;
 	font-family:Times New Roman;
 	text-align:center;
@@ -80,4 +81,3 @@ body {
 	border:1px solid #8E8C8A ;
 	padding-left: 10px;
 }
-
