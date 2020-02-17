@@ -6,28 +6,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="stylesheet" href="../css/bootstrap/css/bootstrap.min.css"/>
 <link href="../css/myStyle.css" type="text/css" rel="stylesheet"/>
+<title>signing in</title>
 </head>
 <body>
-	<div class="banner">Pet Adoption</div>
-   	<div class="modal-dialog" style="padding:125px 10% 25%;">
+  <div class="banner">Pet Adoption</div>
+    <div class="modal-dialog" style="padding:125px 10% 25%;">
        <div class="modal-content">
            <div class="modal-header">
                <h4 class="modal-title text-center" id="myModalLabel">Welcome</h4>
            </div>
            <div class="modal-body" id = "model-body">
                <div class="form-group">
-                   <input id="account" type="text" class="form-control" placeholder="Account"/>
+                  <label for="username">Username:</label>
+                  <input id="username" type="text" class="form-control" placeholder="username">
                </div>
                <div class="form-group">
-                   <input id="pwd" type="password" class="form-control"  placeholder="Password"/>
+                  <label for="pwd">Password:</label>
+                   <input id="pwd" type="password" class="form-control"  placeholder="password"/>
+               </div>
+
+               <div>
+                 <input type="checkbox" name="remember" value="remember" id="remember">
+                 <label for="remember">Remember me</label> 
+                </div>
+                <div>
+                   <button type="button" class="btn btn-primary form-control" onclick="login()">Sign in</button>
                </div>
            </div>
            <div class="modal-footer" style="display:block">
-               <div class="form-group  float-left">
-                   <button type="button" class="btn btn-primary form-control" onclick="login()">Sign in</button>
+               
+               <div class="form-group float-left">
+                    <button type="button" class="btn btn-default form-control" onclick="signup()">Sign up</button>
                </div>
-               <div class="form-group float-right">
-                   	<button type="button" class="btn btn-default form-control" onclick="signup()">Sign up</button>
+               <div class="form-group  float-right">
+                    <button type="button" class="btn btn-default form-control" onclick="">forgot password?</button>
                </div>
            </div>
        </div>
