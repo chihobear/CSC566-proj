@@ -55,14 +55,14 @@ function submit_profile(){
 	var phone = $("#phone").val();
 	var userName = $("#userName").val();
 	var pwd = $("#pwd").val();
-	var position = "Tucson";        //Hard code for now.
+	     //Hard code for now.
 	
 	$.ajax({
 		type:"POST",
 		url:"../../src/controller.php",
 		dataType: "json",
 		data: {firstName: firstName, lastName: lastName, email: email, phone: phone, userName: userName,
-			   pwd: pwd, position: position},
+			   pwd: pwd},
 		success: function(data){
 			//ToDo
 			console.log("profile success");

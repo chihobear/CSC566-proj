@@ -5,7 +5,7 @@ class DatabaseAdaptor {
     // Connect to an existing data based named 'first'
     public function __construct() {
         $dataBase =
-        'mysql:dbname=test;charset=utf8;host=127.0.0.1';
+        'mysql:dbname=pet;charset=utf8;host=127.0.0.1';
         $user =
         'root';
         $password =
@@ -21,21 +21,26 @@ class DatabaseAdaptor {
     } // . . . continued
     
     public function userLogin($loginUsername,$loginPwd ){
-        $stmt = $this->DB->prepare("Select * from test where 
+        $stmt = $this->DB->prepare("Select * from profile where 
 			username =".$loginUsername." and 
 			password = " .$loginPwd.";");
         $stmt->execute();
         return $stmt->fetchAll ( PDO::FETCH_ASSOC );
     }
     
-    public function insertUser($id, $first_name,$last_name,
-                   $phone, $email, $username, $pwd){
-        $stmt = $this->DB->prepare("INSERT INTO test VALUES ('".
-            $id."', '".$first_name."', '".$last_name."', '".
-            $phone."', '".$email."', '".$username."', '"
+    public function insertUser( $firstName,$lastName,
+                   $phone, $email, $userName, $pwd){
+					   
+        $stmt = $this->DB->prepare("INSERT INTO profile 
+		(first_name,last_name,phone,email,username,password)
+		
+		VALUES ('"
+          .$firstName."', '".$lastName."', '".
+            $phone."', '".$email."', '".$userName."', '"
             .$pwd."');");
         $stmt->execute();
-        return $stmt->fetchAll ( PDO::FETCH_ASSOC );
+		
+        return 0;
     }
 }
 ?>
