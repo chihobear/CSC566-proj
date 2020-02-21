@@ -20,18 +20,20 @@ class DatabaseAdaptor {
         }
     } // . . . continued
     
-    public function getValue($substr){
-        $stmt = $this->DB->prepare("Select * from test where value =".$substr.";");
+    public function userLogin($loginUsername,$loginPwd ){
+        $stmt = $this->DB->prepare("Select * from test where 
+			username =".$loginUsername." and 
+			password = " .$loginPwd.";");
         $stmt->execute();
         return $stmt->fetchAll ( PDO::FETCH_ASSOC );
     }
     
     public function insertUser($id, $first_name,$last_name,
-                   $phone, $email, $username, $password){
+                   $phone, $email, $username, $pwd){
         $stmt = $this->DB->prepare("INSERT INTO test VALUES ('".
             $id."', '".$first_name."', '".$last_name."', '".
             $phone."', '".$email."', '".$username."', '"
-            .$password."');");
+            .$pwd."');");
         $stmt->execute();
         return $stmt->fetchAll ( PDO::FETCH_ASSOC );
     }
