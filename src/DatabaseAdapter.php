@@ -5,7 +5,7 @@ class DatabaseAdaptor {
     // Connect to an existing data based named 'first'
     public function __construct() {
         $dataBase =
-        'mysql:dbname=test;charset=utf8;host=127.0.0.1';
+        'mysql:dbname=pet;charset=utf8;host=127.0.0.1';
         $user =
         'root';
         $password =
@@ -21,21 +21,28 @@ class DatabaseAdaptor {
     } // . . . continued
     
     public function userLogin($loginUsername,$loginPwd ){
-        $stmt = $this->DB->prepare("Select * from test where 
-			username =".$loginUsername." and 
+        $stmt = $this->DB->prepare("Select * from profile where
+			username =".$loginUsername." and
 			password = " .$loginPwd.";");
         $stmt->execute();
         return $stmt->fetchAll ( PDO::FETCH_ASSOC );
     }
     
-    public function insertUser($id, $first_name,$last_name,
-                   $phone, $email, $username, $pwd){
-        $stmt = $this->DB->prepare("INSERT INTO test VALUES ('".
-            $id."', '".$first_name."', '".$last_name."', '".
-            $phone."', '".$email."', '".$username."', '"
-            .$pwd."');");
-        $stmt->execute();
-        return $stmt->fetchAll ( PDO::FETCH_ASSOC );
+    public function insertUser($first_name,$last_name,
+        $phone, $email, $username, $pwd){
+            $stmt = $this->DB->prepare("SELECT id FROM profile where username=".$username);
+            $stmt->execute();
+            if($stmt->fetchALL()!=NULL){
+                echo "Username already exits! Please try another username!!!\n";
+                return 0;
+            }
+            $stmt = $this->DB->prepare("INSERT INTO profile (first_name, last_name,phone,
+            email, username, password) VALUES ('"
+                .$first_name."', '".$last_name."', '".
+                $phone."', '".$email."', '".$username."', '"
+                .$pwd."');");
+            $stmt->execute();
+            return 1;
     }
 }
 ?>
