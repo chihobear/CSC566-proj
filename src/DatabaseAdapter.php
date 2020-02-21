@@ -25,5 +25,15 @@ class DatabaseAdaptor {
         $stmt->execute();
         return $stmt->fetchAll ( PDO::FETCH_ASSOC );
     }
+    
+    public function insertUser($id, $first_name,$last_name,
+                   $phone, $email, $username, $password){
+        $stmt = $this->DB->prepare("INSERT INTO test VALUES ('".
+            $id."', '".$first_name."', '".$last_name."', '".
+            $phone."', '".$email."', '".$username."', '"
+            .$password."');");
+        $stmt->execute();
+        return $stmt->fetchAll ( PDO::FETCH_ASSOC );
+    }
 }
 ?>
