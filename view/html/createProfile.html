@@ -23,12 +23,12 @@
 	   		</tr>
 	   		<tr class="background_gray">
 	   			<td>
-	   				<div class="form_row"><input type="text" id="Fname" class="border-0 my-1"  placeholder="First name"></input></div>
-	   				<div class="form_row"><input type="text" id="Lname" class="border-0 my-1" placeholder="Last name"></input></div>
-	   				<div class="form_row"><input type="text" id="email" class="border-0 my-1" placeholder="Email"></input></div>
-	   				<div class="form_row"><input type="text" id="phone" class="border-0 my-1" placeholder="Phone (optional)"></input></div>
-	   				<div class="form_row"><input type="text" id="userName" class="border-0 my-1" placeholder="Username"></input></div>
-	   				<div class="form_row"><input type="password" id="pwd" class="border-0 my-1" placeholder="Password"></input></div>
+	   				<div class="form_row"><input type="text" id="Fname" class="border-0 my-1"  placeholder="First name" pattern = "[A-Z a-z]*" required ></input></div>
+	   				<div class="form_row"><input type="text" id="Lname" class="border-0 my-1" placeholder="Last name" pattern = "[A-Z a-z]*" required ></input></div>
+	   				<div class="form_row"><input type="text" id="email" class="border-0 my-1" placeholder="Email" "[A-Z a-z]*"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required ></input></div>
+	   				<div class="form_row"><input type="text" id="phone" class="border-0 my-1" placeholder="Phone (optional)" pattern = "^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" ></input></div>
+	   				<div class="form_row"><input type="text" id="userName" class="border-0 my-1" placeholder="Username" required ></input></div>
+	   				<div class="form_row"><input type="password" id="pwd" class="border-0 my-1" placeholder="Password" required ></input></div>
 	   				<div class="form_row my-2"><input type="password" id="Rpwd"class="border-0 my-1" placeholder="Retype your password"></input></div>
 	   			</td>
 	   		</tr>

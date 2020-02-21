@@ -1,5 +1,5 @@
 <?php
-//Felicity Aldava
+
 include "DatabaseAdapter.php";
 $theDB = new DatabaseAdaptor();
 $sub_str = $_GET["value"];

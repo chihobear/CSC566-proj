@@ -28,17 +28,17 @@
 //}
 
 function login(){
-	var account = $("#account").val();
-	var pwd = $("#pwd").val();
+	var loginUsername = $("#account").val();
+	var loginPwd = $("#pwd").val();
 	//ToDo user input check
 	
 	$.ajax({
 		type:"POST",
-		url:"",
+		url:"controller.php",
 		dataType: "json",
-		data: {account: account, pwd: pwd},
+		data: {loginUsername: loginUsername, loginPwd: loginPwd},
 		success: function(data){
-			//ToDo
+
 		}
 	});
 }
@@ -48,6 +48,7 @@ function signup(){
 }
 
 function submit_profile(){
+	
 	var firstName = $("#Fname").val();
 	var lastName = $("#Lname").val();
 	var email = $("#email").val();
@@ -58,7 +59,7 @@ function submit_profile(){
 	
 	$.ajax({
 		type:"POST",
-		url:"",
+		url:"controller.php",
 		dataType: "json",
 		data: {firstName: firstName, lastName: lastName, email: email, phone: phone, userName: userName,
 			   pwd: pwd, position: position},
@@ -66,4 +67,5 @@ function submit_profile(){
 			//ToDo
 		}
 	});
+	
 }
