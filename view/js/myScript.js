@@ -70,3 +70,52 @@ function submit_profile(){
 	});
 	
 }
+
+function myProfile(){
+	var obj = $("#age");
+	for(var i = 1;i < 100;i++){
+		obj.append(new Option(i, i));
+	}
+
+	var petAge = $("#pet-age");
+	for (var i = 1;i < 11;i++){
+		petAge.append(new Option(i + " years old", i));
+	}
+}
+
+function updateMyProfile(){
+	var btn = $(".btn-success");
+	//submit
+	if (btn.size() == 0){
+		//Make all input label not editable
+		$(".input-label").each(function(){
+	    	$(this).addClass("not-clicked");
+		});
+		//Make the textarea block not editable
+		$(".favorite-block .myProfile-font-small").each(function(){
+			$(this).attr("contenteditable", "false");
+		});
+		$("#self-introduction").attr("contenteditable", "false");
+		//Change the button
+		btn = $(".btn-primary");
+		btn.removeClass("btn-primary");
+		btn.addClass("btn-success");
+		btn.text("Update");
+	}
+	else{
+		//Make all input label editable
+		$(".not-clicked").each(function(){
+	    	$(this).removeClass("not-clicked");
+		});
+		//Make the textarea block editable
+		$(".favorite-block .myProfile-font-small").each(function(){
+			$(this).attr("contenteditable", "true");
+		});
+		$("#self-introduction").attr("contenteditable", "true");
+		//Change the button
+		btn.removeClass("btn-success");
+		btn.addClass("btn-primary");
+		btn.text("Submit");
+	}
+
+}

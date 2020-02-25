@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.min.css"/>
+<link href="../css/myStyle.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+	<div class= "main_center">
+		<div>
+			<div class="float-left"><img class="rounded-circle" width="56" height="56" src="../source/user.jpg"></img></div>
+			<div class="float-left ml-2">
+				<span class="myProfile-font strong">Hi I am chihobear!</span>
+				<table class="myProfile-font mt-2">
+					<tr>
+						<td>
+							<div>Role: 
+								<select id="role" class="not-clicked input-label">
+									<option value="Adopter" selected="true">Adopter</option>
+									<option value="Owner">Owner</option>
+								</select><hr/>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><div>Name: <input value="Chenghao Xiong" class="not-clicked input-label"></input><hr/></div></td>
+					</tr>
+					<tr>
+						<td><div>Age: 
+							<select id="age" class="not-clicked input-label">
+								<option value="0" selected="true">**</option>
+							</select><hr/>
+						</div></td>
+					</tr>
+					<tr>
+						<td><div>Contact: <input value="chenghaoxiong@email.arizona.edu" class="not-clicked input-label"></input><hr/></div></td>
+					</tr>
+				</table>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div>
+			<div class="float-left image-size">Who am I?</div>
+			<div class="float-left ml-2">
+				<textarea class="myProfile-font not-clicked input-label" style="border:1px solid #8E8C8A; width:255px; height: 50px" placeholder="Information is stolen by aliens"></textarea>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		
+		<div id="Pet-block">
+			<div class="mt-2 pet-block">
+				<p class="mt-1 ml-1">I have a pet</p>
+				<div class = "ml-2 myProfile-font">
+					<div class="float-left">Name: <input class="not-clicked bg-white input-label" value="Alice" style="width:50px"></input></div>
+					<div class="float-left">Age: 
+						<select id="pet-age" class="not-clicked bg-white input-label" style="width:80px">
+							<option value="0" selected="true">**</option>
+						</select></div>
+					<div class="float-left">Gender: 
+						<select class="not-clicked bg-white input-label" style="width:50px" id="pet-gender">
+							<option value="male" selected="true">male</option>
+							<option value="female">female</option>
+						</select></div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="p-2 row">
+					<div class="col-4"><img width="56" height="56" src="../source/user.jpg"></img></div>
+					<div class="col-4"><img width="56" height="56" src="../source/user.jpg"></img></div>
+					<div class="col-4"><img width="56" height="56" src="../source/user.jpg"></img></div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="p-2">
+					<div class="textarea-adjust myProfile-font" id="self-introduction">You will know my features when you know me</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="mt-2 favorite-block my-favorite">
+			<p class="mt-1 ml-1">What is my favorite?</p>
+			<div class="row p-2">
+				<div class="col-4"><div class="img-thumbnail"><img style="margin:0 10px" width="56" height="56" src="../source/user.jpg"></img><div class="myProfile-font-small adjust mt-2">I have an apple that I bought yesterday</div></div></div>
+				<div class="col-4"><div class="img-thumbnail"><img style="margin:0 10px" width="56" height="56" src="../source/user.jpg"></img><div class="myProfile-font-small adjust mt-2">Hello world!</div></div></div>
+				<div class="col-4"><div class="img-thumbnail"><img style="margin:0 10px" width="56" height="56" src="../source/user.jpg"></img><div class="myProfile-font-small adjust mt-2">a</div></div></div>
+			</div>
+		</div>
+		<div class="mt-3 myProfile-font">
+			<div class="float-left pt-3">
+				<input type="checkbox" name="terms">I agree with the terms.</input>
+			</div>
+			<div class="float-right">
+				<button class="btn btn-success btn-sm" onclick="updateMyProfile()">Update</button>
+			<div>
+		</div>
+	</div>
+<script src="../js/jquery-latest.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/myScript.js"></script>
+<script>Vue.config.productionTip=false</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		myProfile();
+	});
+</script>
+</body>
+</html>

@@ -11,10 +11,10 @@ html {
 body {
   font-family: sans-serif;
   line-height: 1.15;
-  height: 100%;
+  height: auto;
   background-color: #F9E1CB;
-  /*background-image: linear-gradient(0deg, #F9E1CB 0%, #FA7F0D 90%);
-  -webkit-text-size-adjust: 100%;*/
+  background-repeat: no-repeat;
+  -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
@@ -81,3 +81,77 @@ body {
 	border:1px solid #8E8C8A ;
 	padding-left: 10px;
 }
+
+.main_center{
+	width: 335px;
+	margin: 20px auto;
+}
+
+.myProfile-font{
+	font-size: .8rem;
+}
+
+.myProfile-font-small{
+	font-size: .5rem;
+}
+
+hr{
+	margin: 0
+}
+
+.strong{
+	font-weight: bolder;
+}
+
+.image-size{
+	width : 56px;
+	height : 56px;
+}
+
+.not-clicked{
+	 pointer-events: none;
+}
+
+.input-label{
+	 background-color: transparent;
+	 border: 0;
+	 width: 210px;
+}
+
+.pet-block{
+	border: 1px solid #8E8C8A;
+	border-radius: 5px;
+	background-color: white;
+	
+}
+
+.textarea-adjust{
+	width: 100%;
+    overflow: auto;
+    word-break: break-all;
+    border: 1px solid #8E8C8A;
+    border-radius: 2px;
+}
+
+.favorite-block{
+	border: 1px solid #8E8C8A;
+	border-radius: 5px;
+	background-color: white;
+}
+
+.pet-block  img{
+	padding: 0.25rem;
+  	background-color: #fff;
+  	border: 1px solid #dee2e6;
+  	border-radius: 0.25rem;
+  	max-width: 100%;
+ 	 height: auto;
+}
+
+.adjust{
+	width: 100%;  
+    height: auto;  
+    word-wrap:break-word;  
+    overflow: hidden;
+}
+
