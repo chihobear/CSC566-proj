@@ -12,6 +12,7 @@
 	<div class="float-right">
 		<p id="location" class="color_gray" onclick="toLocation">Location</p>
 	</div>
+	<form  onsubmit = "submit_profile(); return false">
    	<div style="padding: 60px 10% 10% 10%" align="center">
    		<table>
 	   	<tbody>
@@ -50,13 +51,14 @@
 	   		</tr>
 	   		<tr>
 	   			<td>
-	   				<button class="btn btn-primary" onclick="submit_profile()">submit</button>
+	   				<input class="btn btn-primary" type = "submit">
 	   				<p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
 	   			</td>
 	   		</tr>
 	   	</tbody>
 	   	</table>
    	</div>
+	</form>
 <script src="../js/jquery-latest.js"></script>
 <script src="../js/vue.js"></script>
 <script src="../js/myScript.js"></script>

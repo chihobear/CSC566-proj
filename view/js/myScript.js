@@ -26,6 +26,7 @@
 //		}
 //	});
 //}
+var pwdMatch = false;
 
 function login(){
 	var loginUsername = $("#username").val();
@@ -48,13 +49,23 @@ function signup(){
 }
 
 function submit_profile(){
-	
+
 	var firstName = $("#Fname").val();
 	var lastName = $("#Lname").val();
 	var email = $("#email").val();
 	var phone = $("#phone").val();
 	var userName = $("#userName").val();
 	var pwd = $("#pwd").val();
+	var rpwd = $("#Rpwd").val();
+	/*
+	alert("a");
+	if(firstName.value != lastName.value) {
+		lastName.setCustomValidity("Passwords Don't Match");
+		alert("b");
+	  }
+	  alert("b");
+	  console.log(firstName,lastName);
+	  */
 	     //Hard code for now.
 	
 	$.ajax({
@@ -68,6 +79,7 @@ function submit_profile(){
 			console.log("profile success");
 		}
 	});
+	
 	
 }
 
@@ -119,3 +131,21 @@ function updateMyProfile(){
 	}
 
 }
+/*
+function checkPasswordMatch() {
+    var pwd = $("#pwd");
+    var confirmPwd = $("#Rpwd");
+
+    if (pwd.val() != confirmPwd.val()){
+        pwdMatch = false;
+		console.log("no");
+	}
+    else{
+        pwdMatch = true;
+		console.log("yes");
+	}
+}
+$(document).ready(function () {
+   $("#Rpwd").keyup(checkPasswordMatch);
+});
+*/
