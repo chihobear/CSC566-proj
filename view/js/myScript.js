@@ -57,15 +57,13 @@ function submit_profile(){
 	var userName = $("#userName").val();
 	var pwd = $("#pwd").val();
 	var rpwd = $("#Rpwd").val();
-	/*
+	
 	alert("a");
-	if(firstName.value != lastName.value) {
-		lastName.setCustomValidity("Passwords Don't Match");
-		alert("b");
+	if(pwd != rpwd) {
+		 $("#Rpwd")[0].setCustomValidity("Passwords Don't Match");
 	  }
-	  alert("b");
 	  console.log(firstName,lastName);
-	  */
+	  
 	     //Hard code for now.
 	
 	$.ajax({
