@@ -34,7 +34,7 @@ function login(){
 	//ToDo user input check
 	console.log("log");
 	$.ajax({
-		type:"GET",
+		type:"POST",
 		url:"../../src/controllerLogin.php",
 		dataType: "json",
 		data: {loginUsername: loginUsername, loginPwd: loginPwd},

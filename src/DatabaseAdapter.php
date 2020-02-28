@@ -27,14 +27,14 @@ class DatabaseAdaptor {
 
 			password = '" .$loginPwd."';");
         $stmt->execute();
-		/*
+		
 		if ($stmt->execute())
 		{
 			if ($stmt->rowCount()==1){
 				return 1;
 			}
-		}*/
-        return $stmt->fetchAll ( PDO::FETCH_ASSOC );
+		}
+        //return $stmt->fetchAll ( PDO::FETCH_ASSOC );
 		
     }
     
