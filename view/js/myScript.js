@@ -32,14 +32,15 @@ function login(){
 	var loginUsername = $("#username").val();
 	var loginPwd = $("#pwd").val();
 	//ToDo user input check
-	
+	console.log("log");
 	$.ajax({
-		type:"POST",
+		type:"GET",
 		url:"../../src/controller.php",
 		dataType: "json",
 		data: {loginUsername: loginUsername, loginPwd: loginPwd},
 		success: function(data){
 			console.log("login success");
+			console.log(data);
 		}
 	});
 }

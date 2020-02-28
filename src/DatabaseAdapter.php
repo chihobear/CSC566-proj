@@ -22,12 +22,20 @@ class DatabaseAdaptor {
     
     public function userLogin($loginUsername,$loginPwd ){
 
-        $stmt = $this->DB->prepare("Select * from profile where 
-			username =".$loginUsername." and 
+        $stmt = $this->DB->prepare("SELECT * FROM profile WHERE 
+			username ='".$loginUsername."' AND
 
-			password = " .$loginPwd.";");
+			password = '" .$loginPwd."';");
         $stmt->execute();
+		/*
+		if ($stmt->execute())
+		{
+			if ($stmt->rowCount()==1){
+				return 1;
+			}
+		}*/
         return $stmt->fetchAll ( PDO::FETCH_ASSOC );
+		
     }
     
 
