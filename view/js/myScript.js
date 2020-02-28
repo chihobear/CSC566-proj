@@ -35,7 +35,7 @@ function login(){
 	console.log("log");
 	$.ajax({
 		type:"GET",
-		url:"../../src/controller.php",
+		url:"../../src/controllerLogin.php",
 		dataType: "json",
 		data: {loginUsername: loginUsername, loginPwd: loginPwd},
 		success: function(data){
@@ -69,7 +69,7 @@ function submit_profile(){
 	
 	$.ajax({
 		type:"POST",
-		url:"../../src/controller.php",
+		url:"../../src/controllerSignUp.php",
 		dataType: "json",
 		data: {firstName: firstName, lastName: lastName, email: email, phone: phone, userName: userName,
 			   pwd: pwd},
