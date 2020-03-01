@@ -26,33 +26,41 @@ class DatabaseAdaptor {
 			username ='".$loginUsername."' AND
 
 			password = '" .$loginPwd."';");
-        $stmt->execute();
-		
-		if ($stmt->execute())
-		{
-			if ($stmt->rowCount()==1){
-				return 1;
-			}
-		}
-        //return $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        $check = $stmt->execute();
+		//$num_rows = $check->num_rows;
+
+			//return $num_rows;
+        return $stmt->fetchAll ( PDO::FETCH_ASSOC );
 		
     }
     
 
     public function insertUser( $firstName,$lastName,
                    $phone, $email, $userName, $pwd){
-					   
-        $stmt = $this->DB->prepare("INSERT INTO profile 
-		(first_name,last_name,phone,email,username,password)
-		
-		VALUES ('"
-          .$firstName."', '".$lastName."', '".
-            $phone."', '".$email."', '".$userName."', '"
-            .$pwd."');");
-        $stmt->execute();
-		
-        return 0;
+				
+		$usernamCheck = $this->DB->prepare("SELECT * FROM profile WHERE 
+			username ='".$userName."';");
+			
+		if ($usernamCheck ->rowCount() != 0)
+		{
+			echo "Username already exist";
+			return 1;
+		}
+		else
+		{			
+			$stmt = $this->DB->prepare("INSERT INTO profile 
+			(first_name,last_name,phone,email,username,password)
+			VALUES ('"
+			  .$firstName."', '".$lastName."', '".
+				$phone."', '".$email."', '".$userName."', '"
+				.$pwd."');");
+			$stmt->execute();
+			return 0;
+		}
+
 
     }
+	
+
 }
 ?>

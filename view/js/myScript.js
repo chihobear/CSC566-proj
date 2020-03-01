@@ -32,15 +32,19 @@ function login(){
 	var loginUsername = $("#username").val();
 	var loginPwd = $("#pwd").val();
 	//ToDo user input check
-	console.log("log");
 	$.ajax({
 		type:"POST",
 		url:"../../src/controllerLogin.php",
 		dataType: "json",
 		data: {loginUsername: loginUsername, loginPwd: loginPwd},
-		success: function(data){
-			console.log("login success");
-			console.log(data);
+		success: function(data){	
+			if (data === undefined || data.length == 0) {
+				console.log("no data");
+			}
+			else
+			{
+				location.href = "myProfile.html";
+			}
 		}
 	});
 }
@@ -50,7 +54,9 @@ function signup(){
 }
 
 function submit_profile(){
-
+	
+	var correctPassword = false;
+	var usernameNotExist = false;
 	var firstName = $("#Fname").val();
 	var lastName = $("#Lname").val();
 	var email = $("#email").val();
@@ -59,11 +65,9 @@ function submit_profile(){
 	var pwd = $("#pwd").val();
 	var rpwd = $("#Rpwd").val();
 	
-	alert("a");
 	if(pwd != rpwd) {
 		 $("#Rpwd")[0].setCustomValidity("Passwords Don't Match");
 	  }
-	  console.log(firstName,lastName);
 	  
 	     //Hard code for now.
 	
@@ -73,9 +77,9 @@ function submit_profile(){
 		dataType: "json",
 		data: {firstName: firstName, lastName: lastName, email: email, phone: phone, userName: userName,
 			   pwd: pwd},
-		success: function(data){
+		success: function(){
 			//ToDo
-			console.log("profile success");
+			//location.href = "myProfile.html";	
 		}
 	});
 	
