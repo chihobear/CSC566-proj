@@ -79,11 +79,10 @@ body {
 	margin-left:20px;
 	margin-right: 20px;
 	border:1px solid #8E8C8A ;
-	padding-left: 10px;
 }
 
 .main_center{
-	width: 335px;
+	width: 90%;
 	margin: 20px auto;
 }
 
@@ -153,5 +152,49 @@ hr{
     height: auto;  
     word-wrap:break-word;  
     overflow: hidden;
+}
+
+.search{
+	border-radius: 50px;
+    background: #f5f5f5;
+    border: 0px;
+}
+
+.top-location .search{
+	border-radius: 16px;
+    background: #f5f5f5;
+    border: 0px;
+    height: 20px;
+}
+
+.myProfile-font tr{
+	height: 20px;
+}
+
+.bottom-profile{
+	z-index: 1;
+}
+
+.top-location{
+    height:450px;
+    position:absolute;
+    z-index:998;
+    background-color:#fff;
+    display: none;
+    bottom: 0px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+.blur-notClicked{
+	float:left-webkit-filter: blur(1.5px);
+	filter: blur(1.5px);
+	pointer-events: none;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 

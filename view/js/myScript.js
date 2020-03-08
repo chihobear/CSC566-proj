@@ -79,7 +79,7 @@ function submit_profile(){
 			   pwd: pwd},
 		success: function(){
 			//ToDo
-			//location.href = "myProfile.html";	
+			window.location.href = "login.html";	
 		}
 	});
 	
@@ -134,6 +134,27 @@ function updateMyProfile(){
 	}
 
 }
+
+function myLocation(){
+	var str = '';
+	var letters = $("#letters");
+	for(var i = 0;i < 26;i++){
+		var letter = String.fromCharCode(i + 'A'.charCodeAt());
+		str += '<tr height="25px"><td>' + letter + '</td></tr>';
+	}
+	letters.html(str);
+}
+
+function toLocation(){
+	var location = $(".top-location");
+	location.css({'display':'block'});
+	var body = $("body");
+//	body.css({'background-color': '#f5f5f5'});
+	var profile = $(".bottom-profile");
+	profile.addClass("blur-notClicked");
+}
+
+
 /*
 function checkPasswordMatch() {
     var pwd = $("#pwd");
