@@ -84,6 +84,7 @@ function submit_profile(){
 	
 	if(pwd != rpwd) {
 		 $("#Rpwd")[0].setCustomValidity("Passwords Don't Match");
+		 return;
 	  }
 	  
 	     //Hard code for now.
