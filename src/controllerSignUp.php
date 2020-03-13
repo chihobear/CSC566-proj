@@ -11,8 +11,10 @@ $email = $_POST["email"];
 $phone = $_POST["phone"];
 $userName = $_POST["userName"];
 $pwd = $_POST["pwd"];
+$adopter = $_POST["adopter"];
+$sender = $_POST["sender"];
 echo json_encode($theDB ->insertUser( $firstName,$lastName,
-                   $phone, $email, $userName, $pwd)); 
+                   $phone, $email, $userName, $pwd, $adopter, $sender)); 
 			   
 
 

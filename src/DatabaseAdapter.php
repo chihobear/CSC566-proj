@@ -30,14 +30,25 @@ class DatabaseAdaptor {
 		//$num_rows = $check->num_rows;
 
 			//return $num_rows;
-        return $stmt->fetchAll ( PDO::FETCH_ASSOC );
+			$check = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+			/*
+		if(!empty($check)) 
+		{
+			return 1;
+		}
+		if(empty($check)) 
+		{
+			return 0;
+		}*/
+		
+       return $check;
 		
     }
     
 
     public function insertUser( $firstName,$lastName,
-                   $phone, $email, $userName, $pwd){
-				
+                   $phone, $email, $userName, $pwd, $adopter, $sender){
+
 		$usernamCheck = $this->DB->prepare("SELECT * FROM profile WHERE 
 			username ='".$userName."';");
 			
@@ -49,11 +60,11 @@ class DatabaseAdaptor {
 		else
 		{			
 			$stmt = $this->DB->prepare("INSERT INTO profile 
-			(first_name,last_name,phone,email,username,password)
+			(first_name,last_name,phone,email,username,password,adopter,sender)
 			VALUES ('"
 			  .$firstName."', '".$lastName."', '".
 				$phone."', '".$email."', '".$userName."', '"
-				.$pwd."');");
+				.$pwd."' ,'".$adopter."', '".$sender."' );");
 			$stmt->execute();
 			return true;
 		}

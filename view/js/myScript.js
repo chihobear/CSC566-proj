@@ -37,14 +37,18 @@ function login(){
 		url:"../../src/controllerLogin.php",
 		dataType: "json",
 		data: {loginUsername: loginUsername, loginPwd: loginPwd},
-		success: function(data){	
-			if (data === undefined || data.length == 0) {
+		success: function(data){
+
+		if (data === undefined || data.length == 0) {
 				console.log("no data");
-			}
-			else
-			{
-				location.href = "myProfile.html";
-			}
+		}
+		else
+		{
+			window.location.href="createProfile.html";
+			console.log(data);
+			// pass data to createProfile.html page here
+		}
+
 		}
 	});
 }
@@ -64,6 +68,20 @@ function submit_profile(){
 	var userName = $("#userName").val();
 	var pwd = $("#pwd").val();
 	var rpwd = $("#Rpwd").val();
+	var adopter = 0;
+	var sender = 0;
+	if($('#Wpet').is(':checked') )
+	{
+		adopter = 1;
+	}
+	if($('#Hpet').is(':checked') )
+	{
+		sender = 1;
+	}
+
+	
+
+	console.log(adopter,sender);
 	
 	if(pwd != rpwd) {
 		 $("#Rpwd")[0].setCustomValidity("Passwords Don't Match");
@@ -77,7 +95,7 @@ function submit_profile(){
 		url:"../../src/controllerSignUp.php",
 		dataType: "json",
 		data: {firstName: firstName, lastName: lastName, email: email, phone: phone, userName: userName,
-			   pwd: pwd},
+			   pwd: pwd, adopter: adopter, sender: sender},
 		success: function(){
 			//ToDo
 			window.location.href = "login.html";	
@@ -135,6 +153,27 @@ function updateMyProfile(){
 	}
 
 }
+
+function myLocation(){
+	var str = '';
+	var letters = $("#letters");
+	for(var i = 0;i < 26;i++){
+		var letter = String.fromCharCode(i + 'A'.charCodeAt());
+		str += '<tr height="25px"><td>' + letter + '</td></tr>';
+	}
+	letters.html(str);
+}
+
+function toLocation(){
+	var location = $(".top-location");
+	location.css({'display':'block'});
+	var body = $("body");
+//	body.css({'background-color': '#f5f5f5'});
+	var profile = $(".bottom-profile");
+	profile.addClass("blur-notClicked");
+}
+
+
 /*
 function checkPasswordMatch() {
     var pwd = $("#pwd");

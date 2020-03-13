@@ -9,9 +9,6 @@
 </head>
 <body>
 	<div class="banner">Welcome to Pet Adoption</div>
-	<div class="float-right">
-		<p id="location" class="color_gray" onclick="toLocation">Location</p>
-	</div>
 	<form  onsubmit = "submit_profile(); return false">
    	<div style="padding: 60px 10% 10% 10%" align="center">
    		<table>
@@ -24,22 +21,24 @@
 	   		</tr>
 	   		<tr class="background_gray">
 	   			<td>
-	   				<div class="form_row"><input type="text" id="Fname" class="border-0 my-1"  placeholder="First name" pattern = "[A-Z a-z]*" required ></input></div>
-	   				<div class="form_row"><input type="text" id="Lname" class="border-0 my-1" placeholder="Last name" pattern = "[A-Z a-z]*" required ></input></div>
-	   				<div class="form_row"><input type="text" id="email" class="border-0 my-1" placeholder="Email" "[A-Z a-z]*"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required ></input></div>
-	   				<div class="form_row"><input type="text" id="phone" class="border-0 my-1" placeholder="Phone (optional)" pattern = "^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" ></input></div>
-	   				<div class="form_row"><input type="text" id="userName" class="border-0 my-1" placeholder="Username" required ></input></div>
-	   				<div class="form_row"><input type="password" id="pwd" class="border-0 my-1" placeholder="Password" required ></input></div>
-	   				<div class="form_row my-2"><input type="password" id="Rpwd"class="border-0 my-1" placeholder="Retype your password"></input></div>
+	   				<div class="form_row"><input type="text" id="Fname" class="border-0 pl-1 w-100 h-100"  placeholder="First name" pattern = "[A-Z a-z]*" required ></input></div>
+	   				<div class="form_row"><input type="text" id="Lname" class="border-0 pl-1 w-100 h-100" placeholder="Last name" pattern = "[A-Z a-z]*" required ></input></div>
+	   				<div class="form_row"><input type="text" id="email" class="border-0 pl-1 w-100 h-100" placeholder="Email" "[A-Z a-z]*"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required ></input></div>
+	   				<div class="form_row"><input type="text" id="phone" class="border-0 pl-1 w-100 h-100" placeholder="Phone (optional)" pattern = "^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" ></input></div>
+	   				<div class="form_row"><input type="text" id="userName" class="border-0 pl-1 w-100 h-100" placeholder="Username" required ></input></div>
+	   				<div class="form_row"><input type="password" id="pwd" class="border-0 pl-1 w-100 h-100" placeholder="Password" required ></input></div>
+	   				<div class="form_row my-2"><input type="password" id="Rpwd"class="border-0 pl-1 w-100 h-100" placeholder="Retype your password"></input></div>
 	   			</td>
 	   		</tr>
 	   		<tr>
 	   			<td>
-	   				<label>I'm Interested in:</label>
-	   				<input type="checkbox" name="Wpet" id="Wpet">
-	   				<label>Adopting a pet</label>
-	   				<input type="checkbox" name="Hpet" id="Hpet">
-	   				<label>Rehoming a pet</label>
+	   				<div class="myProfile-font mt-2">I'm Interested in:</div>
+	   				<div class="myProfile-font">
+	   					<input type="checkbox" name="Wpet" id="Wpet">
+	   					<label>Adopting a pet</label>
+	   					<input class="ml-5" type="checkbox" name="Hpet" id="Hpet">
+	   					<label>Rehoming a pet</label>
+	   				</div>
 	   				
 	   				<!-- <div class="float-left">
 	   					<button id="Hpet" class="btn btn-primary">I have a pet</button>
@@ -51,8 +50,8 @@
 	   		</tr>
 	   		<tr>
 	   			<td>
-	   				<input class="btn btn-primary" type = "submit">
-	   				<p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+	   				<div><p class="myProfile-font mb-0">By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p></div>
+	   				<div><input class="btn btn-primary float-right btn-sm" type = "submit"><div class="clearfix"></div></div>
 	   			</td>
 	   		</tr>
 	   	</tbody>
