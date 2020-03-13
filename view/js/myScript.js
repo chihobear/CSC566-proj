@@ -67,6 +67,7 @@ function submit_profile(){
 	
 	if(pwd != rpwd) {
 		 $("#Rpwd")[0].setCustomValidity("Passwords Don't Match");
+		 return;
 	  }
 	  
 	     //Hard code for now.
@@ -79,7 +80,7 @@ function submit_profile(){
 			   pwd: pwd},
 		success: function(){
 			//ToDo
-			//location.href = "myProfile.html";	
+			window.location.href = "login.html";	
 		}
 	});
 	

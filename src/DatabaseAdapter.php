@@ -44,7 +44,7 @@ class DatabaseAdaptor {
 		if ($usernamCheck ->rowCount() != 0)
 		{
 			echo "Username already exist";
-			return 1;
+			return false;
 		}
 		else
 		{			
@@ -55,7 +55,7 @@ class DatabaseAdaptor {
 				$phone."', '".$email."', '".$userName."', '"
 				.$pwd."');");
 			$stmt->execute();
-			return 0;
+			return true;
 		}
 
 
