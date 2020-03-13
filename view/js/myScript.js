@@ -1,3 +1,4 @@
+
 //const app = new Vue({
 //	el: '#app',
 //	data: {
@@ -40,12 +41,11 @@ function login(){
 		success: function(data){
 
 		if (data === undefined || data.length == 0) {
-				console.log("no data");
+				$('#alert').text('Account or password is wrong!');
 		}
 		else
 		{
-			window.location.href="createProfile.html";
-			console.log(data);
+			window.location.href="myProfile.php";
 			// pass data to createProfile.html page here
 		}
 
@@ -54,7 +54,7 @@ function login(){
 }
 
 function signup(){
-	window.location.href="createProfile.html";
+	window.location.href="createProfile.php";
 }
 
 function submit_profile(){
@@ -81,7 +81,6 @@ function submit_profile(){
 
 	
 
-	console.log(adopter,sender);
 	
 	if(pwd != rpwd) {
 		 $("#Rpwd")[0].setCustomValidity("Passwords Don't Match");
@@ -97,11 +96,41 @@ function submit_profile(){
 			   pwd: pwd, adopter: adopter, sender: sender},
 		success: function(){
 			//ToDo
-			window.location.href = "login.html";	
+			window.location.href = "myProfile.php";	
 		}
 	});
 	
 	
+}
+
+function myProfileDataLoad(){
+	var user_name = $('#user_name').text();
+	$.ajax({
+		type: "POST",
+		url:"../../src/controllerMyProfile.php",
+		dataType: "json",
+		data: {user_name: user_name},
+		success: function(data){
+			//Roles
+			data = data[0];
+			if (data['adopter'] == '1' && data['sender'] == '1'){
+				$('option[value="Adopter & Owner"]').attr('selected', true);
+			}
+			else if (data['adopter'] == '1' && data['sender'] == '0'){
+				$('option[value="Adopter"]').attr('selected', true);
+			}
+			else{
+				$('option[value="Owner"]').attr('selected', true);
+			}
+
+			//name
+			var name = data['first_name'] + data['last_name'];
+			$("#name").val(name);
+
+			//email
+			$("#contact").val(data['email']);
+ 		}
+	});
 }
 
 function myProfile(){
@@ -113,6 +142,9 @@ function myProfile(){
 	var petAge = $("#pet-age");
 	for (var i = 1;i < 11;i++){
 		petAge.append(new Option(i + " years old", i));
+	}
+	if($('#type').text() == 'sign up'){
+		updateMyProfile();
 	}
 }
 
@@ -172,6 +204,9 @@ function toLocation(){
 	profile.addClass("blur-notClicked");
 }
 
+function removeAlert(){
+	$('#alert').text('');
+}
 
 /*
 function checkPasswordMatch() {

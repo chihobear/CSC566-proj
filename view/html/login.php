@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
@@ -18,11 +17,12 @@
            <div class="modal-body" id = "model-body">
                <div class="form-group">
                   <label for="username">Username:</label>
-                  <input id="username" type="text" class="form-control" placeholder="username">
+                  <input id="username" type="text" class="form-control" placeholder="username" onchange="removeAlert()"/>
                </div>
                <div class="form-group">
                   <label for="pwd">Password:</label>
-                   <input id="pwd" type="password" class="form-control"  placeholder="password"/>
+                  <input id="pwd" type="password" class="form-control"  placeholder="password" onchange="removeAlert()"/>
+                  <div class="myProfile-font-small" style="color: red" id ="alert"></div>
                </div>
 
                <div>

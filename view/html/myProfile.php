@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?php session_start(); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
@@ -8,24 +8,29 @@
 <link href="../css/myStyle.css" type="text/css" rel="stylesheet"/>
 </head>
 <body class="m-0">
+	<?php 
+		if (isset($_SESSION['user_name'])){
+
+	?>
 	<div class= "main_center bottom-profile">
 		<div>
 			<div class="float-left"><img class="rounded-circle" width="56" height="56" src="../source/user.jpg"></img></div>
 			<div class="float-left ml-2">
-				<span class="myProfile-font strong">Hi I am chihobear!</span>
+				<span class="myProfile-font strong">Hi I am <?php echo $_SESSION['user_name']?>!</span>
 				<table class="myProfile-font mt-2">
 					<tr>
 						<td>
 							<div>Role: 
 								<select id="role" class="not-clicked input-label">
-									<option value="Adopter" selected="true">Adopter</option>
+									<option value="Adopter">Adopter</option>
 									<option value="Owner">Owner</option>
+									<option value="Adopter & Owner">Adopter & Owner</option>
 								</select><hr/>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td><div>Name: <input value="Chenghao Xiong" class="not-clicked input-label"></input><hr/></div></td>
+						<td><div>Name: <input class="not-clicked input-label" id="name"></input><hr/></div></td>
 					</tr>
 					<tr>
 						<td><div>Age: 
@@ -40,7 +45,7 @@
 						</div></td>
 					</tr>
 					<tr>
-						<td><div>Contact: <input value="chenghaoxiong@email.arizona.edu" class="not-clicked input-label"></input><hr/></div></td>
+						<td><div>Contact: <input class="not-clicked input-label" id="contact"></input><hr/></div></td>
 					</tr>
 				</table>
 			</div>
@@ -132,15 +137,28 @@
 			</div> 
 		</div>
 	</div>
+
+
+<div class="d-none" id="type"><?php echo $_SESSION['profile_type']; ?></div>
+<div class="d-none" id="user_name"><?php echo $_SESSION['user_name']; ?></div>
+
 <script src="../js/jquery-latest.js"></script>
 <script src="../js/vue.js"></script>
 <script src="../js/myScript.js"></script>
 <script>Vue.config.productionTip=false</script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		myProfileDataLoad();
 		myProfile();
 		myLocation();
 	});
 </script>
+<?php }
+		else{
+			?>
+			<div>Invalid Access</div>
+			<?php
+		}
+	?>
 </body>
 </html>
