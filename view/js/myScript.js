@@ -212,6 +212,22 @@ function removeAlert(){
 	$('#alert').text('');
 }
 
+function normal(){
+	var location = $(".top-location");
+	if(location.css('display') == 'block'){
+		console.log('hi');
+		location.css({'display':'none'});
+		var profile = $(".bottom-profile");
+		profile.removeClass("blur-notClicked");
+	}
+}
+
+function display(){
+	$(".display").on("click",function(){
+    alert("成功");
+});
+}
+
 /*
 function checkPasswordMatch() {
     var pwd = $("#pwd");

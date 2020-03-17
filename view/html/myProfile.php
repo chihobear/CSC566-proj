@@ -97,6 +97,14 @@
 				<div class="col-4"><div class="img-thumbnail"><img style="margin:0 10px" width="56" height="56" src="../source/user.jpg"></img><div class="myProfile-font-small adjust mt-2">a</div></div></div>
 			</div>
 		</div>
+
+		<div class="mt-2 message-block">
+			<p class="mt-1 ml-1">You have messages here</p>
+			
+
+		</div>
+
+		
 		<div class="mt-3 myProfile-font">
 			<div class="float-left pt-3">
 				<input type="checkbox" name="terms">I agree with the terms.</input>
@@ -105,6 +113,7 @@
 				<button class="btn btn-success btn-sm" onclick="updateMyProfile()">Update</button>
 			</div>
 		</div>
+
 	</div>
 
 	<div class="top-location w-100">
@@ -114,20 +123,20 @@
 				<div class="col-10 h-100 overflow-y-auto">
 					<div class="mt-3">Tucson, AZ</div>
 					<div class="mt-3">Phoenix, AZ</div>
-					<div class="mt-3">Tucson, AZ</div>
-					<div class="mt-3">Phoenix, AZ</div>
-					<div class="mt-3">Tucson, AZ</div>
-					<div class="mt-3">Phoenix, AZ</div>
-					<div class="mt-3">Tucson, AZ</div>
-					<div class="mt-3">Phoenix, AZ</div>
-					<div class="mt-3">Tucson, AZ</div>
-					<div class="mt-3">Phoenix, AZ</div>
-					<div class="mt-3">Tucson, AZ</div>
-					<div class="mt-3">Phoenix, AZ</div>
-					<div class="mt-3">Tucson, AZ</div>
-					<div class="mt-3">Phoenix, AZ</div>
-					<div class="mt-3">Tucson, AZ</div>
-					<div class="mt-3">Phoenix, AZ</div>
+					<div class="mt-3">Tempe, AZ</div>
+					<div class="mt-3">Taylor, AZ</div>
+					<div class="mt-3">Surprise, AZ</div>
+					<div class="mt-3">Tusayan, AZ</div>
+					<div class="mt-3">Star Valley, AZ</div>
+					<div class="mt-3">Tombstone, AZ</div>
+					<div class="mt-3">Tusayan, AZ</div>
+					<div class="mt-3">Welton, AZ</div>
+					<div class="mt-3">Wickenburg, AZ</div>
+					<div class="mt-3">Willcox, AZ</div>
+					<div class="mt-3">Williams, AZ</div>
+					<div class="mt-3">Winkelman, AZ</div>
+					<div class="mt-3">Winslow, AZ</div>
+					<div class="mt-3">Yuma, AZ</div>
 				</div>
 				<div class="col-2 h-100 overflow-y-auto">
 					<table class="h-100" id="letters">

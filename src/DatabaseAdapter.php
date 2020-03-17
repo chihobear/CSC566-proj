@@ -5,7 +5,7 @@ class DatabaseAdaptor {
     // Connect to an existing data based named 'first'
     public function __construct() {
         $dataBase =
-        'mysql:dbname=pet;charset=utf8;host=127.0.0.1';
+        'mysql:dbname=PetAdoption;charset=utf8;host=127.0.0.1';
         $user =
         'root';
         $password =
@@ -70,6 +70,13 @@ class DatabaseAdaptor {
 		}
 
 
+    }
+
+    public function userInfo($user_name){
+    	$userInfo = $this->DB->prepare("SELECT first_name, last_name, email, adopter, sender FROM profile WHERE username = '".$user_name."';");
+    	$result = $userInfo->execute();
+    	$result = $userInfo->fetchAll();
+    	return $result;
     }
 	
 
