@@ -84,7 +84,6 @@ function submit_profile(){
 	
 	if(pwd != rpwd) {
 		 $("#Rpwd")[0].setCustomValidity("Passwords Don't Match");
-		 return;
 	  }
 	  
 	     //Hard code for now.
@@ -132,6 +131,13 @@ function myProfileDataLoad(){
 			$("#contact").val(data['email']);
  		}
 	});
+	if($('#type').text() == 'sign up'){
+		updateMyProfile();
+	
+	}
+	else{
+		
+	}
 }
 
 function myProfile(){
@@ -143,9 +149,6 @@ function myProfile(){
 	var petAge = $("#pet-age");
 	for (var i = 1;i < 11;i++){
 		petAge.append(new Option(i + " years old", i));
-	}
-	if($('#type').text() == 'sign up'){
-		updateMyProfile();
 	}
 }
 
