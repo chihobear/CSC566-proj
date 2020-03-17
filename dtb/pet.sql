@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2020 at 01:06 PM
+-- Generation Time: Mar 17, 2020 at 10:07 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -34,7 +34,8 @@ CREATE TABLE `person_info` (
   `role` varchar(255) NOT NULL,
   `age` int(100) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `info` varchar(255) NOT NULL
+  `info` varchar(255) NOT NULL,
+  `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -49,7 +50,8 @@ CREATE TABLE `pet_info` (
   `type` varchar(255) NOT NULL,
   `breed` varchar(255) DEFAULT NULL,
   `gender` varchar(255) NOT NULL,
-  `info` varchar(255) NOT NULL
+  `info` varchar(255) NOT NULL,
+  `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -110,7 +112,7 @@ ALTER TABLE `pet_info`
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
