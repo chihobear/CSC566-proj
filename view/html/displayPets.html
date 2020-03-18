@@ -8,13 +8,33 @@
 <link href="../css/myStyle.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-	<div class="banner">All Pets ready for their new home!</div>
 	<script>
-	
+		$.ajax({
+			type:"POST",
+			url:"../../src/controllerPetInfo.php",
+			dataType: "json",
+			data: {},
+			success: function(data){
+				if (data === undefined || data.length == 0) {
+					document.body.innerHTML = "<h1>Sorry, We currently have no pets ready</h1>"
+				}
+				else
+				{
+					document.body.innerHTML = "<div class=\"banner\">Here are All Pets ready for their new home!</div>"
+					for(var key in data){
+						element = data[key];
+						document.body.innerHTML += "<div>";
+						for(var key2 in element){
+							document.body.innerHTML += element + " ";
+						}
+						document.body.innerHTML += "</div>";
+					}
+				}
+			}
+		});
 	</script>
 <script src="../js/jquery-latest.js"></script>
 <script src="../js/vue.js"></script>
-<script src="../js/myScript.js"></script>
 <script>Vue.config.productionTip=false</script>
 
 </body>
