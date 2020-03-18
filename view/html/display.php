@@ -12,7 +12,7 @@
 		<div class="mt-3"  onclick="normal()">
 			<div class="mt-2 pet-block container">
 				<div class="row mt-2">
-					<div class="col-3"><img width="56" height="56" src="../source/user.jpg"></img></div>
+					<div class="col-3"><img width="56" height="56" src="../source/a.jpg"></img></div>
 					<div class="col-9 pl-0">
 						<div class="mb-2"><span>Alice</span><hr/></div>
 						<div class="mb-2"><span class="myProfile-font">2 years old</span><hr/></div>
@@ -25,7 +25,7 @@
 
 			<div class="mt-2 pet-block container">
 				<div class="row mt-2">
-					<div class="col-3"><img width="56" height="56" src="../source/user.jpg"></img></div>
+					<div class="col-3"><img width="56" height="56" src="../source/b.jpg"></img></div>
 					<div class="col-9 pl-0">
 						<div class="mb-2"><span>Ted</span><hr/></div>
 						<div class="mb-2"><span class="myProfile-font">1 years old</span><hr/></div>
@@ -38,7 +38,7 @@
 
 			<div class="mt-2 pet-block container">
 				<div class="row mt-2">
-					<div class="col-3"><img width="56" height="56" src="../source/user.jpg"></img></div>
+					<div class="col-3"><img width="56" height="56" src="../source/c.jpg"></img></div>
 					<div class="col-9 pl-0">
 						<div class="mb-2"><span>Jetty</span><hr/></div>
 						<div class="mb-2"><span class="myProfile-font">1 years old</span><hr/></div>

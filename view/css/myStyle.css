@@ -151,6 +151,8 @@ hr{
 	border: 1px solid #8E8C8A;
 	border-radius: 5px;
 	background-color: white;
+	max-height: 250px;
+	overflow: auto;
 }
 
 .adjust{
@@ -215,5 +217,12 @@ hr{
 	border-radius: 15px;
 	background-color: white;
 	padding: .5rem;
+}
+
+.message{
+	display: block;
+	overflow: auto;
+	max-height: 50px;
+	margin-bottom: .75rem;
 }
 

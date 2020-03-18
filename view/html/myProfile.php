@@ -12,9 +12,9 @@
 		if (isset($_SESSION['user_name'])){
 
 	?>
-	<div class= "main_center bottom-profile">
+	<div class= "main_center bottom-profile"><!-- onclick='normal()' -->
 		<div>
-			<div class="float-left"><img class="rounded-circle" width="56" height="56" src="../source/user.jpg"></img></div>
+			<div class="float-left"><img class="rounded-circle" width="56" height="56" src="../source/1.jpeg"></img></div>
 			<div class="float-left ml-2">
 				<span class="myProfile-font strong">Hi I am <?php echo $_SESSION['user_name']?>!</span>
 				<table class="myProfile-font mt-2">
@@ -78,9 +78,9 @@
 					</div>
 				</div>
 				<div class="p-2 row">
-					<div class="col-4"><img width="56" height="56" src="../source/user.jpg"></img></div>
-					<div class="col-4"><img width="56" height="56" src="../source/user.jpg"></img></div>
-					<div class="col-4"><img width="56" height="56" src="../source/user.jpg"></img></div>
+					<div class="col-4"><img width="56" height="56" src="../source/x.jpg"></img></div>
+					<div class="col-4"><img width="56" height="56" src="../source/y.jpg"></img></div>
+					<div class="col-4"><img width="56" height="56" src="../source/z.jpg"></img></div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="p-2">
@@ -92,19 +92,77 @@
 		<div class="mt-2 favorite-block my-favorite">
 			<p class="mt-1 ml-1">What is my favorite?</p>
 			<div class="row p-2">
-				<div class="col-4"><div class="img-thumbnail"><img style="margin:0 10px" width="56" height="56" src="../source/user.jpg"></img><div class="myProfile-font-small adjust mt-2">I have an apple that I bought yesterday</div></div></div>
-				<div class="col-4"><div class="img-thumbnail"><img style="margin:0 10px" width="56" height="56" src="../source/user.jpg"></img><div class="myProfile-font-small adjust mt-2">Hello world!</div></div></div>
-				<div class="col-4"><div class="img-thumbnail"><img style="margin:0 10px" width="56" height="56" src="../source/user.jpg"></img><div class="myProfile-font-small adjust mt-2">a</div></div></div>
+				<div class="col-4"><div class="img-thumbnail"><img style="margin:0 10px" width="56" height="56" src="../source/a.jpg"></img><div class="myProfile-font-small adjust mt-2">I have an apple that I bought yesterday</div></div></div>
+				<div class="col-4"><div class="img-thumbnail"><img style="margin:0 10px" width="56" height="56" src="../source/b.jpg"></img><div class="myProfile-font-small adjust mt-2">Hello world!</div></div></div>
+				<div class="col-4"><div class="img-thumbnail"><img style="margin:0 10px" width="56" height="56" src="../source/c.jpg"></img><div class="myProfile-font-small adjust mt-2">a</div></div></div>
 			</div>
 		</div>
 
-		<div class="mt-2 message-block">
+		<!-- Owner's chat block -->
+		<div class="mt-2 message-block" >
 			<p class="mt-1 ml-1">You have messages here</p>
 			
+			<div class="row">
+				<div class="col-2"><img style="margin:0 10px" width="32" height="32" src="../source/2.jpg"></img></div>
+				<div class="col-10"><span class="myProfile-font message">It is cute. Can I see more pictures of your pets? When can I meet with you?</span></div>
+			</div>
+			<div class="ml-2"><input type="text" placeholder="Say something here..." class="myProfile-font adjust search pl-1" style="width: 70%"/><span class="myProfile-font mr-3" style="color: green;float: right">Reply</span></div>
+			<div class="m-2"><hr/></div>
+
+			<div class="row">
+				<div class="col-2"><img style="margin:0 10px" width="32" height="32" src="../source/3.jpg"></img></div>
+				<div class="col-10"><span class="myProfile-font message">It is cute. Can I see more pictures of your pets? When can I meet with you?</span></div>
+			</div>
+			<div class="ml-2"><input type="text" placeholder="Say something here..." class="myProfile-font adjust search pl-1" style="width: 70%"/><span class="myProfile-font mr-3" style="color: green;float: right">Reply</span></div>
+			<div class="m-2"><hr/></div>
+
+			<div class="row">
+				<div class="col-2"><img style="margin:0 10px" width="32" height="32" src="../source/4.jpg"></img></div>
+				<div class="col-10"><span class="myProfile-font message">It is cute. Can I see more pictures of your pets? When can I meet with you?</span></div>
+			</div>
+			<div class="ml-2"><input type="text" placeholder="Say something here..." class="myProfile-font adjust search pl-1" style="width: 70%"/><span class="myProfile-font mr-3" style="color: green;float: right">Reply</span></div>
+			<div class="m-2"><hr/></div>
+
+			<div class="row">
+				<div class="col-2"><img style="margin:0 10px" width="32" height="32" src="../source/4.jpg"></img></div>
+				<div class="col-10"><span class="myProfile-font message">It is cute. Can I see more pictures of your pets? When can I meet with you?</span></div>
+			</div>
+			<div class="ml-2"><input type="text" placeholder="Say something here..." class="myProfile-font adjust search pl-1" style="width: 70%"/><span class="myProfile-font mr-3" style="color: green;float: right">Reply</span></div>
+			<div class="m-2"><hr/></div>
+		</div>
+
+		<!-- visitor's chat block -->
+		<div class="mt-2 message-block"style="display:none">
+			<p class="mt-1 ml-1">Leave your message</p>
+
+			<div class="row">
+				<div class="col-2"><img style="margin:0 10px" width="32" height="32" src="../source/2.jpg"></img></div>
+				<div class="col-10"><span class="myProfile-font message">It is cute. Can I see more pictures of your pets? When can I meet with you?</span></div>
+			</div>
+			<div class="row ml-3">
+				<div class="col-2"><img style="margin:0 10px" width="24" height="24" src="../source/1.jpeg"></img></div>
+				<div class="col-10 pl-0"><span class="myProfile-font-small message">It is cute. Can I see more pictures of your pets? When can I meet with you?</span></div>
+				<div class="ml-5 mr-3 w-100"><input type="text" placeholder="Say something here..." class="myProfile-font-small adjust search pl-1" style="width: 70%"/><span class="myProfile-font-small mr-3" style="color: green;float: right;">Reply</span></div>
+			</div>
+			<div class="m-2"><hr/></div>
+
+
+			<div class="row">
+				<div class="col-2"><img style="margin:0 10px" width="32" height="32" src="../source/2.jpg"></img></div>
+				<div class="col-10"><span class="myProfile-font message">It is cute. Can I see more pictures of your pets? When can I meet with you?</span></div>
+			</div>
+			<div class="row ml-3">
+				<div class="ml-5 mr-3 w-100"><input type="text" placeholder="Say something here..." class="myProfile-font-small adjust search pl-1" style="width: 70%"/><span class="myProfile-font-small mr-3" style="color: green;float: right;">Reply</span></div>
+			</div>
+			<div class="m-2"><hr/></div>
+
+
+			<div class="ml-2"><input type="text" placeholder="Say something here..." class="myProfile-font adjust search pl-1" style="width: 70%"/><span class="myProfile-font mr-3" style="color: green;float: right">New Post</span></div>
+			<div class="m-2"><hr/></div>
 
 		</div>
 
-		
+
 		<div class="mt-3 myProfile-font">
 			<div class="float-left pt-3">
 				<input type="checkbox" name="terms">I agree with the terms.</input>
@@ -113,6 +171,8 @@
 				<button class="btn btn-success btn-sm" onclick="updateMyProfile()">Update</button>
 			</div>
 		</div>
+
+
 
 	</div>
 
