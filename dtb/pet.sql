@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2020 at 10:07 AM
+-- Generation Time: Mar 21, 2020 at 06:15 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -51,7 +51,8 @@ CREATE TABLE `pet_info` (
   `breed` varchar(255) DEFAULT NULL,
   `gender` varchar(255) NOT NULL,
   `info` varchar(255) NOT NULL,
-  `image` varchar(255) DEFAULT NULL
+  `image` varchar(255) DEFAULT NULL,
+  `owner` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -62,7 +63,8 @@ CREATE TABLE `pet_info` (
 
 CREATE TABLE `pet_reference` (
   `pet_id` int(10) NOT NULL,
-  `info` varchar(255) NOT NULL
+  `info` varchar(255) NOT NULL,
+  `person_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
