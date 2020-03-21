@@ -99,7 +99,7 @@
 		</div>
 
 		<!-- Owner's chat block -->
-		<div class="mt-2 message-block" >
+		<div class="mt-2 message-block" style="display:none">
 			<p class="mt-1 ml-1">You have messages here</p>
 			
 			<div class="row">
@@ -132,7 +132,7 @@
 		</div>
 
 		<!-- visitor's chat block -->
-		<div class="mt-2 message-block"style="display:none">
+		<div class="mt-2 message-block">
 			<p class="mt-1 ml-1">Leave your message</p>
 
 			<div class="row">
