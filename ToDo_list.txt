@@ -1,0 +1,25 @@
+Sign up: 	same username unchecked, same mail address unchecked, same 		phone number unchecked
+
+Myprofile: 	Pet info is not initialized
+		(Options may have more than one pets, needs "add one" button)
+		(image needs "add one" button for choose)
+		
+		Favorite part is not implemented and static. This part should  		be initialized and not changed. But you can edit description 		for each favorite block.
+		
+		Message part: To be discussed
+
+		Location: It is static now, everything is not clickeable. 
+
+		
+		Take Pet info part apart from my favorite part
+			That is adopter will have favorite part.
+			Sender will have pet info part		
+
+
+Display: 	We only display pet info that is only supporting adopter-to-		sender
+	
+		We need to add more filters like location, type(dog, cat), 		more type(Teddy), gender, or something.
+		
+		When the pet block is clicked, the user can be directed to 		the owner's profile page and can leave message there. 
+
+		Need to add a favorite symbol to help to favorite the pet
