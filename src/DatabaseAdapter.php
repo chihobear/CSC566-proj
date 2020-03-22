@@ -49,15 +49,42 @@ class DatabaseAdaptor {
     public function insertUser( $firstName,$lastName,
                    $phone, $email, $userName, $pwd, $adopter, $sender){
 
-		$usernamCheck = $this->DB->prepare("SELECT * FROM profile WHERE 
+		$usernameCheck = $this->DB->prepare("SELECT * FROM profile WHERE 
 			username ='".$userName."';");
+		$emailCheck = $this->DB->prepare("SELECT * FROM profile WHERE 
+			email ='".$email."';");
+		$phoneCheck = $this->DB->prepare("SELECT * FROM profile WHERE 
+			phone ='".$phone."';");
 			
-		if ($usernamCheck ->rowCount() != 0)
+		$phoneCheck->execute();
+		$emailCheck->execute();
+		$usernameCheck->execute();
+		
+		$valid = true;
+		$message = "";
+		
+		if ($usernameCheck ->rowCount() != 0)
 		{
-			echo "Username already exist";
-			return false;
+			//echo "Username already exist ".PHP_EOL."";
+			$valid = false;
+			$message .="1";
 		}
-		else
+		if ($emailCheck ->rowCount() != 0)
+		{
+			//echo "Email already in use ".PHP_EOL."";
+			$valid = false;
+			$message .="2";
+		}
+		
+
+		if ($phoneCheck ->rowCount() != 0)
+		{
+			//echo "Phone already in use ".PHP_EOL."";
+			$valid = false;
+			$message .="3";
+		}
+		
+		if ($valid == true)
 		{			
 			$stmt = $this->DB->prepare("INSERT INTO profile 
 			(first_name,last_name,phone,email,username,password,adopter,sender)
@@ -66,9 +93,10 @@ class DatabaseAdaptor {
 				$phone."', '".$email."', '".$userName."', '"
 				.$pwd."' ,'".$adopter."', '".$sender."' );");
 			$stmt->execute();
-			return true;
+			//echo "login sucessful";
+			$message .="0";
 		}
-
+		return $message;
 
     }
 

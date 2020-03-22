@@ -80,23 +80,43 @@ function submit_profile(){
 	}
 
 	
-
-	
 	if(pwd != rpwd) {
 		 $("#Rpwd")[0].setCustomValidity("Passwords Don't Match");
 	  }
 	  
 	     //Hard code for now.
-	
+
 	$.ajax({
 		type:"POST",
 		url:"../../src/controllerSignUp.php",
 		dataType: "json",
 		data: {firstName: firstName, lastName: lastName, email: email, phone: phone, userName: userName,
 			   pwd: pwd, adopter: adopter, sender: sender},
-		success: function(){
-			//ToDo
-			window.location.href = "myProfile.php";	
+		success: function(data){
+			var message ="";
+			if (data.includes(1))
+			{
+				message += "Username already exist \n";
+			}
+			if (data.includes(2))
+			{
+				message +="Email already in use \n";
+			}
+			if (data.includes(3))
+			{
+				message +="Phone already in use \n";
+			}
+			if (!data.includes(0))
+			{
+				// print message here
+				$('#alert1').innerHTML = message;
+				console.log(message);
+			}
+			else
+			{
+				window.location.href = "myProfile.php";	
+			}
+			//window.location.href = "myProfile.php";	
 		}
 	});
 	
