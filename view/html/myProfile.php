@@ -12,7 +12,7 @@
 		if (isset($_SESSION['user_name'])){
 
 	?>
-	<div class= "main_center bottom-profile"><!-- onclick='normal()' -->
+	<div class= "main_center bottom-profile" onclick='normal()'>
 		<div>
 			<div class="float-left"><img class="rounded-circle" width="56" height="56" src="../source/1.jpeg"></img></div>
 			<div class="float-left ml-2">
@@ -40,8 +40,8 @@
 						</div></td>
 					</tr>
 					<tr>
-						<td><div>Location: 
-							<span class="not-clicked" onclick="toLocation()">Tucson, AZ</span><hr/>
+						<td><div> 
+							<span id="cur_location" class="not-clicked" onclick="toLocation(event)">Location: </span><hr/>
 						</div></td>
 					</tr>
 					<tr>
@@ -177,26 +177,15 @@
 	</div>
 
 	<div class="top-location w-100">
-		<div class="pl-3" style="margin-top: 10px"><input type="text" placeholder="City" class="adjust search pl-1" style="width: 70%"></input></div>
+		<div class="pl-3" style="margin-top: 10px;display: inline-block;width: 70%"><input type="text" placeholder="City" class="adjust search pl-1" id="search_input"></input></div>
+		<button style="display: inline-block" class="ml-2 search-btn" onclick="search()">Search</button>
 		<div class="container" style="height: 420px">
 			<div class="row h-100">
-				<div class="col-10 h-100 overflow-y-auto">
-					<div class="mt-3">Tucson, AZ</div>
-					<div class="mt-3">Phoenix, AZ</div>
-					<div class="mt-3">Tempe, AZ</div>
-					<div class="mt-3">Taylor, AZ</div>
-					<div class="mt-3">Surprise, AZ</div>
-					<div class="mt-3">Tusayan, AZ</div>
-					<div class="mt-3">Star Valley, AZ</div>
-					<div class="mt-3">Tombstone, AZ</div>
-					<div class="mt-3">Tusayan, AZ</div>
-					<div class="mt-3">Welton, AZ</div>
-					<div class="mt-3">Wickenburg, AZ</div>
-					<div class="mt-3">Willcox, AZ</div>
-					<div class="mt-3">Williams, AZ</div>
-					<div class="mt-3">Winkelman, AZ</div>
-					<div class="mt-3">Winslow, AZ</div>
-					<div class="mt-3">Yuma, AZ</div>
+				<select id = "states" class="input-label mt-2 ml-3 search">
+					<option value='' selected >All States</option>  
+				</select>
+				<div class="col-10 h-100 overflow-y-auto" id="location-container">
+					
 				</div>
 				<div class="col-2 h-100 overflow-y-auto">
 					<table class="h-100" id="letters">

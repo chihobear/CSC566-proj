@@ -78,7 +78,27 @@ class DatabaseAdaptor {
     	$result = $userInfo->fetchAll();
     	return $result;
     }
+
+    public function getLocation($location_str, $state){
+    	$location;
+    	if($state == ''){
+    		$location = $this->DB->prepare("SELECT cityName, stateName FROM cities left join states on cities.stateID = states.stateID WHERE cities.countryID = 'USA' and cities.cityName LIKE '".$location_str."%';");
+    	}
+    	else{
+    		$location = $this->DB->prepare("SELECT cityName, stateName FROM cities left join states on cities.stateID = states.stateID WHERE cities.countryID = 'USA' and states.stateName = '".$state."' and cities.cityName LIKE '".$location_str."%';");
+    	}
+    	
+    	$result = $location->execute();
+    	$result = $location->fetchAll();
+    	return $result;
+    }
 	
+	public function getStates(){
+		$states = $this->DB->prepare("SELECT stateName FROM states WHERE countryID = 'USA'; ");
+		$result = $states->execute();
+		$result = $states->fetchAll();
+		return $result;
+	}
 
 }
 ?>

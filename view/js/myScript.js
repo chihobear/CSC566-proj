@@ -194,18 +194,69 @@ function myLocation(){
 	var letters = $("#letters");
 	for(var i = 0;i < 26;i++){
 		var letter = String.fromCharCode(i + 'A'.charCodeAt());
-		str += '<tr height="25px"><td>' + letter + '</td></tr>';
+		str += '<tr height="25px"><td onclick="search_location($(this).text())">' + letter + '</td></tr>';
 	}
 	letters.html(str);
+
+	str = '';
+	var states = $("#states");
+	$.ajax({
+		type: "POST",
+		url: "../../src/controllerMyProfile.php",
+		dataType: "json",
+		data: {states: str},
+		success: function(data){
+			html_str = states.html();
+			data.forEach(e =>{
+				html_str += '<option value="' + e['stateName'] + '">' + e['stateName'] + '</option>';
+			});
+			states.html(html_str);
+		}
+	});
 }
 
-function toLocation(){
+function search_location(str){
+	var state = $("#states").val();
+	$.ajax({
+		type: "POST",
+		url:"../../src/controllerMyProfile.php",
+		dataType: "json",
+		data: {location_str: str, state: state},
+		success: function(data){
+			console.log('hi');
+			//Roles
+			html_str = '';
+			data.forEach(e =>{
+				html_str += '<div class="mt-3" onclick="select_location_display($(this).text())">' + e['cityName'] + ', ' + e['stateName'] + '</div>';
+			});
+			var container = $("#location-container");
+			container.html(html_str);
+ 		}
+	});
+}
+
+function select_location_display(val){
+	var bar = $("#cur_location");
+	bar.text('Location: ' + val);
+	normal();
+}
+
+function search(){
+	var ele = $("#search_input");
+	var value = ele.val();
+	if(value != ('')){
+		search_location(value);
+	}
+}
+
+function toLocation(e){
 	var location = $(".top-location");
 	location.css({'display':'block'});
 	var body = $("body");
 //	body.css({'background-color': '#f5f5f5'});
 	var profile = $(".bottom-profile");
 	profile.addClass("blur-notClicked");
+	e.cancelBubble = true;
 }
 
 function removeAlert(){
@@ -215,7 +266,6 @@ function removeAlert(){
 function normal(){
 	var location = $(".top-location");
 	if(location.css('display') == 'block'){
-		console.log('hi');
 		location.css({'display':'none'});
 		var profile = $(".bottom-profile");
 		profile.removeClass("blur-notClicked");
