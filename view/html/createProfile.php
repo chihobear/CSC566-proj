@@ -28,16 +28,8 @@
 	   				<div class="form_row"><input type="text" id="userName" class="border-0 pl-1 w-100 h-100" placeholder="Username" required ></input></div>
 	   				<div class="form_row"><input type="password" id="pwd" class="border-0 pl-1 w-100 h-100" placeholder="Password" required ></input></div>
 	   				<div class="form_row my-2"><input type="password" id="Rpwd"class="border-0 pl-1 w-100 h-100" placeholder="Retype your password"></input></div>
-					<div class="myProfile-font-small" style="color: red" id ="alert"></div>
-					<!--
-					<div class="form_row"><input type="text" id="Fname" class="border-0 pl-1 w-100 h-100"  placeholder="First name"  ></input></div>
-	   				<div class="form_row"><input type="text" id="Lname" class="border-0 pl-1 w-100 h-100" placeholder="Last name" ></input></div>
-	   				<div class="form_row"><input type="text" id="email" class="border-0 pl-1 w-100 h-100" placeholder="Email" "[A-Z a-z]*"  ></input></div>
-	   				<div class="form_row"><input type="text" id="phone" class="border-0 pl-1 w-100 h-100" placeholder="Phone (optional)" " ></input></div>
-	   				<div class="form_row"><input type="text" id="userName" class="border-0 pl-1 w-100 h-100" placeholder="Username"  ></input></div>
-	   				<div class="form_row"><input type="password" id="pwd" class="border-0 pl-1 w-100 h-100" placeholder="Password"  ></input></div>
-	   				<div class="form_row my-2"><input type="password" id="Rpwd"class="border-0 pl-1 w-100 h-100" placeholder="Retype your password"></input></div>
-					-->
+					<div class="myProfile-font-small" style="color: red" id ="alert1"></div>
+
 	   			</td>
 	   		</tr>
 	   		<tr>
