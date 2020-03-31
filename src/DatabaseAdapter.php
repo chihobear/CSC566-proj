@@ -128,5 +128,11 @@ class DatabaseAdaptor {
 		return $result;
 	}
 
+	public function getPetInfo(){
+	    $states = $this->DB->prepare("SELECT name,breed,gender,info,image,owner FROM pet_info");
+	    $result = $states->execute();
+	    $result = $states->fetchAll();
+	    return $result;
+	}
 }
 ?>

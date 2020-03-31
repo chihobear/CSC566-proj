@@ -298,6 +298,35 @@ function display(){
 });
 }
 
+function display_pets(){
+	$.ajax({
+		type:"POST",
+		url:"../../src/controllerPetInfo.php",
+		dataType: "json",
+		data: {},
+		success: function(data){
+			if (data === undefined || data.length == 0) {
+				document.body.innerHTML = "<h1>Sorry, We currently have no pets ready</h1>"
+			}
+			else
+			{
+				document.body.innerHTML = "<div class=\"banner\">Here are All Pets ready for their new home!</div>"
+				for(var key in data){
+					element = data[key];
+					document.body.innerHTML += "<div>";
+					for(var key2 in element){
+						if(key2.length<4){
+							continue;
+						}
+						document.body.innerHTML += "<p>" + key2 + ": " + data[key][key2] + "</p>";
+					}
+					document.body.innerHTML += "</div>";
+				}
+			}
+		}
+	});
+}
+
 /*
 function checkPasswordMatch() {
     var pwd = $("#pwd");
