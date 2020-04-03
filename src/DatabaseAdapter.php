@@ -45,6 +45,17 @@ class DatabaseAdaptor {
 		
     }
     
+	public function insertPet($petName,$petType,
+                   $petBreed, $petGender, $petInfo, $petImage, $petOwner){
+		$stmt = $this->DB->prepare("INSERT INTO pet_info 
+			(id,name,type,breed,gender,info,image,owner)
+			VALUES ('"
+			  .$petName."', '".$petType."', '".
+				$petBreed."', '".$petGender."', '".$petInfo."', '"
+				.$petImage."' ,'".$petOwner."' );");
+			$stmt->execute();
+					 
+	}
 
     public function insertUser( $firstName,$lastName,
                    $phone, $email, $userName, $pwd, $adopter, $sender){

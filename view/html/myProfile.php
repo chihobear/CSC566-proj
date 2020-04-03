@@ -60,7 +60,11 @@
 		</div>
 		
 		<div id="Pet-block">
+
 			<div class="mt-2 pet-block">
+				<input type="file" id="file" />
+				<button onclick="uploadFile();">Upload</button>
+			<!--
 				<p class="mt-1 ml-1">I have a pet</p>
 				<div class = "row myProfile-font ml-3 mr-3">
 					<div class="col-6">Name: <input class="not-clicked bg-white input-label" value="Alice" style="width:50px"></input></div>
@@ -86,7 +90,9 @@
 				<div class="p-2">
 					<div class="textarea-adjust myProfile-font" id="self-introduction">You will know my features when you know me</div>
 				</div>
+				-->
 			</div>
+			
 		</div>
 		
 		<div class="mt-2 favorite-block my-favorite">

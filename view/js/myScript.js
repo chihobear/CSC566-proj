@@ -28,9 +28,11 @@
 //	});
 //}
 var pwdMatch = false;
+var folderName;
 
 function login(){
 	var loginUsername = $("#username").val();
+	folderName = loginUsername;
 	var loginPwd = $("#pwd").val();
 	//ToDo user input check
 	$.ajax({
@@ -66,6 +68,7 @@ function submit_profile(){
 	var email = $("#email").val();
 	var phone = $("#phone").val();
 	var userName = $("#userName").val();
+	folderName = userName;
 	var pwd = $("#pwd").val();
 	var rpwd = $("#Rpwd").val();
 	var adopter = 0;
@@ -326,6 +329,72 @@ function display_pets(){
 		}
 	});
 }
+
+function submit_pet_profile(){
+	
+
+	var petName = $("#petname").val();
+	var petType = $("#pettype").val();
+	var petBreed = $("#breed").val();
+	var petGender = $("#gender").val();
+	var petInfo = $("#petinfo").val();
+	var petImage = 0; // no image yet
+	var petOwner = folderName; // name of owner
+
+	$.ajax({
+		type:"POST",
+		url:"../../src/controllerPetSubmitProfile.php",
+		dataType: "json",
+		data: {petName: petName, petType: petType, petBreed: petBreed, petGender: petGender, petInfo: petInfo,
+			   petImage: petImage, petOwner: petOwner},
+		success: function(data){
+			console.log(data);
+		}
+	});
+	
+	
+}
+
+function uploadFile() {
+  if (input.files.length > 0) {
+    var file = input.files[0];
+    //console.log("You chose", file.name);
+    //if (file.type) console.log("It has type", file.type);
+
+    var fReader = new FileReader();
+	var result = fReader.readAsDataURL(file)
+		console.log(result);
+	}
+}
+
+/*
+function uploadFile(){
+	
+  var input = document.getElementById("file");
+  
+  var file = input.files[0];
+  if(file != undefined){
+    formData= new FormData();
+    if(!!file.type.match(/image./)){
+      formData.append("image", file);
+      $.ajax({
+        url: "../../src/upload.php",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(data){
+            console.log(data);
+        }
+      });
+    }else{
+      alert('Not a valid image!');
+    }
+  }else{
+    alert('Input something!');
+  }
+}
+*/
 
 /*
 function checkPasswordMatch() {
