@@ -332,13 +332,14 @@ function display_pets(){
 
 function submit_pet_profile(){
 	
-
+	console.log($("#myImage").val());
+	/*
 	var petName = $("#petname").val();
 	var petType = $("#pettype").val();
 	var petBreed = $("#breed").val();
 	var petGender = $("#gender").val();
 	var petInfo = $("#petinfo").val();
-	var petImage = 0; // no image yet
+	var petImage ;
 	var petOwner = folderName; // name of owner
 
 	$.ajax({
@@ -351,66 +352,37 @@ function submit_pet_profile(){
 			console.log(data);
 		}
 	});
-	
+	*/
 	
 }
 
-function uploadFile() {
-  if (input.files.length > 0) {
-    var file = input.files[0];
-    //console.log("You chose", file.name);
-    //if (file.type) console.log("It has type", file.type);
+var value;
+function uploadFile(inputElement) {
 
-    var fReader = new FileReader();
-	var result = fReader.readAsDataURL(file)
-		console.log(result);
-	}
+	var temp = document.getElementById('Pet-block-test');
+  var file = inputElement.files[0];
+  var reader = new FileReader();	
+  reader.readAsDataURL(file);
+  reader.onload = function() {
+    //console.log('Encoded Base 64 File String:', reader.result);
+	console.log(reader.result);
+	
+	//console.log(value);
+	// var image1 = new Image();
+	//image1.src = reader.result;
+	//temp.appendChild(image1);
+  }
+
+  console.log(value);
 }
 
-/*
-function uploadFile(){
-	
-  var input = document.getElementById("file");
-  
-  var file = input.files[0];
-  if(file != undefined){
-    formData= new FormData();
-    if(!!file.type.match(/image./)){
-      formData.append("image", file);
-      $.ajax({
-        url: "../../src/upload.php",
-        type: "POST",
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function(data){
-            console.log(data);
-        }
-      });
-    }else{
-      alert('Not a valid image!');
-    }
-  }else{
-    alert('Input something!');
+
+
+function toggleUpload() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
   }
 }
-*/
-
-/*
-function checkPasswordMatch() {
-    var pwd = $("#pwd");
-    var confirmPwd = $("#Rpwd");
-
-    if (pwd.val() != confirmPwd.val()){
-        pwdMatch = false;
-		console.log("no");
-	}
-    else{
-        pwdMatch = true;
-		console.log("yes");
-	}
-}
-$(document).ready(function () {
-   $("#Rpwd").keyup(checkPasswordMatch);
-});
-*/
