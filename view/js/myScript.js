@@ -356,9 +356,6 @@ function submit_pet_profile(){
 	
 }
 
-var value;
-function uploadFile(inputElement) {
-
 function upload_image(e) {
 	var imgSrc = new Array();
 	var fileList = e.files;
@@ -404,37 +401,4 @@ function hide_delete(e){
 
 function remove_image(e){
 	$(e).parent().remove();
-}
-
-
-/*
-function uploadFile(){
-=======
-	var temp = document.getElementById('Pet-block-test');
-  var file = inputElement.files[0];
-  var reader = new FileReader();	
-  reader.readAsDataURL(file);
-  reader.onload = function() {
-    //console.log('Encoded Base 64 File String:', reader.result);
-	console.log(reader.result);
->>>>>>> b73eeeb5572af26215eb6c56e726d063d9df8087
-	
-	//console.log(value);
-	// var image1 = new Image();
-	//image1.src = reader.result;
-	//temp.appendChild(image1);
-  }
-
-  console.log(value);
-}
-
-
-
-function toggleUpload() {
-  var x = document.getElementById("myDIV");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
 }
