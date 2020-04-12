@@ -61,38 +61,50 @@
 		
 		<div id="Pet-block">
 
-			<div class="mt-2 pet-block">
-				<input type="file" id="load_image" />
-				<button onclick="uploadFile();">Upload</button>
-			<!--
-				<p class="mt-1 ml-1">I have a pet</p>
-				<div class = "row myProfile-font ml-3 mr-3">
-					<div class="col-6">Name: <input class="not-clicked bg-white input-label" value="Alice" style="width:50px"></input></div>
-					<div class="col-6">Age: 
-						<select id="pet-age" class="not-clicked bg-white input-label" style="width:80px">
-							<option value="0" selected="true">**</option>
-						</select>
-					</div>
-					<div class="col-6">Type: <input class="not-clicked bg-white input-label" value="Teddy" style="width:50px"></input></div>
-					<div class="col-6">Gender: 
-						<select class="not-clicked bg-white input-label" style="width:50px" id="pet-gender">
-							<option value="male" selected="true">male</option>
-							<option value="female">female</option>
-						</select>
-					</div>
-				</div>
-				<div class="p-2 row">
-					<div class="col-4"><img width="56" height="56" src="../source/x.jpg"></img></div>
-					<div class="col-4"><img width="56" height="56" src="../source/y.jpg"></img></div>
-					<div class="col-4"><img width="56" height="56" src="../source/z.jpg"></img></div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="p-2">
-					<div class="textarea-adjust myProfile-font" id="self-introduction">You will know my features when you know me</div>
-				</div>
-				-->
-			</div>
+			<button onclick="toggleUpload()">Add Pet</button>
+			<div id="myDIV">
 			
+				<div class="mt-2 pet-block">
+					<form  onsubmit = "submit_pet_profile(); return false">
+						petName <input type="text" id="petName"></input><br>
+						petType <input type="text" id="petType"></input><br>
+						petBreed <input type="text" id="petBreed"></input><br>
+						petGender <input type="text" id="petGender"></input><br>
+						petInfo <input type="text" id="petInfo"></input><br>
+						
+						<!--<input type="file" onchange="uploadFile(this)" />-->
+						
+						Image <input type="file" onchange="uploadFile(this)" id="myImage" /></input><br>
+						<div><input  type = "submit"></div>
+				<!--
+					<p class="mt-1 ml-1">I have a pet</p>
+					<div class = "row myProfile-font ml-3 mr-3">
+						<div class="col-6">Name: <input class="not-clicked bg-white input-label" value="Alice" style="width:50px"></input></div>
+						<div class="col-6">Age: 
+							<select id="pet-age" class="not-clicked bg-white input-label" style="width:80px">
+								<option value="0" selected="true">**</option>
+							</select>
+						</div>
+						<div class="col-6">Type: <input class="not-clicked bg-white input-label" value="Teddy" style="width:50px"></input></div>
+						<div class="col-6">Gender: 
+							<select class="not-clicked bg-white input-label" style="width:50px" id="pet-gender">
+								<option value="male" selected="true">male</option>
+								<option value="female">female</option>
+							</select>
+						</div>
+					</div>
+					<div class="p-2 row">
+						<div class="col-4"><img width="56" height="56" src="../source/x.jpg"></img></div>
+						<div class="col-4"><img width="56" height="56" src="../source/y.jpg"></img></div>
+						<div class="col-4"><img width="56" height="56" src="../source/z.jpg"></img></div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="p-2">
+						<div class="textarea-adjust myProfile-font" id="self-introduction">You will know my features when you know me</div>
+					</div>
+					-->
+				</div>
+			</div>
 		</div>
 		
 		<div class="mt-2 favorite-block my-favorite">
