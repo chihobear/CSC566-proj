@@ -356,33 +356,49 @@ function submit_pet_profile(){
 	
 }
 
-var value;
-function uploadFile(inputElement) {
-
-	var temp = document.getElementById('Pet-block-test');
-  var file = inputElement.files[0];
-  var reader = new FileReader();	
-  reader.readAsDataURL(file);
-  reader.onload = function() {
-    //console.log('Encoded Base 64 File String:', reader.result);
-	console.log(reader.result);
-	
-	//console.log(value);
-	// var image1 = new Image();
-	//image1.src = reader.result;
-	//temp.appendChild(image1);
-  }
-
-  console.log(value);
+function upload_image(e) {
+	var imgSrc = new Array();
+	var fileList = e.files;
+	for(var i = 0; i < fileList.length; i++) {
+		var imgSize = fileList[i].size;  //b
+		if(imgSize>1024*1024*1){//1M
+			return alert("The size of the image cannot be larger than 1M");
+		}
+		if(fileList[i].type != 'image/png' && fileList[i].type != 'image/jpeg' && fileList[i].type != 'image/gif'){
+			return alert("The format of the image is not correct");
+		}
+		imgSrc.push(getObjectURL(fileList[i]));
+	}
+	var tab = $('#pet-images');
+	var html = tab.html();
+	var s = '';
+	imgSrc.forEach(e => {
+		s += '<div onmouseover="show_delete(this)" onmouseleave="hide_delete(this)" class="list-inline-item m-1 image_out" style="position:relative"><img width="56" height="56" src="' + e +'"><a onclick="remove_image(this)" class="in-block-delete" align="center">--</div></img></a>';
+	});
+	html = s + html;
+	tab.html(html);
 }
 
+function getObjectURL(file) {
+	var url = null ;
+	if (window.createObjectURL!=undefined) { // basic
+		url = window.createObjectURL(file) ;
+	} else if (window.URL!=undefined) { // mozilla(firefox)
+		url = window.URL.createObjectURL(file) ;
+	} else if (window.webkitURL!=undefined) { // webkit or chrome
+		url = window.webkitURL.createObjectURL(file) ;
+	}
+	return url ;
+}
 
+function show_delete(e){
+	$(e).find('.in-block-delete').attr('style', 'display: block');
+}
 
-function toggleUpload() {
-  var x = document.getElementById("myDIV");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
+function hide_delete(e){
+	$(e).find('.in-block-delete').attr('style', 'display: none');
+}
+
+function remove_image(e){
+	$(e).parent().remove();
 }

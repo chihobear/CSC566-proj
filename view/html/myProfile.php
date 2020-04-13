@@ -61,22 +61,7 @@
 		
 		<div id="Pet-block">
 
-			<button onclick="toggleUpload()">Add Pet</button>
-			<div id="myDIV">
-			
-				<div class="mt-2 pet-block">
-					<form  onsubmit = "submit_pet_profile(); return false">
-						petName <input type="text" id="petName"></input><br>
-						petType <input type="text" id="petType"></input><br>
-						petBreed <input type="text" id="petBreed"></input><br>
-						petGender <input type="text" id="petGender"></input><br>
-						petInfo <input type="text" id="petInfo"></input><br>
-						
-						<!--<input type="file" onchange="uploadFile(this)" />-->
-						
-						Image <input type="file" onchange="uploadFile(this)" id="myImage" /></input><br>
-						<div><input  type = "submit"></div>
-				<!--
+			<div class="mt-2 pet-block">
 					<p class="mt-1 ml-1">I have a pet</p>
 					<div class = "row myProfile-font ml-3 mr-3">
 						<div class="col-6">Name: <input class="not-clicked bg-white input-label" value="Alice" style="width:50px"></input></div>
@@ -93,17 +78,13 @@
 							</select>
 						</div>
 					</div>
-					<div class="p-2 row">
-						<div class="col-4"><img width="56" height="56" src="../source/x.jpg"></img></div>
-						<div class="col-4"><img width="56" height="56" src="../source/y.jpg"></img></div>
-						<div class="col-4"><img width="56" height="56" src="../source/z.jpg"></img></div>
-						<div class="clearfix"></div>
-					</div>
-					<div class="p-2">
-						<div class="textarea-adjust myProfile-font" id="self-introduction">You will know my features when you know me</div>
-					</div>
-					-->
+				<div class="p-2 slide" id = 'pet-images'>
+					<div class="list-inline-item m-1 image_out" style="position:relative;"><img width="56" height="56" src="../source/plus.jpeg"><input onchange="upload_image(this)" type="file" id="file" accept="image/*" id="upload"/></img></div>
 				</div>
+				<div class="p-2">
+					<div class="textarea-adjust myProfile-font" id="self-introduction">You will know my features when you know me</div>
+				</div>
+			
 			</div>
 		</div>
 		
