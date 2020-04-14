@@ -332,14 +332,14 @@ function display_pets(){
 
 function submit_pet_profile(){
 	
-	console.log($("#myImage").val());
-	/*
-	var petName = $("#petname").val();
-	var petType = $("#pettype").val();
-	var petBreed = $("#breed").val();
-	var petGender = $("#gender").val();
-	var petInfo = $("#petinfo").val();
-	var petImage ;
+	
+	var petName = $("#pet-name").val();
+	var petType = $("#pet-type").val();
+	var petBreed = $("#pet-breed").val();
+	var petAge = $("#pet-age").val();
+	var petGender = $("#pet-gender").val();
+	var petInfo = $("#pet-info").val();
+	var petImage = image64;
 	var petOwner = folderName; // name of owner
 
 	$.ajax({
@@ -352,13 +352,14 @@ function submit_pet_profile(){
 			console.log(data);
 		}
 	});
-	*/
+	
 	
 }
 
 function upload_image(e) {
 	var imgSrc = new Array();
 	var fileList = e.files;
+	convert_binary(e);
 	for(var i = 0; i < fileList.length; i++) {
 		var imgSize = fileList[i].size;  //b
 		if(imgSize>1024*1024*1){//1M
@@ -378,6 +379,18 @@ function upload_image(e) {
 	html = s + html;
 	tab.html(html);
 }
+
+var image64 = [];
+function convert_binary(inputElement){
+	var file = inputElement.files[0];
+	  var reader = new FileReader();	
+	  reader.onload = function() {
+		image64.push(reader.result);
+	  }
+	reader.readAsDataURL(file);
+
+}
+
 
 function getObjectURL(file) {
 	var url = null ;

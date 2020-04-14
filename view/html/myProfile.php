@@ -60,24 +60,26 @@
 		</div>
 		
 		<div id="Pet-block">
-
+		<form  onsubmit = "submit_pet_profile(); return false">
 			<div class="mt-2 pet-block">
 					<p class="mt-1 ml-1">I have a pet</p>
 					<div class = "row myProfile-font ml-3 mr-3">
-						<div class="col-6">Name: <input class="not-clicked bg-white input-label" value="Alice" style="width:50px"></input></div>
+						<div class="col-6">Name: <input class="bg-white input-label" type="text" id="pet-name"" style="width:50px"></input></div>
+						<div class="col-6">Breed: <input class="bg-white input-label" type="text" id="pet-breed" style="width:50px"></input></div>
 						<div class="col-6">Age: 
-							<select id="pet-age" class="not-clicked bg-white input-label" style="width:80px">
+							<select id="pet-age" class="bg-white input-label" type="text" style="width:80px">
 								<option value="0" selected="true">**</option>
 							</select>
 						</div>
-						<div class="col-6">Type: <input class="not-clicked bg-white input-label" value="Teddy" style="width:50px"></input></div>
+						<div class="col-6">Type: <input class="bg-white input-label" type="text" id="pet-type" style="width:50px"></input></div>
 						<div class="col-6">Gender: 
-							<select class="not-clicked bg-white input-label" style="width:50px" id="pet-gender">
+							<select class="bg-white input-label"  style="width:50px" id="pet-gender">
 								<option value="male" selected="true">male</option>
 								<option value="female">female</option>
 							</select>
 						</div>
 					</div>
+				<div class="col-6">Info: <input class="bg-white input-label" id="pet-info" type="text" style="width:100px"></input></div>
 				<div class="p-2 slide" id = 'pet-images'>
 					<div class="list-inline-item m-1 image_out" style="position:relative;"><img width="56" height="56" src="../source/plus.jpeg"><input onchange="upload_image(this)" type="file" id="file" accept="image/*" id="upload"/></img></div>
 				</div>
@@ -86,6 +88,8 @@
 				</div>
 			
 			</div>
+			<div><input class="btn btn-primary float-right btn-sm" type = "submit"><div class="clearfix"></div></div>
+		</form>
 		</div>
 		
 		<div class="mt-2 favorite-block my-favorite">
