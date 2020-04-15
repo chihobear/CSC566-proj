@@ -340,8 +340,8 @@ function submit_pet_profile(){
 	var petGender = $("#pet-gender").val();
 	var petInfo = $("#pet-info").val();
 	var petImage = image64;
-	var petOwner = folderName; // name of owner
-
+	//var petOwner = folderName; // name of owner
+	
 	$.ajax({
 		type:"POST",
 		url:"../../src/controllerPetSubmitProfile.php",
@@ -350,10 +350,11 @@ function submit_pet_profile(){
 			   petImage: petImage, petOwner: petOwner},
 		success: function(data){
 			console.log(data);
+			alert("stop");
 		}
 	});
 	
-	
+	alert("stop");
 }
 
 function upload_image(e) {

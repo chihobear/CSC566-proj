@@ -46,14 +46,17 @@ class DatabaseAdaptor {
     }
     
 	public function insertPet($petName,$petType,
-                   $petBreed, $petGender, $petInfo, $petImage, $petOwner){
+                   $petBreed, $petAge,$petGender, $petInfo, $petImage, $petOwner){
 		$stmt = $this->DB->prepare("INSERT INTO pet_info 
-			(id,name,type,breed,gender,info,image,owner)
+			(id,name,type,breed,age,gender,info,image,owner)
 			VALUES ('"
-			  .$petName."', '".$petType."', '".
-				$petBreed."', '".$petGender."', '".$petInfo."', '"
-				.$petImage."' ,'".$petOwner."' );");
+			  .$petName."', '".$petType."', '". $petBreed."', 
+			  '". $petAge."','".$petGender."', '".$petInfo."', 
+			  '".$petImage."' ,'".$petOwner."' );");
 			$stmt->execute();
+			
+			//test return image data;
+			
 					 
 	}
 
@@ -131,16 +134,16 @@ class DatabaseAdaptor {
     	$result = $location->fetchAll();
     	return $result;
     }
-	
+	/*
 	public function getStates(){
 		$states = $this->DB->prepare("SELECT stateName FROM states WHERE countryID = 'USA'; ");
 		$result = $states->execute();
 		$result = $states->fetchAll();
 		return $result;
 	}
-
+*/
 	public function getPetInfo(){
-	    $states = $this->DB->prepare("SELECT name,breed,gender,info,image,owner FROM pet_info");
+	    $states = $this->DB->prepare("SELECT name,type,breed,age,gender,info,image,owner FROM pet_info");
 	    $result = $states->execute();
 	    $result = $states->fetchAll();
 	    return $result;
