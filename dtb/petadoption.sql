@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2020 at 06:15 PM
+-- Generation Time: Apr 15, 2020 at 08:45 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pet`
+-- Database: `petadoption`
 --
 
 -- --------------------------------------------------------
@@ -41,6 +41,19 @@ CREATE TABLE `person_info` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pet_image`
+--
+
+CREATE TABLE `pet_image` (
+  `id` int(11) NOT NULL,
+  `pet_name` varchar(255) NOT NULL,
+  `pet_owner` varchar(255) NOT NULL,
+  `image` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pet_info`
 --
 
@@ -49,10 +62,10 @@ CREATE TABLE `pet_info` (
   `name` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
   `breed` varchar(255) DEFAULT NULL,
+  `age` varchar(100) DEFAULT NULL,
   `gender` varchar(255) NOT NULL,
   `info` varchar(255) NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `owner` varchar(255) NOT NULL
+  `owner` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -90,6 +103,12 @@ CREATE TABLE `profile` (
 --
 
 --
+-- Indexes for table `pet_image`
+--
+ALTER TABLE `pet_image`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `pet_info`
 --
 ALTER TABLE `pet_info`
@@ -106,15 +125,20 @@ ALTER TABLE `profile`
 --
 
 --
+-- AUTO_INCREMENT for table `pet_image`
+--
+ALTER TABLE `pet_image`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+--
 -- AUTO_INCREMENT for table `pet_info`
 --
 ALTER TABLE `pet_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 --
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

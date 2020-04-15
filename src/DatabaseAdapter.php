@@ -48,17 +48,39 @@ class DatabaseAdaptor {
 	public function insertPet($petName,$petType,
                    $petBreed, $petAge,$petGender, $petInfo, $petImage, $petOwner){
 		$stmt = $this->DB->prepare("INSERT INTO pet_info 
-			(id,name,type,breed,age,gender,info,image,owner)
+			(name,type,breed,age,gender,info,owner)
 			VALUES ('"
 			  .$petName."', '".$petType."', '". $petBreed."', 
-			  '". $petAge."','".$petGender."', '".$petInfo."', 
-			  '".$petImage."' ,'".$petOwner."' );");
-			$stmt->execute();
+			  '". $petAge."','".$petGender."', '".$petInfo."' ,'".$petOwner."' );");
+			$stmt->execute();			
 			
-			//test return image data;
-			
+			foreach ($petImage as &$value) {
+				$image = $this->DB->prepare("INSERT INTO pet_image (pet_name,pet_owner,image) VALUES (
+					'".$petName."', '".$petOwner."', '".$value."'
+				);");
+				$image ->execute();
+			}
+		//-------------------------------------------------
+		// display pet infor example	
+		$displayPet = $this->DB->prepare("SELECT * FROM pet_info WHERE 
+			name = '".$petName."' AND 
+			owner = '".$petOwner."'
+			;");
+    	$displayPet->execute();
+		$res_1 = $displayPet->fetchAll ( PDO::FETCH_ASSOC );
+		// display image of pet example
+		$img = $this->DB->prepare("SELECT * FROM pet_image WHERE 
+			pet_name = '".$petName."' AND 
+			pet_owner = '".$petOwner."'
+			;");
+    	$img->execute();
+		$res_2 = $img->fetchAll ( PDO::FETCH_ASSOC );
+    	return array($res_1,$res_2);
+		//--------------------------------------------------
 					 
 	}
+
+	
 
     public function insertUser( $firstName,$lastName,
                    $phone, $email, $userName, $pwd, $adopter, $sender){
@@ -120,6 +142,8 @@ class DatabaseAdaptor {
     	$result = $userInfo->fetchAll();
     	return $result;
     }
+	
+
 
     public function getLocation($location_str, $state){
     	$location;

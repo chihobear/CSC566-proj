@@ -59,8 +59,9 @@
 			<div class="clearfix"></div>
 		</div>
 		
+		
 		<div id="Pet-block">
-		<form  onsubmit = "submit_pet_profile(); return false">
+		<form  id="pet_form" onsubmit = "submit_pet_profile(); return false">
 			<div class="mt-2 pet-block">
 					<p class="mt-1 ml-1">I have a pet</p>
 					<div class = "row myProfile-font ml-3 mr-3">

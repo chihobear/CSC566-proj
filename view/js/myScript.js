@@ -331,36 +331,42 @@ function display_pets(){
 }
 
 function submit_pet_profile(){
-	
-	
 	var petName = $("#pet-name").val();
 	var petType = $("#pet-type").val();
 	var petBreed = $("#pet-breed").val();
 	var petAge = $("#pet-age").val();
 	var petGender = $("#pet-gender").val();
 	var petInfo = $("#pet-info").val();
-	var petImage = image64;
-	//var petOwner = folderName; // name of owner
-	
+	var petImage = JSON.stringify(image64);
+	console.log(petImage);
+	var petOwner = $('#user_name').text();
 	$.ajax({
 		type:"POST",
 		url:"../../src/controllerPetSubmitProfile.php",
 		dataType: "json",
-		data: {petName: petName, petType: petType, petBreed: petBreed, petGender: petGender, petInfo: petInfo,
+		data: {petName: petName, petType: petType, petBreed: petBreed,
+				petAge:petAge, petGender: petGender, petInfo: petInfo,
 			   petImage: petImage, petOwner: petOwner},
 		success: function(data){
 			console.log(data);
-			alert("stop");
+			// display image example
+			//temp.appendChild(data);
+			//-------------------------------------
 		}
 	});
 	
-	alert("stop");
+	//document.getElementById("pet_form").reset();
+}
+
+function pet_display_on_profile(){
+
 }
 
 function upload_image(e) {
 	var imgSrc = new Array();
 	var fileList = e.files;
 	convert_binary(e);
+	
 	for(var i = 0; i < fileList.length; i++) {
 		var imgSize = fileList[i].size;  //b
 		if(imgSize>1024*1024*1){//1M
@@ -379,6 +385,7 @@ function upload_image(e) {
 	});
 	html = s + html;
 	tab.html(html);
+	console.log(image64);
 }
 
 var image64 = [];
@@ -387,6 +394,7 @@ function convert_binary(inputElement){
 	  var reader = new FileReader();	
 	  reader.onload = function() {
 		image64.push(reader.result);
+		
 	  }
 	reader.readAsDataURL(file);
 

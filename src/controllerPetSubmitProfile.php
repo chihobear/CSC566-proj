@@ -13,7 +13,7 @@ $petBreed = $_POST["petBreed"];
 $petAge = $_POST["petAge"];
 $petGender = $_POST["petGender"];
 $petInfo = $_POST["petInfo"];
-$petImage = $_POST["petImage"];
+$petImage =  json_decode( $_POST['petImage'], true );
 $petOwner = $_POST["petOwner"];
 
 echo json_encode($theDB ->insertPet( $petName,$petType,
