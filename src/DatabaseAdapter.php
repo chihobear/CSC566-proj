@@ -60,27 +60,50 @@ class DatabaseAdaptor {
 				);");
 				$image ->execute();
 			}
-		//-------------------------------------------------
-		// display pet infor example	
-		$displayPet = $this->DB->prepare("SELECT * FROM pet_info WHERE 
-			name = '".$petName."' AND 
-			owner = '".$petOwner."'
-			;");
-    	$displayPet->execute();
-		$res_1 = $displayPet->fetchAll ( PDO::FETCH_ASSOC );
-		// display image of pet example
-		$img = $this->DB->prepare("SELECT * FROM pet_image WHERE 
-			pet_name = '".$petName."' AND 
-			pet_owner = '".$petOwner."'
-			;");
-    	$img->execute();
-		$res_2 = $img->fetchAll ( PDO::FETCH_ASSOC );
-    	return array($res_1,$res_2);
-		//--------------------------------------------------
+
 					 
 	}
-
 	
+	public function displayPetOnProfile($user){
+		$stmt1 = $this->DB->prepare("SELECT * FROM pet_info WHERE 
+			owner = '".$user."'
+			;");
+		$stmt1->execute();
+		$data = $stmt1->fetchAll ( PDO::FETCH_ASSOC );
+		
+		$images =  [];
+		$size = count($data);
+		for($x = 0; $x < $size; $x++ ) {
+			$petName = $data[$x]["name"];
+			$stmt2 = $this->DB->prepare("SELECT image FROM pet_image WHERE 
+			pet_name = '".$petName."' AND 
+			pet_owner = '".$user."'
+			;");
+			$stmt2->execute();
+			$image = $stmt2->fetchAll ( PDO::FETCH_ASSOC );
+			array_push($images,$image);
+		}
+
+		/*	
+		$stmt2 = $this->DB->prepare("SELECT image FROM pet_image WHERE 
+			pet_name = '".$petName."' AND 
+			pet_owner = '".$user."'
+			;");
+    	$stmt2->execute();
+		$images = $stmt2->fetchAll ( PDO::FETCH_ASSOC );
+		return array($data,$images);
+		*/
+		return array($data,$images);
+	}
+	
+	public function displayPetImage( $user,$petName ){
+		$stmt = $this->DB->prepare("SELECT image FROM pet_image WHERE 
+			pet_name = '".$petName."' AND 
+			pet_owner = '".$user."'
+			;");
+    	$stmt->execute();
+		return $stmt->fetchAll ( PDO::FETCH_ASSOC );
+	}
 
     public function insertUser( $firstName,$lastName,
                    $phone, $email, $userName, $pwd, $adopter, $sender){

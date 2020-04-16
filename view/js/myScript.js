@@ -338,7 +338,6 @@ function submit_pet_profile(){
 	var petGender = $("#pet-gender").val();
 	var petInfo = $("#pet-info").val();
 	var petImage = JSON.stringify(image64);
-	console.log(petImage);
 	var petOwner = $('#user_name').text();
 	$.ajax({
 		type:"POST",
@@ -352,15 +351,47 @@ function submit_pet_profile(){
 			// display image example
 			//temp.appendChild(data);
 			//-------------------------------------
+			myProfileAutoLoadPet();
 		}
 	});
 	
 	//document.getElementById("pet_form").reset();
 }
 
-function pet_display_on_profile(){
+function myProfileAutoLoadPet(){
+	var user = $('#user_name').text();
+	var temp = document.getElementById('Pet-block-display');
+	$.ajax({
+		type:"POST",
+		url:"../../src/controllerMyProfilePetLoad.php",
+		dataType: "json",
+		data: {user: user},
+		success: function(data){
+			temp.innerHTML= "";
+			for (var i = 0; i <data[0].length; i++){
+				temp.innerHTML += "<br> ----------------------------";
+				temp.innerHTML += " <br> name : " + data[0][i]["name"]
+								+" <br> type : " + data[0][i]["type"]
+								+" <br> breed : " + data[0][i]["breed"]
+								+" <br> age : " + data[0][i]["age"]
+								+" <br> gender : " + data[0][i]["gender"]
+								+" <br> info : " + data[0][i]["info"] + " ";
+				// get pet image
+				
+				console.log(data[1].length);
+				for (var j = 0; j <data[1].length; j++){ 
+					temp.innerHTML += " <br> <img src='" +data[1][i][j]["image"] +"'>"; 
+				}
+				
 
+			}
+			
+		}
+	});
+	image64 = [];
 }
+
+
 
 function upload_image(e) {
 	var imgSrc = new Array();
@@ -385,7 +416,7 @@ function upload_image(e) {
 	});
 	html = s + html;
 	tab.html(html);
-	console.log(image64);
+	
 }
 
 var image64 = [];

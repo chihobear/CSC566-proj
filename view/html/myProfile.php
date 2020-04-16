@@ -58,7 +58,9 @@
 			</div>
 			<div class="clearfix"></div>
 		</div>
-		
+		<!-- display pet on profile -->
+		<div id="Pet-block-display"> 
+		</div>
 		
 		<div id="Pet-block">
 		<form  id="pet_form" onsubmit = "submit_pet_profile(); return false">
@@ -211,6 +213,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		myProfileDataLoad();
+		myProfileAutoLoadPet();
 		myProfile();
 		myLocation();
 	});
