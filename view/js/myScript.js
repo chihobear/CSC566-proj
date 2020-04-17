@@ -28,11 +28,9 @@
 //	});
 //}
 var pwdMatch = false;
-var folderName;
 
 function login(){
 	var loginUsername = $("#username").val();
-	folderName = loginUsername;
 	var loginPwd = $("#pwd").val();
 	//ToDo user input check
 	$.ajax({
@@ -68,7 +66,6 @@ function submit_profile(){
 	var email = $("#email").val();
 	var phone = $("#phone").val();
 	var userName = $("#userName").val();
-	folderName = userName;
 	var pwd = $("#pwd").val();
 	var rpwd = $("#Rpwd").val();
 	var adopter = 0;
@@ -313,145 +310,40 @@ function display_pets(){
 			}
 			else
 			{
-				document.body.innerHTML = "<div class=\"banner\">Here are All Pets ready for their new home!</div>"
+				document.body.innerHTML = "<div class= \"main_center bottom-profile\"onclick=\"normal()\"><span id=\"cur_location\" class=\"pet-location\"onclick=\"toLocation(event)\">Location: </span> <div class=\"mt-3\">";
 				for(var key in data){
 					element = data[key];
-					document.body.innerHTML += "<div>";
-					for(var key2 in element){
-						if(key2.length<4){
-							continue;
-						}
-						document.body.innerHTML += "<p>" + key2 + ": " + data[key][key2] + "</p>";
+					document.body.innerHTML += "<div class=\"mt-2 pet-block container\"><div class=\"row mt-2\"> <div class=\"col-9 pl-0\">";
+					if(element.length > 1){
+						document.body.innerHTML += "<div class=\"mb-2\"><span>"+ element[1] + "</span><hr/></div>";
+						document.body.innerHTML += "<div class=\"mb-2\"><span class=\"myProfile-font\">" + element[4] + "</span><hr/></div>";
+						document.body.innerHTML += "<div class=\"mb-2\"><span class=\"myProfile-font\">" + element[3] + "</span><hr/></div>";
+						document.body.innerHTML += "<div class=\"mb-2\"><span class=\"myProfile-font\">" + element[5] + "</span><hr/></div>";
+						document.body.innerHTML += "<div class=\"mb-2\"><span class=\"myProfile-font pet-description\">"  + element[6] + "</span></div>";
 					}
-					document.body.innerHTML += "</div>";
+					document.body.innerHTML += "</div></div></div>";
 				}
+				document.body.innerHTML += "/div>"
 			}
 		}
 	});
 }
 
-function submit_pet_profile(){
-	var petName = $("#pet-name").val();
-	var petType = $("#pet-type").val();
-	var petBreed = $("#pet-breed").val();
-	var petAge = $("#pet-age").val();
-	var petGender = $("#pet-gender").val();
-	var petInfo = $("#pet-info").val();
-	var petImage = JSON.stringify(image64);
-	var petOwner = $('#user_name').text();
-	$.ajax({
-		type:"POST",
-		url:"../../src/controllerPetSubmitProfile.php",
-		dataType: "json",
-		data: {petName: petName, petType: petType, petBreed: petBreed,
-				petAge:petAge, petGender: petGender, petInfo: petInfo,
-			   petImage: petImage, petOwner: petOwner},
-		success: function(data){
-			console.log(data);
-			// display image example
-			//temp.appendChild(data);
-			//-------------------------------------
-			myProfileAutoLoadPet();
-		}
-	});
-	
-	//document.getElementById("pet_form").reset();
-}
+/*
+function checkPasswordMatch() {
+    var pwd = $("#pwd");
+    var confirmPwd = $("#Rpwd");
 
-function myProfileAutoLoadPet(){
-	var user = $('#user_name').text();
-	var temp = document.getElementById('Pet-block-display');
-	$.ajax({
-		type:"POST",
-		url:"../../src/controllerMyProfilePetLoad.php",
-		dataType: "json",
-		data: {user: user},
-		success: function(data){
-			temp.innerHTML= "";
-			for (var i = 0; i <data[0].length; i++){
-				temp.innerHTML += "<br> ----------------------------";
-				temp.innerHTML += " <br> name : " + data[0][i]["name"]
-								+" <br> type : " + data[0][i]["type"]
-								+" <br> breed : " + data[0][i]["breed"]
-								+" <br> age : " + data[0][i]["age"]
-								+" <br> gender : " + data[0][i]["gender"]
-								+" <br> info : " + data[0][i]["info"] + " ";
-				// get pet image
-				
-				console.log(data[1].length);
-				for (var j = 0; j <data[1].length; j++){ 
-					temp.innerHTML += " <br> <img src='" +data[1][i][j]["image"] +"'>"; 
-				}
-				
-
-			}
-			
-		}
-	});
-	image64 = [];
-}
-
-
-
-function upload_image(e) {
-	var imgSrc = new Array();
-	var fileList = e.files;
-	convert_binary(e);
-	
-	for(var i = 0; i < fileList.length; i++) {
-		var imgSize = fileList[i].size;  //b
-		if(imgSize>1024*1024*1){//1M
-			return alert("The size of the image cannot be larger than 1M");
-		}
-		if(fileList[i].type != 'image/png' && fileList[i].type != 'image/jpeg' && fileList[i].type != 'image/gif'){
-			return alert("The format of the image is not correct");
-		}
-		imgSrc.push(getObjectURL(fileList[i]));
+    if (pwd.val() != confirmPwd.val()){
+        pwdMatch = false;
+		console.log("no");
 	}
-	var tab = $('#pet-images');
-	var html = tab.html();
-	var s = '';
-	imgSrc.forEach(e => {
-		s += '<div onmouseover="show_delete(this)" onmouseleave="hide_delete(this)" class="list-inline-item m-1 image_out" style="position:relative"><img width="56" height="56" src="' + e +'"><a onclick="remove_image(this)" class="in-block-delete" align="center">--</div></img></a>';
-	});
-	html = s + html;
-	tab.html(html);
-	
-}
-
-var image64 = [];
-function convert_binary(inputElement){
-	var file = inputElement.files[0];
-	  var reader = new FileReader();	
-	  reader.onload = function() {
-		image64.push(reader.result);
-		
-	  }
-	reader.readAsDataURL(file);
-
-}
-
-
-function getObjectURL(file) {
-	var url = null ;
-	if (window.createObjectURL!=undefined) { // basic
-		url = window.createObjectURL(file) ;
-	} else if (window.URL!=undefined) { // mozilla(firefox)
-		url = window.URL.createObjectURL(file) ;
-	} else if (window.webkitURL!=undefined) { // webkit or chrome
-		url = window.webkitURL.createObjectURL(file) ;
+    else{
+        pwdMatch = true;
+		console.log("yes");
 	}
-	return url ;
 }
-
-function show_delete(e){
-	$(e).find('.in-block-delete').attr('style', 'display: block');
-}
-
-function hide_delete(e){
-	$(e).find('.in-block-delete').attr('style', 'display: none');
-}
-
-function remove_image(e){
-	$(e).parent().remove();
-}
+$(document).ready(function () {
+   $("#Rpwd").keyup(checkPasswordMatch);
+});
+*/

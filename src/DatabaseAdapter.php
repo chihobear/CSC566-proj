@@ -190,7 +190,7 @@ class DatabaseAdaptor {
 	}
 */
 	public function getPetInfo(){
-	    $states = $this->DB->prepare("SELECT name,type,breed,age,gender,info,image,owner FROM pet_info");
+	    $states = $this->DB->prepare("SELECT * FROM pet_info");
 	    $result = $states->execute();
 	    $result = $states->fetchAll();
 	    return $result;
