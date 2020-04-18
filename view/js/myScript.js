@@ -317,7 +317,7 @@ function display_pets(){
 				for(;;){
 					element = data[i];
 					document.body.innerHTML += "<div class=\"mt-2 pet-block container\"><div class=\"row mt-2\">";
-					document.body.innerHTML += "<div class=\"col-3\"><img width=\"56\" height=\"56\" src=\"" + data[j][0][0]["image"] + "\" onclick = \"click_on_img()\"></img></div>";
+					document.body.innerHTML += "<div class=\"col-3\"><img width=\"56\" height=\"56\" src=\"" + data[j][0][0]["image"] + "\" onclick = \"click_on_img(\'" + element[0]["owner"] + "\')\"></img></div>";
 					document.body.innerHTML += "<div class=\"col-9 pl-0\">";
 						document.body.innerHTML += "<div class=\"mb-2\"><span>"+ element[0]["name"] + "</span><hr/></div>";
 						document.body.innerHTML += "<div class=\"mb-2\"><span class=\"myProfile-font\">" + element[0]["age"] + "</span><hr/></div>";
@@ -338,8 +338,8 @@ function display_pets(){
 	});
 }
 
-function click_on_img(){
-	alert("redirect to the owner profile!");
+function click_on_img(owner){
+	alert("redirect to the owner profile: " + owner);
 }
 
 // merged conflict here
