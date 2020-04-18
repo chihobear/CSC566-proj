@@ -305,29 +305,43 @@ function display_pets(){
 		dataType: "json",
 		data: {},
 		success: function(data){
+			
 			if (data === undefined || data.length == 0) {
 				document.body.innerHTML = "<h1>Sorry, We currently have no pets ready</h1>"
 			}
 			else
 			{
 				document.body.innerHTML = "<div class= \"main_center bottom-profile\"onclick=\"normal()\"><span id=\"cur_location\" class=\"pet-location\"onclick=\"toLocation(event)\">Location: </span> <div class=\"mt-3\">";
-				for(var key in data){
-					element = data[key];
-					document.body.innerHTML += "<div class=\"mt-2 pet-block container\"><div class=\"row mt-2\"> <div class=\"col-9 pl-0\">";
-					if(element.length > 1){
-						document.body.innerHTML += "<div class=\"mb-2\"><span>"+ element[1] + "</span><hr/></div>";
-						document.body.innerHTML += "<div class=\"mb-2\"><span class=\"myProfile-font\">" + element[4] + "</span><hr/></div>";
-						document.body.innerHTML += "<div class=\"mb-2\"><span class=\"myProfile-font\">" + element[3] + "</span><hr/></div>";
-						document.body.innerHTML += "<div class=\"mb-2\"><span class=\"myProfile-font\">" + element[5] + "</span><hr/></div>";
-						document.body.innerHTML += "<div class=\"mb-2\"><span class=\"myProfile-font pet-description\">"  + element[6] + "</span></div>";
-					}
+				var i = 0;
+				var j = 1;
+				for(;;){
+					element = data[i];
+					document.body.innerHTML += "<div class=\"mt-2 pet-block container\"><div class=\"row mt-2\">";
+					document.body.innerHTML += "<div class=\"col-3\"><img width=\"56\" height=\"56\" src=\"" + data[j][0][0]["image"] + "\" onclick = \"click_on_img()\"></img></div>";
+					document.body.innerHTML += "<div class=\"col-9 pl-0\">";
+						document.body.innerHTML += "<div class=\"mb-2\"><span>"+ element[0]["name"] + "</span><hr/></div>";
+						document.body.innerHTML += "<div class=\"mb-2\"><span class=\"myProfile-font\">" + element[0]["age"] + "</span><hr/></div>";
+						document.body.innerHTML += "<div class=\"mb-2\"><span class=\"myProfile-font\">" + element[0]["breed"] + "</span><hr/></div>";
+						document.body.innerHTML += "<div class=\"mb-2\"><span class=\"myProfile-font\">" + element[0]["gender"] + "</span><hr/></div>";
+						document.body.innerHTML += "<div class=\"mb-2\"><span class=\"myProfile-font pet-description\">"  + element[0]["info"] + "</span></div>";
 					document.body.innerHTML += "</div></div></div>";
+					i += 2;
+					j += 2;
+					if(i >= data.length)
+						break;
+					if(j >= data.length)
+						break;
 				}
-				document.body.innerHTML += "/div>"
+				document.body.innerHTML += "</div>"
 			}
 		}
 	});
 }
+
+function click_on_img(){
+	alert("redirect to the owner profile!");
+}
+
 // merged conflict here
 function submit_pet_profile(){
 	var petName = $("#pet-name").val();

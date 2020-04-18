@@ -190,10 +190,34 @@ class DatabaseAdaptor {
 	}
 */
 	public function getPetInfo(){
-	    $states = $this->DB->prepare("SELECT * FROM pet_info");
-	    $result = $states->execute();
-	    $result = $states->fetchAll();
-	    return $result;
+	    $stmt1 = $this->DB->prepare("SELECT * FROM pet_info;");
+	    $stmt1->execute();
+	    $data = $stmt1->fetchAll ( PDO::FETCH_ASSOC );
+	    
+	    $images =  [];
+	    $size = count($data);
+	    for($x = 0; $x < $size; $x++ ) {
+	        $petName = $data[$x]["name"];
+	        $user = $data[$x]["owner"];
+	        $stmt2 = $this->DB->prepare("SELECT image FROM pet_image WHERE
+			pet_name = '".$petName."' AND
+			pet_owner = '".$user."'
+			;");
+	        $stmt2->execute();
+	        $image = $stmt2->fetchAll ( PDO::FETCH_ASSOC );
+	        array_push($images,$image);
+	    }
+	    
+	    /*
+	     $stmt2 = $this->DB->prepare("SELECT image FROM pet_image WHERE
+	     pet_name = '".$petName."' AND
+	     pet_owner = '".$user."'
+	     ;");
+	     $stmt2->execute();
+	     $images = $stmt2->fetchAll ( PDO::FETCH_ASSOC );
+	     return array($data,$images);
+	     */
+	    return array($data,$images);
 	}
 }
 ?>
