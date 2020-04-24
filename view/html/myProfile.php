@@ -12,6 +12,8 @@
 		if (isset($_SESSION['user_name'])){
 
 	?>
+	<div class="d-none" id="type"><?php if($_SESSION['cur_user_name'] == $_SESSION['user_name'] && $_SESSION['profile_type'] == 'display'){$_SESSION['profile_type'] = 'displayMy';} echo $_SESSION['profile_type']; ?></div>
+	<div class="d-none" id="user_name"><?php echo $_SESSION['cur_user_name']; ?></div>
 	<div class= "main_center bottom-profile" onclick='normal()'>
 		<div>
 			<div class="float-left"><img class="rounded-circle" width="56" height="56" src="../source/1.jpeg"></img></div>
@@ -21,16 +23,12 @@
 					<tr>
 						<td>
 							<div>Role: 
-								<select id="role" class="not-clicked input-label">
-									<option value="Adopter">Adopter</option>
-									<option value="Owner">Owner</option>
-									<option value="Adopter & Owner">Adopter & Owner</option>
-								</select><hr/>
+								<span id="role"></span><hr/>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td><div>Name: <input class="not-clicked input-label" id="name"></input><hr/></div></td>
+						<td><div>Name: <span id="name"></span><hr/></div></td>
 					</tr>
 					<tr>
 						<td><div>Age: 
@@ -49,12 +47,13 @@
 					</tr>
 				</table>
 			</div>
+			<div class="float-right" style="font-size: 2rem" onclick="window.location.href = 'display.php'">→</div>
 			<div class="clearfix"></div>
 		</div>
 		<div>
 			<div class="float-left image-size">Who am I?</div>
 			<div class="float-left ml-2">
-				<textarea class="myProfile-font not-clicked input-label" style="border:1px solid #8E8C8A; width:255px; height: 50px" placeholder="Information is stolen by aliens"></textarea>
+				<textarea id="person_intro" class="myProfile-font not-clicked input-label" style="border:1px solid #8E8C8A; width:255px; height: 50px" placeholder="Information is stolen by aliens"></textarea>
 			</div>
 			<div class="clearfix"></div>
 		</div>
@@ -63,20 +62,19 @@
 		</div>
 		
 		<div id="Pet-block">
-		<form  id="pet_form" onsubmit = "submit_pet_profile(); return false">
 			<div class="mt-2 pet-block">
 					<p class="mt-1 ml-1">I have a pet</p>
 					<div class = "row myProfile-font ml-3 mr-3">
-						<div class="col-6">Name: <input class="bg-white input-label" type="text" id="pet-name"" style="width:50px"></input></div>
-						<div class="col-6">Breed: <input class="bg-white input-label" type="text" id="pet-breed" style="width:50px"></input></div>
+						<div class="col-6">Name: <input class="bg-white input-label not-clicked" type="text" id="pet-name"" style="width:50px"></input></div>
+						<div class="col-6">Breed: <input class="bg-white input-label not-clicked" type="text" id="pet-breed" style="width:50px"></input></div>
 						<div class="col-6">Age: 
-							<select id="pet-age" class="bg-white input-label" type="text" style="width:80px">
+							<select id="pet-age" style="width: 100px" class="bg-white input-label not-clicked" type="text" style="width:80px">
 								<option value="0" selected="true">**</option>
 							</select>
 						</div>
-						<div class="col-6">Type: <input class="bg-white input-label" type="text" id="pet-type" style="width:50px"></input></div>
+						<div class="col-6">Type: <input class="bg-white input-label not-clicked" type="text" id="pet-type" style="width:50px"></input></div>
 						<div class="col-6">Gender: 
-							<select class="bg-white input-label"  style="width:50px" id="pet-gender">
+							<select class="bg-white input-label not-clicked"  style="width:50px" id="pet-gender">
 								<option value="male" selected="true">male</option>
 								<option value="female">female</option>
 							</select>
@@ -84,15 +82,13 @@
 					</div>
 				<div class="col-6">Info: <input class="bg-white input-label" id="pet-info" type="text" style="width:100px"></input></div>
 				<div class="p-2 slide" id = 'pet-images'>
-					<div class="list-inline-item m-1 image_out" style="position:relative;"><img width="56" height="56" src="../source/plus.jpeg"><input onchange="upload_image(this)" type="file" id="file" accept="image/*" id="upload"/></img></div>
+					<div id="add_image" class="list-inline-item m-1 image_out d-none" style="position:relative;"><img width="56" height="56" src="../source/plus.jpeg"><input onchange="upload_image(this)" type="file" id="file" accept="image/*" id="upload"/></img></div>
 				</div>
 				<div class="p-2">
 					<div class="textarea-adjust myProfile-font" id="self-introduction">You will know my features when you know me</div>
 				</div>
 			
 			</div>
-			<div><input class="btn btn-primary float-right btn-sm" type = "submit"><div class="clearfix"></div></div>
-		</form>
 		</div>
 		
 		<div class="mt-2 favorite-block my-favorite">
@@ -168,7 +164,9 @@
 
 		</div>
 
-
+		<?php 
+			if ($_SESSION['profile_type'] != 'display'){
+		?>
 		<div class="mt-3 myProfile-font">
 			<div class="float-left pt-3">
 				<input type="checkbox" name="terms">I agree with the terms.</input>
@@ -177,6 +175,7 @@
 				<button class="btn btn-success btn-sm" onclick="updateMyProfile()">Update</button>
 			</div>
 		</div>
+		<?php } ?>
 
 
 
@@ -201,10 +200,6 @@
 			</div> 
 		</div>
 	</div>
-
-
-<div class="d-none" id="type"><?php echo $_SESSION['profile_type']; ?></div>
-<div class="d-none" id="user_name"><?php echo $_SESSION['user_name']; ?></div>
 
 <script src="../js/jquery-latest.js"></script>
 <script src="../js/vue.js"></script>

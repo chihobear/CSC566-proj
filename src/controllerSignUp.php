@@ -14,6 +14,7 @@ $email = $_POST["email"];
 $phone = $_POST["phone"];
 $userName = $_POST["userName"];
 $_SESSION['user_name']= $userName ;
+$_SESSION['cur_user_name'] = $userName;
 $pwd = $_POST["pwd"];
 $adopter = $_POST["adopter"];
 $sender = $_POST["sender"];

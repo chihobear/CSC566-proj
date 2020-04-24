@@ -35,7 +35,8 @@ CREATE TABLE `person_info` (
   `age` int(100) NOT NULL,
   `email` varchar(255) NOT NULL,
   `info` varchar(255) NOT NULL,
-  `image` varchar(255) DEFAULT NULL
+  `image` varchar(255) DEFAULT NULL,
+  `username` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -98,6 +99,12 @@ CREATE TABLE `profile` (
   `sender` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+CREATE TABLE 'favorite' (
+  `username` varchar(255) NOT NULL,
+  `owner` varchar(255) NOT NULL,
+  `petname` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 --
 -- Indexes for dumped tables
 --

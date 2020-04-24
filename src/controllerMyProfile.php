@@ -3,6 +3,11 @@
 include "DatabaseAdapter.php";
 $theDB = new DatabaseAdaptor();
 
+if(isset($_POST["user"])){
+	$user_name = $_POST["user"];
+	unset($_POST["user"]);
+	echo json_encode(($theDB->userInfoFromSignUp($user_name)));
+}
 
 if(isset($_POST["user_name"])){
 	$user_name = $_POST["user_name"];

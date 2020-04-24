@@ -47,19 +47,35 @@ class DatabaseAdaptor {
     
 	public function insertPet($petName,$petType,
                    $petBreed, $petAge,$petGender, $petInfo, $petImage, $petOwner){
-		$stmt = $this->DB->prepare("INSERT INTO pet_info 
+		$exist = $this->DB->prepare("SELECT id FROM pet_info where owner = '" . $petOwner . "';");
+		$result = $exist->execute();
+		$result = $exist->fetchAll();
+		//Empty, insert
+		if(empty($result)){
+			$stmt = $this->DB->prepare("INSERT INTO pet_info 
 			(name,type,breed,age,gender,info,owner)
 			VALUES ('"
 			  .$petName."', '".$petType."', '". $petBreed."', 
 			  '". $petAge."','".$petGender."', '".$petInfo."' ,'".$petOwner."' );");
-			$stmt->execute();			
-			
-			foreach ($petImage as &$value) {
-				$image = $this->DB->prepare("INSERT INTO pet_image (pet_name,pet_owner,image) VALUES (
-					'".$petName."', '".$petOwner."', '".$value."'
-				);");
-				$image ->execute();
-			}
+			$stmt->execute();
+		}
+		//Not empty, modify
+		else{
+			$stmt = $this->DB->prepare("update pet_info set name='". $petName . "', type='" . $petType . "', breed='" . $petBreed . "', age='" . $petAge . "', gender='" . $petGender . "', info='" . $petInfo . "';");
+			$stmt->execute();
+		}
+					
+		
+		//Delete all relevant images first
+		$delete = $this->DB->prepare("DELETE from pet_image where pet_name = '" . $petName . "' AND pet_owner = '" . $petOwner . "';");
+		$delete->execute();
+
+		foreach ($petImage as &$value) {
+			$image = $this->DB->prepare("INSERT INTO pet_image (pet_name,pet_owner,image) VALUES (
+				'".$petName."', '".$petOwner."', '".$value."'
+			);");
+			$image ->execute();
+		}
 
 					 
 	}
@@ -160,6 +176,13 @@ class DatabaseAdaptor {
     }
 
     public function userInfo($user_name){
+    	$userInfo = $this->DB->prepare("SELECT first, last, email, role, age, info, location FROM person_info WHERE username = '".$user_name."';");
+    	$result = $userInfo->execute();
+    	$result = $userInfo->fetchAll();
+    	return $result;
+    }
+
+    public function userInfoFromSignUp($user_name){
     	$userInfo = $this->DB->prepare("SELECT first_name, last_name, email, adopter, sender FROM profile WHERE username = '".$user_name."';");
     	$result = $userInfo->execute();
     	$result = $userInfo->fetchAll();
@@ -218,6 +241,40 @@ class DatabaseAdaptor {
 	     return array($data,$images);
 	     */
 	    return array($data,$images);
+	}
+
+
+	public function storePerson($role, $userName, $firstName, $lastName, $age, $location, $contact, $person_intro){
+		$exist = $this->DB->prepare("Select username from person_info where username = '" . $userName . "';");
+		$result = $exist->execute();
+		$result = $exist->fetchAll();
+		$flag;
+		//insert
+		if(empty($result)){
+			$flag = True;
+		}
+		else{
+			$flag = False;
+		}
+		if($flag){
+			$person = $this->DB->prepare("INSERT INTO person_info VALUES('" . $firstName . "', '" . $lastName . "', '" . $role . "', " . $age . ", '" . $contact . "', '" . $person_intro . "', 'text', '" . $location . "', '" . $userName . "');");
+    		$result = $person->execute();
+		}
+		else{
+			$person = $this->DB->prepare("UPDATE person_info SET age = " . $age . ", email = '" . $contact . "', info = '" . $person_intro . "', location = '" . $location . "' where username = '" . $userName . "';");
+			$result = $person->execute();
+		}
+		
+	}
+
+	public function deleteFavorite($user, $owner){
+		$stmt = $this->DB->prepare("delete from favorite where username='".$user."' and owner='".$owner."';");
+		$stmt->execute();
+	}
+
+	public function addFavorite($user, $owner){
+		$stmt = $this->DB->prepare("insert into favorite (username, owner) values ('".$user."', '".$owner."');");
+		$stmt->execute();
 	}
 }
 ?>
