@@ -276,5 +276,19 @@ class DatabaseAdaptor {
 		$stmt = $this->DB->prepare("insert into favorite (username, owner) values ('".$user."', '".$owner."');");
 		$stmt->execute();
 	}
+	
+	public function chat($from_user,$to_user,$message,$time){
+		$stmt = $this->DB->prepare("insert into chat (from_user,to_user,message,time)
+					values ('".$from_user."', '".$to_user."','".$message."', '".$time."');");
+		$stmt->execute();
+	}
+	
+	public function chatDisplay($from_user,$to_user){
+		$stmt = $this->DB->prepare("SELECT * FROM chat WHERE 
+			from_user = '".$from_user."' AND to_user = '".$to_user."'
+			;");
+		$stmt->execute();
+		return $stmt->fetchAll ( PDO::FETCH_ASSOC );
+	}
 }
 ?>

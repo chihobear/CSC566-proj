@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2020 at 08:45 AM
+-- Generation Time: Apr 26, 2020 at 01:26 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -21,6 +21,33 @@ SET time_zone = "+00:00";
 --
 -- Database: `petadoption`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chat`
+--
+
+CREATE TABLE `chat` (
+  `id` int(10) NOT NULL,
+  `from_user` varchar(255) NOT NULL,
+  `to_user` varchar(255) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `time` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `favorite`
+--
+
+CREATE TABLE `favorite` (
+  `fav_id` int(100) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `owner` varchar(255) NOT NULL,
+  `petname` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -99,53 +126,43 @@ CREATE TABLE `profile` (
   `sender` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `profile`
+--
 
-CREATE TABLE 'favorite' (
-  `username` varchar(255) NOT NULL,
-  `owner` varchar(255) NOT NULL,
-  `petname` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `profile` (`id`, `first_name`, `last_name`, `phone`, `email`, `username`, `password`, `adopter`, `sender`) VALUES
+(0, 'Khoa', 'Tran', '270 792 4496', 'khoatran1412@gmail.com', 'nhan123', '123', 1, 0);
+
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `pet_image`
+-- Indexes for table `chat`
 --
-ALTER TABLE `pet_image`
+ALTER TABLE `chat`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `pet_info`
+-- Indexes for table `favorite`
 --
-ALTER TABLE `pet_info`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `profile`
---
-ALTER TABLE `profile`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `favorite`
+  ADD PRIMARY KEY (`fav_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `pet_image`
+-- AUTO_INCREMENT for table `chat`
 --
-ALTER TABLE `pet_image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+ALTER TABLE `chat`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `pet_info`
+-- AUTO_INCREMENT for table `favorite`
 --
-ALTER TABLE `pet_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
---
--- AUTO_INCREMENT for table `profile`
---
-ALTER TABLE `profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;COMMIT;
+ALTER TABLE `favorite`
+  MODIFY `fav_id` int(100) NOT NULL AUTO_INCREMENT;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

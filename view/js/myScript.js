@@ -545,6 +545,47 @@ function favorite(e){
 		});
 	}
 }
+
+function chat(){
+	var d = new Date();
+    var time = 
+		d.getHours() +":"+ d.getMinutes() + " " +
+		d.getMonth() + "/"+d.getDate()+ "/"+d.getFullYear();
+	
+	var from_user= $("#from").val();
+	var to_user = $("#to").val();
+	var message = $("#message").val();
+	$.ajax({
+		type:"POST",
+		url:"../../src/controllerChat.php",
+		dataType: "json",
+		data: { from_user : from_user , to_user: to_user,message:message, time : time},
+		success: function(data){
+		}
+	});
+	$('#message').val('');
+	
+}
+
+function displayChat(){
+	var refresh=1000; // Refresh rate in milli seconds
+	mytime=setTimeout('chatMessage()',refresh);
+}
+
+function chatMessage(){
+	// get session  data
+	var from_user= $("#from").val();
+	var to_user = $("#to").val();
+	$.ajax({
+		type:"POST",
+		url:"../../src/controllerChat.php",
+		dataType: "json",
+		data: { from_user : from_user , to_user: to_user},
+		success: function(data){
+			// display message
+		}
+	});
+}
 /*
 function checkPasswordMatch() {
     var pwd = $("#pwd");
