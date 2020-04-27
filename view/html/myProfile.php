@@ -133,7 +133,7 @@
 			<div class="m-2"><hr/></div>
 		</div>
 		-->
-		<!-- visitor's chat block -->
+		<!-- visitor's chat block 
 		<div class="mt-2 message-block" id="chat_block">
 			<p class="mt-1 ml-1">Leave your message</p>
 
@@ -163,7 +163,11 @@
 			<div class="m-2"><hr/></div>
 
 		</div>
-
+		-->
+		<div class="mt-2 message-block" id="chat_block">
+		
+		</div>
+		
 		<?php 
 			if ($_SESSION['profile_type'] != 'display'){
 		?>
@@ -211,6 +215,8 @@
 		myProfileAutoLoadPet();
 		myProfile();
 		myLocation();
+		displayStartChat();
+		displayChat();
 		//document.getElementById("chat_block").style.display = "none";
 	});
 </script>

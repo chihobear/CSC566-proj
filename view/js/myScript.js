@@ -357,7 +357,7 @@ function display_pets(){
 				var size = data[0].length;
 				for(i = 0;i < size;i++){
 					element = data[0];
-					console.log( data[1][i]);
+					
 					str = '';
 					str += '<div class="mt-2 pet-block container"><div class="row mt-2"><div class="col-3"><img onclick="to_myProfile(this, \'other\')" width="56" height="56" src="' + data[1][i][0]["image"] + '"></img><div class="d-none">'+element[i]["owner"]+'</div><div onclick="favorite(this)" class="mt-2" style="font-size: 2rem">♡</div></div><div class="col-9 pl-0">';
 					str += '<div class="mb-2"><span>' + element[i]["name"] + '</span><hr/></div>';
@@ -371,9 +371,10 @@ function display_pets(){
 					else{
 						str += '<div class="mb-2"><span class="myProfile-font pet-description">' + element[i]["info"] + '</span></div>';
 					}
-					var from_user = data[0][i]["owner"];
-					var to_user = user_name.textContent;
-					str += '<div class="mb-2"><button type="button" id="testbtn" onclick="redirect()" value="a">Contact</button></div>';
+					var to_user = data[0][i]["owner"];
+					var from_user = user_name.textContent;
+					console.log(from_user,to_user);
+					str += '<div class="mb-2"><button type="button" id="testbtn" onclick="redirect(\''+from_user+'\',\''+to_user+'\')" value="a">Contact</button></div>';
 					str += '</div></div></div>';
 					
 					html += str;
@@ -557,23 +558,33 @@ function favorite(e){
 	}
 }
 
-function redirect(){
+function redirect(from_user,to_user){
+	//$('#chat_block').innerHTML += '<br> to ' +  to_user;
+	$.ajax({
+		type:"POST",
+		url:"../../src/controllerStartChat.php",
+		dataType: "json",
+		data: {from_user: from_user ,to_user: to_user },
+		success: function(data){
+			
+		}
+	});
 	window.location.href="myProfile.php";
-	// stuck here
-	document.getElementById("chat_block").style.display = "none";
 }
 
 
-function startChat(){
-	$('#chat_block').style.display = "none";
-}
-function chat(from_user,to_user){
+
+function chat(from_user,to_user,id){
 	var d = new Date();
-    var time = 
+    var rawTime = 
 		d.getHours() +":"+ d.getMinutes() + " " +
 		d.getMonth() + "/"+d.getDate()+ "/"+d.getFullYear();
-	
-	var message = $("#message").val();
+	//var message = $("#" +id +"").val();
+	//var mess = "\"id\";
+	//var x = "\"+"id"+\"";
+	var time = String(rawTime);
+	console.log(time);
+	var message = document.getElementById(id.id).value;
 	$.ajax({
 		type:"POST",
 		url:"../../src/controllerChat.php",
@@ -582,26 +593,58 @@ function chat(from_user,to_user){
 		success: function(data){
 		}
 	});
+	
 	$('#message').val('');
 	
 }
 
+
+function displayStartChat(){
+	//$('#chat_block').innerHTML += '<br> to ' +  data;
+	var from_user = user_name.textContent;
+	var str ="";
+	$.ajax({
+		type:"POST",
+		url:"../../src/controllerDisplayStartChat.php",
+		dataType: "json",
+		data: {from_user: from_user  },
+		success: function(data){
+			var size = data.length;
+			var tab = $("#chat_block");
+			for (var i =0; i< size; i++)
+			{
+	
+				var html = tab.html();
+				var temp_id = "mess"+i;	
+					//str += '<input type="'button'" ' + data[i]['to_user']+ '>';
+					str += ' chat with '+ data[i]['to_user']; 
+					str +=' <br>message <input type="text" id="'+ temp_id +'">';
+					str += '<div class="mb-2"><button type="button" id="testButton" onclick="chat(\''+data[i]['from_user']+'\',\''+data[i]['to_user']+'\',mess'+i+')" value="a">'+ data[i]['to_user']+'</button></div>';
+
+					//console.log(data);
+					html = str + html;
+			}
+				tab.html(html);	
+		}
+	});
+}
+/*
 function displayChat(){
 	var refresh=1000; // Refresh rate in milli seconds
 	mytime=setTimeout('chatMessage()',refresh);
 }
-
-function chatMessage(){
+*/
+function displayChat(){
 	// get session  data
-	var from_user= $("#from").val();
-	var to_user = $("#to").val();
+	var from_user = user_name.textContent;
+	var mess ="";
 	$.ajax({
 		type:"POST",
-		url:"../../src/controllerChat.php",
+		url:"../../src/controllerchatDisplay.php",
 		dataType: "json",
-		data: { from_user : from_user , to_user: to_user},
+		data: { from_user : from_user },
 		success: function(data){
-			// display message
+			console.log(data);
 		}
 	});
 }

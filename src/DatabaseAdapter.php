@@ -281,11 +281,29 @@ class DatabaseAdaptor {
 		$stmt = $this->DB->prepare("insert into chat (from_user,to_user,message,time)
 					values ('".$from_user."', '".$to_user."','".$message."', '".$time."');");
 		$stmt->execute();
+		$stmt1 = $this->DB->prepare("SELECT * FROM chat WHERE 
+			from_user = '".$from_user."' AND to_user = '".$to_user."'
+			;");
+		
 	}
 	
-	public function chatDisplay($from_user,$to_user){
+	public function chatDisplay($from_user){
 		$stmt = $this->DB->prepare("SELECT * FROM chat WHERE 
-			from_user = '".$from_user."' AND to_user = '".$to_user."'
+			from_user = '".$from_user."' 
+			;");
+		$stmt->execute();
+		return $stmt->fetchAll ( PDO::FETCH_ASSOC );
+	}
+	
+	public function startChat($from_user,$to_user){
+		$stmt = $this->DB->prepare("INSERT into start_chat(from_user,to_user)
+			values ('".$from_user."', '".$to_user."');");
+		$stmt->execute();
+	}
+	
+	public function displayStartChat($from_user){
+		$stmt = $this->DB->prepare("SELECT * FROM start_chat WHERE 
+			from_user = '".$from_user."' 
 			;");
 		$stmt->execute();
 		return $stmt->fetchAll ( PDO::FETCH_ASSOC );
