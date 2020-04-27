@@ -99,8 +99,8 @@
 				<div class="col-4"><div class="img-thumbnail"><img style="margin:0 10px" width="56" height="56" src="../source/c.jpg"></img><div class="myProfile-font-small adjust mt-2">a</div></div></div>
 			</div>
 		</div>
-
-		<!-- Owner's chat block -->
+		
+		<!-- Owner's chat block 
 		<div class="mt-2 message-block" style="display:none">
 			<p class="mt-1 ml-1">You have messages here</p>
 			
@@ -132,9 +132,9 @@
 			<div class="ml-2"><input type="text" placeholder="Say something here..." class="myProfile-font adjust search pl-1" style="width: 70%"/><span class="myProfile-font mr-3" style="color: green;float: right">Reply</span></div>
 			<div class="m-2"><hr/></div>
 		</div>
-
+		-->
 		<!-- visitor's chat block -->
-		<div class="mt-2 message-block">
+		<div class="mt-2 message-block" id="chat_block">
 			<p class="mt-1 ml-1">Leave your message</p>
 
 			<div class="row">
@@ -211,6 +211,7 @@
 		myProfileAutoLoadPet();
 		myProfile();
 		myLocation();
+		//document.getElementById("chat_block").style.display = "none";
 	});
 </script>
 <?php }

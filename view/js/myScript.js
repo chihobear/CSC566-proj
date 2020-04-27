@@ -28,9 +28,10 @@
 //	});
 //}
 var pwdMatch = false;
-
+var user_name_control ="";
 function login(){
 	var loginUsername = $("#username").val();
+	user_name_control += $("#username").val();
 	var loginPwd = $("#pwd").val();
 	//ToDo user input check
 	$.ajax({
@@ -66,6 +67,7 @@ function submit_profile(){
 	var email = $("#email").val();
 	var phone = $("#phone").val();
 	var userName = $("#userName").val();
+	user_name_control = $("#userName").val();
 	var pwd = $("#pwd").val();
 	var rpwd = $("#Rpwd").val();
 	var adopter = 0;
@@ -145,6 +147,8 @@ function myProfileDataLoad(){
 		});
 		updateMyProfile();
 	}
+	
+	/*
 	else{
 		$.ajax({
 			type: "POST",
@@ -154,6 +158,7 @@ function myProfileDataLoad(){
 			success: function(data){
 				//Roles
 				data = data[0];
+
 				$('#role').text(data['role']);
 
 				//name
@@ -175,6 +180,7 @@ function myProfileDataLoad(){
 		});
 	}
 	
+	*/
 }
 
 function myProfile(){
@@ -351,20 +357,25 @@ function display_pets(){
 				var size = data[0].length;
 				for(i = 0;i < size;i++){
 					element = data[0];
+					console.log( data[1][i]);
 					str = '';
 					str += '<div class="mt-2 pet-block container"><div class="row mt-2"><div class="col-3"><img onclick="to_myProfile(this, \'other\')" width="56" height="56" src="' + data[1][i][0]["image"] + '"></img><div class="d-none">'+element[i]["owner"]+'</div><div onclick="favorite(this)" class="mt-2" style="font-size: 2rem">♡</div></div><div class="col-9 pl-0">';
 					str += '<div class="mb-2"><span>' + element[i]["name"] + '</span><hr/></div>';
 					str += '<div class="mb-2"><span class="myProfile-font">' + element[i]["age"] + '</span><hr/></div>';
 					str += '<div class="mb-2"><span class="myProfile-font">' + element[i]["breed"] + '    ' + element[i]["type"] + '</span><hr/></div>';
 					str += '<div class="mb-2"><span class="myProfile-font">' + element[i]["gender"] + '</span><hr/></div>';
+					
 					if(element[i]["info"] == ''){
 						str += '<div class="mb-2"><span class="myProfile-font pet-description">"My master is busy to write something here."</span></div>';
 					}
 					else{
 						str += '<div class="mb-2"><span class="myProfile-font pet-description">' + element[i]["info"] + '</span></div>';
 					}
+					var from_user = data[0][i]["owner"];
+					var to_user = user_name.textContent;
+					str += '<div class="mb-2"><button type="button" id="testbtn" onclick="redirect()" value="a">Contact</button></div>';
 					str += '</div></div></div>';
-
+					
 					html += str;
 				}
 				tab.html(html);
@@ -546,14 +557,22 @@ function favorite(e){
 	}
 }
 
-function chat(){
+function redirect(){
+	window.location.href="myProfile.php";
+	// stuck here
+	document.getElementById("chat_block").style.display = "none";
+}
+
+
+function startChat(){
+	$('#chat_block').style.display = "none";
+}
+function chat(from_user,to_user){
 	var d = new Date();
     var time = 
 		d.getHours() +":"+ d.getMinutes() + " " +
 		d.getMonth() + "/"+d.getDate()+ "/"+d.getFullYear();
 	
-	var from_user= $("#from").val();
-	var to_user = $("#to").val();
 	var message = $("#message").val();
 	$.ajax({
 		type:"POST",
@@ -586,6 +605,7 @@ function chatMessage(){
 		}
 	});
 }
+
 /*
 function checkPasswordMatch() {
     var pwd = $("#pwd");
