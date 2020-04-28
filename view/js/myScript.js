@@ -576,24 +576,19 @@ function redirect(from_user,to_user){
 
 function chat(from_user,to_user,id){
 	var d = new Date();
-    var rawTime = 
-		d.getHours() +":"+ d.getMinutes() + " " +
-		d.getMonth() + "/"+d.getDate()+ "/"+d.getFullYear();
-	//var message = $("#" +id +"").val();
-	//var mess = "\"id\";
-	//var x = "\"+"id"+\"";
-	var time = String(rawTime);
-	console.log(time);
+	
+    var messID = String(id.id);
+	console.log(id.id);
 	var message = document.getElementById(id.id).value;
 	$.ajax({
 		type:"POST",
 		url:"../../src/controllerChat.php",
 		dataType: "json",
-		data: { from_user : from_user , to_user: to_user,message:message, time : time},
+		data: { from_user : from_user , to_user: to_user,message:message, messID : messID},
 		success: function(data){
 		}
 	});
-	
+	displayChat();
 	$('#message').val('');
 	
 }
@@ -613,20 +608,44 @@ function displayStartChat(){
 			var tab = $("#chat_block");
 			for (var i =0; i< size; i++)
 			{
-	
-				var html = tab.html();
-				var temp_id = "mess"+i;	
-					//str += '<input type="'button'" ' + data[i]['to_user']+ '>';
-					str += ' chat with '+ data[i]['to_user']; 
-					str +=' <br>message <input type="text" id="'+ temp_id +'">';
-					str += '<div class="mb-2"><button type="button" id="testButton" onclick="chat(\''+data[i]['from_user']+'\',\''+data[i]['to_user']+'\',mess'+i+')" value="a">'+ data[i]['to_user']+'</button></div>';
+				if (data[i]['from_user']===from_user) 
+				{
+					var html = tab.html();
+					var temp_id = "mess"+i;	
+						//str += '<input type="'button'" ' + data[i]['to_user']+ '>';
+						str += ' <div>chat with '+ data[i]['to_user'] + '</div>'; 
+						var from_id = "from_id_" + i;
+						var to_id = "to_id_" + i;
+						str += ' <div id='+from_id+'></div>'; 
+						str += ' <div id='+to_id+'></div>'; 
+						str +=' <br>message <input type="text" id="'+ temp_id +'">';
+						str += '<div class="mb-2"><button type="button" id="testButton" onclick="chat(\''+data[i]['from_user']+'\',\''+data[i]['to_user']+'\',mess'+i+')" value="a">'+ data[i]['to_user']+'</button></div>';
 
-					//console.log(data);
-					html = str + html;
+						//console.log(data);
+						html = str + html;
+						
+				}
+				else  if (data[i]['from_user']!==from_user) 
+				{
+					var html = tab.html();
+					var temp_id = "mess"+i;	
+						//str += '<input type="'button'" ' + data[i]['to_user']+ '>';
+						str += ' <div>chat with '+ data[i]['from_user'] + '</div>'; 
+						var from_id = "from_id_" + i;
+						var to_id = "to_id_" + i;
+						str += ' <div id='+from_id+'></div>'; 
+						str += ' <div id='+to_id+'></div>'; 
+						str +=' <br>message <input type="text" id="'+ temp_id +'">';
+						str += '<div class="mb-2"><button type="button" id="testButton" onclick="chat(\''+data[i]['from_user']+'\',\''+data[i]['to_user']+'\',mess'+i+')" value="a">'+ data[i]['to_user']+'</button></div>';
+
+						//console.log(data);
+						html = str + html;
+				}
 			}
 				tab.html(html);	
 		}
 	});
+	var str ="";
 }
 /*
 function displayChat(){
@@ -637,6 +656,9 @@ function displayChat(){
 function displayChat(){
 	// get session  data
 	var from_user = user_name.textContent;
+	//var idvalue = String("from_id_" + 0);
+	//var message = document.getElementById(idvalue);
+	//console.log(message);
 	var mess ="";
 	$.ajax({
 		type:"POST",
@@ -644,11 +666,53 @@ function displayChat(){
 		dataType: "json",
 		data: { from_user : from_user },
 		success: function(data){
-			console.log(data);
+			//console.log(data);
+			for (var i =0; i<data.length;i++)
+			{
+				var mess1 = String("from_id_" + i);
+				var mess2 = String("to_id_" + i);
+				var str2 = "";
+				if (data[i]['from_user']==from_user)
+				{
+					console.log(data[i]);
+					var str1 = "";
+					str1 += data[i]['from_user'] +" : ";
+					str1 += data[i]['message'] + "<br>";
+					document.getElementById(mess1).innerHTML +=str1 ;
+				}
+				else
+				{
+					var str2 = "";
+					str1 += data[i]['to_user'] +" : ";
+					str2 += data[i]['message'];
+					document.getElementById(mess2).innerHTML +=str2 ;
+				}
+			}
 		}
 	});
 }
 
+function checkUserType(from_user){
+	$.ajax({
+		type:"POST",
+		url:"../../src/controllerUserType.php",
+		dataType: "json",
+		data: { from_user : from_user },
+		success: function(data){
+			
+			if(data[0]['adopter'] = 1){
+				console.log("adopter");
+				return "adopter";
+			}
+			else
+			{
+				console.log("sender");
+				return "sender";
+			}
+
+		}
+	});
+}
 /*
 function checkPasswordMatch() {
     var pwd = $("#pwd");

@@ -277,13 +277,16 @@ class DatabaseAdaptor {
 		$stmt->execute();
 	}
 	
-	public function chat($from_user,$to_user,$message,$time){
-		$stmt = $this->DB->prepare("insert into chat (from_user,to_user,message,time)
-					values ('".$from_user."', '".$to_user."','".$message."', '".$time."');");
+	public function chat($from_user,$to_user,$message,$messID){
+		$stmt = $this->DB->prepare("insert into chat (from_user,to_user,message,messID)
+					values ('".$from_user."', '".$to_user."','".$message."', '".$messID."');");
 		$stmt->execute();
+		
 		$stmt1 = $this->DB->prepare("SELECT * FROM chat WHERE 
 			from_user = '".$from_user."' AND to_user = '".$to_user."'
 			;");
+		$stmt1->execute();
+		return $stmt1->fetchAll ( PDO::FETCH_ASSOC );
 		
 	}
 	
@@ -302,11 +305,20 @@ class DatabaseAdaptor {
 	}
 	
 	public function displayStartChat($from_user){
-		$stmt = $this->DB->prepare("SELECT * FROM start_chat WHERE 
-			from_user = '".$from_user."' 
+		$stmt1 = $this->DB->prepare("SELECT * FROM start_chat WHERE 
+			from_user = '".$from_user."' OR to_user = '".$from_user."'
+			;");
+		$stmt1->execute();
+		return $stmt1->fetchAll ( PDO::FETCH_ASSOC );
+	}
+	
+	public function userType($from_user){
+		$stmt = $this->DB->prepare("SELECT adopter FROM profile WHERE 
+			username = '".$from_user."' 
 			;");
 		$stmt->execute();
 		return $stmt->fetchAll ( PDO::FETCH_ASSOC );
 	}
+	
 }
 ?>

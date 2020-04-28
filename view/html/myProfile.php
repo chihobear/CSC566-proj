@@ -165,7 +165,7 @@
 		</div>
 		-->
 		<div class="mt-2 message-block" id="chat_block">
-		
+
 		</div>
 		
 		<?php 
