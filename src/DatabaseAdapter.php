@@ -292,7 +292,7 @@ class DatabaseAdaptor {
 	
 	public function chatDisplay($from_user){
 		$stmt = $this->DB->prepare("SELECT * FROM chat WHERE 
-			from_user = '".$from_user."' 
+			from_user = '".$from_user."'  OR to_user = '".$from_user."'
 			;");
 		$stmt->execute();
 		return $stmt->fetchAll ( PDO::FETCH_ASSOC );
@@ -306,7 +306,7 @@ class DatabaseAdaptor {
 	
 	public function displayStartChat($from_user){
 		$stmt1 = $this->DB->prepare("SELECT * FROM start_chat WHERE 
-			from_user = '".$from_user."' OR to_user = '".$from_user."'
+			from_user = '".$from_user."'  OR to_user = '".$from_user."'
 			;");
 		$stmt1->execute();
 		return $stmt1->fetchAll ( PDO::FETCH_ASSOC );

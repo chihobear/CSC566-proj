@@ -576,7 +576,7 @@ function redirect(from_user,to_user){
 
 function chat(from_user,to_user,id){
 	var d = new Date();
-	
+	console.loge(from_user, to_user);
     var messID = String(id.id);
 	console.log(id.id);
 	var message = document.getElementById(id.id).value;
@@ -597,6 +597,7 @@ function chat(from_user,to_user,id){
 function displayStartChat(){
 	//$('#chat_block').innerHTML += '<br> to ' +  data;
 	var from_user = user_name.textContent;
+	console.log(from_user);
 	var str ="";
 	$.ajax({
 		type:"POST",
@@ -610,6 +611,7 @@ function displayStartChat(){
 			{
 				if (data[i]['from_user']===from_user) 
 				{
+					console.log("here");
 					var html = tab.html();
 					var temp_id = "mess"+i;	
 						//str += '<input type="'button'" ' + data[i]['to_user']+ '>';
@@ -619,14 +621,14 @@ function displayStartChat(){
 						str += ' <div id='+from_id+'></div>'; 
 						str += ' <div id='+to_id+'></div>'; 
 						str +=' <br>message <input type="text" id="'+ temp_id +'">';
-						str += '<div class="mb-2"><button type="button" id="testButton" onclick="chat(\''+data[i]['from_user']+'\',\''+data[i]['to_user']+'\',mess'+i+')" value="a">'+ data[i]['to_user']+'</button></div>';
+						str += '<div class="mb-2"><button type="button" id="testButton" onclick="chat(\''+data[i]['from_user']+'\',\''+data[i]['to_user']+'\',mess'+i+')" >'+ data[i]['to_user']+'</button></div>';
 
 						//console.log(data);
 						html = str + html;
 						
 				}
-				else  if (data[i]['from_user']!==from_user) 
-				{
+				if (data[i]['to_user']===from_user) 
+				{console.log("here");
 					var html = tab.html();
 					var temp_id = "mess"+i;	
 						//str += '<input type="'button'" ' + data[i]['to_user']+ '>';
@@ -636,7 +638,7 @@ function displayStartChat(){
 						str += ' <div id='+from_id+'></div>'; 
 						str += ' <div id='+to_id+'></div>'; 
 						str +=' <br>message <input type="text" id="'+ temp_id +'">';
-						str += '<div class="mb-2"><button type="button" id="testButton" onclick="chat(\''+data[i]['from_user']+'\',\''+data[i]['to_user']+'\',mess'+i+')" value="a">'+ data[i]['to_user']+'</button></div>';
+						str += '<div class="mb-2"><button type="button" id="testButton" onclick="chat(\''+data[i]['to_user']+'\',\''+data[i]['from_user']+'\',mess'+i+')" >'+ data[i]['to_user']+'</button></div>';
 
 						//console.log(data);
 						html = str + html;
@@ -645,6 +647,7 @@ function displayStartChat(){
 				tab.html(html);	
 		}
 	});
+	displayChat();
 	var str ="";
 }
 /*
@@ -672,19 +675,20 @@ function displayChat(){
 				var mess1 = String("from_id_" + i);
 				var mess2 = String("to_id_" + i);
 				var str2 = "";
-				if (data[i]['from_user']==from_user)
+				if (data[i]['from_user']===from_user)
 				{
+					
 					console.log(data[i]);
 					var str1 = "";
 					str1 += data[i]['from_user'] +" : ";
 					str1 += data[i]['message'] + "<br>";
 					document.getElementById(mess1).innerHTML +=str1 ;
 				}
-				else
+				if (data[i]['to_user']===from_user)
 				{
 					var str2 = "";
-					str1 += data[i]['to_user'] +" : ";
-					str2 += data[i]['message'];
+					str2 += data[i]['to_user'] +" : ";
+					str2 += data[i]['message'] + "<br>";;
 					document.getElementById(mess2).innerHTML +=str2 ;
 				}
 			}
