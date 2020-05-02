@@ -22,10 +22,10 @@ if(isset($_POST["location_str"])){
 	unset($_POST["state"]);
 	echo json_encode($theDB->getLocation($location_str, $state));
 }
-/*
+
 if(isset($_POST["states"])){
 	unset($_POST["states"]);
 	echo json_encode($theDB->getStates());
 }
-	*/		   
+		   
 ?>  

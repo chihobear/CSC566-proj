@@ -111,6 +111,23 @@ class DatabaseAdaptor {
 		*/
 		return array($data,$images);
 	}
+
+	public function displayFavoriteOnProfile($user){
+		$stmt = $this->DB->prepare("SELECT * FROM favorite where username = '".$user."';");
+		$stmt->execute();
+		$data = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+
+		$images = [];
+		$size = count($data);
+		for($x = 0;$x < $size;$x++){
+			$ownerName = $data[$x]["owner"];
+			$st = $this->DB->prepare("SELECT image FROM pet_image WHERE pet_owner = '".$ownerName."' ;");
+			$st->execute();
+			$image = $st->fetchAll ( PDO::FETCH_ASSOC );
+			array_push($images, $image);
+		}
+		return array($data, $images);
+	}
 	
 	public function displayPetImage( $user,$petName ){
 		$stmt = $this->DB->prepare("SELECT image FROM pet_image WHERE 
@@ -204,15 +221,15 @@ class DatabaseAdaptor {
     	$result = $location->fetchAll();
     	return $result;
     }
-	/*
+	
 	public function getStates(){
 		$states = $this->DB->prepare("SELECT stateName FROM states WHERE countryID = 'USA'; ");
 		$result = $states->execute();
 		$result = $states->fetchAll();
 		return $result;
 	}
-*/
-	public function getPetInfo(){
+
+	public function getPetInfo($user_name){
 	    $stmt1 = $this->DB->prepare("SELECT * FROM pet_info;");
 	    $stmt1->execute();
 	    $data = $stmt1->fetchAll ( PDO::FETCH_ASSOC );
@@ -231,6 +248,11 @@ class DatabaseAdaptor {
 	        array_push($images,$image);
 	    }
 	    
+	    $stmt3 = $this->DB->prepare("SELECT * FROM favorite where username = '".$user_name."';");
+
+	    $stmt3->execute();
+	    $favorite = $stmt3->fetchAll ( PDO::FETCH_ASSOC );
+
 	    /*
 	     $stmt2 = $this->DB->prepare("SELECT image FROM pet_image WHERE
 	     pet_name = '".$petName."' AND
@@ -240,7 +262,7 @@ class DatabaseAdaptor {
 	     $images = $stmt2->fetchAll ( PDO::FETCH_ASSOC );
 	     return array($data,$images);
 	     */
-	    return array($data,$images);
+	    return array($data,$images,$favorite);
 	}
 
 

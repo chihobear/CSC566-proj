@@ -127,24 +127,34 @@ function submit_profile(){
 
 function myProfileDataLoad(){
 	var user_name = $('#user_name').text();
-	if($('#type').text() == 'sign up'){
-		$.ajax({
-			type: "POST",
-			url: "../../src/controllerMyProfile.php",
-			dataType: "json",
-			data: {user: user_name},
-			success: function(data){
-				data = data[0];
-				if(data['adopter'] == 1){
-					$('#role').text('adopter');
-				}
-				else{
-					$('#role').text('sender');
-				}
-				$('#name').text(data['first_name'] + ' ' + data['last_name']);
-				$('#contact').val(data['email']);
+	$.ajax({
+		type: "POST",
+		url: "../../src/controllerMyProfile.php",
+		dataType: "json",
+		data: {user: user_name},
+		success: function(data){
+			data = data[0];
+			if(data['adopter'] == 1){
+				$('#role').text('adopter');
 			}
-		});
+			else{
+				$('#role').text('sender');
+			}
+			$('#name').text(data['first_name'] + ' ' + data['last_name']);
+			$('#contact').val(data['email']);
+
+			var role = $('#role').text();
+			if(role == "adopter"){
+				$('#Favorite-block').css('display', 'block');
+				myProfileAutoLoadFavorite();
+			}
+			else{
+				$('#Pet-block').css('display', 'block');
+				myProfileAutoLoadPet();
+			}
+		}
+	});
+	if($('#type').text() == 'sign up' || $('#type').text() == 'display_my'){
 		updateMyProfile();
 	}
 	
@@ -340,11 +350,12 @@ function normal(){
 
 
 function display_pets(){
+	var user = $('#user_name').text();
 	$.ajax({
 		type:"POST",
 		url:"../../src/controllerPetInfo.php",
 		dataType: "json",
-		data: {},
+		data: {user: user},
 		success: function(data){
 			
 			if (data === undefined || data.length == 0) {
@@ -359,7 +370,21 @@ function display_pets(){
 					element = data[0];
 					
 					str = '';
-					str += '<div class="mt-2 pet-block container"><div class="row mt-2"><div class="col-3"><img onclick="to_myProfile(this, \'other\')" width="56" height="56" src="' + data[1][i][0]["image"] + '"></img><div class="d-none">'+element[i]["owner"]+'</div><div onclick="favorite(this)" class="mt-2" style="font-size: 2rem">♡</div></div><div class="col-9 pl-0">';
+					str += '<div class="mt-2 pet-block container"><div class="row mt-2"><div class="col-3"><img onclick="to_myProfile(this, \'other\')" width="56" height="56" src="'
+					str += data[1][i][0]["image"] 
+					str += '"></img><div class="d-none">'+element[i]["owner"]
+					var flag = true;
+					for(j = 0;j < data[2].length;j++){
+						if(element[i]["owner"] == data[2][j]["owner"]){
+							flag = false;
+						}
+					}
+					if(flag == true){
+						str +='</div><div onclick="favorite(this)" class="mt-2" style="font-size: 2rem">♡</div></div><div class="col-9 pl-0">';
+					}
+					else{
+						str +='</div><div onclick="favorite(this)" class="mt-2" style="font-size: 2rem">❤</div></div><div class="col-9 pl-0">';
+					}
 					str += '<div class="mb-2"><span>' + element[i]["name"] + '</span><hr/></div>';
 					str += '<div class="mb-2"><span class="myProfile-font">' + element[i]["age"] + '</span><hr/></div>';
 					str += '<div class="mb-2"><span class="myProfile-font">' + element[i]["breed"] + '    ' + element[i]["type"] + '</span><hr/></div>';
@@ -373,7 +398,6 @@ function display_pets(){
 					}
 					var to_user = data[0][i]["owner"];
 					var from_user = user_name.textContent;
-					console.log(from_user,to_user);
 					str += '<div class="mb-2"><button type="button" id="testbtn" onclick="redirect(\''+from_user+'\',\''+to_user+'\')" value="a">Contact</button></div>';
 					str += '</div></div></div>';
 					
@@ -414,39 +438,65 @@ function submit_pet_profile(){
 }
 
 function myProfileAutoLoadPet(){
-	var user = $('#user_name').text();
-	$.ajax({
-		type:"POST",
-		url:"../../src/controllerMyProfilePetLoad.php",
-		dataType: "json",
-		data: {user: user},
-		success: function(data){
-			var tab = $("#pet-images");
-			var html = tab.html();
-			var str = '';
-			image64 = [];
-			if(data[0].length != 0){
-				$("#pet-name").val(data[0][0]['name']);
-				$("#pet-breed").val(data[0][0]['breed']);
-				$("#pet-age").val(data[0][0]['age']);
-				$('#pet-type').val(data[0][0]['type']);
-				$('#pet-gender').val(data[0][0]['gender']);
-				if(data[0][0]['info'] != ''){
-					$('#self-introduction').text(data[0][0]['info']);
-				}
-				for (var i = 0; i <data[0].length; i++){
-					// get pet image	
-					for (var j = 0; j < data[1][i].length; j++){ 
-						str += '<div onmouseover="show_delete(this)" onmouseleave="hide_delete(this)" class="list-inline-item m-1 image_out" style="position:relative"><img width="56" height="56" src="' +data[1][i][j]["image"] +'"><a onclick="remove_image(this)" class="in-block-delete" align="center">--</div></img></a>';
-						image64.push(data[1][i][j]["image"]);
+	var role = $('#role').text();
+	if(role == 'sender'){
+		var user = $('#user_name').text();
+		$.ajax({
+			type:"POST",
+			url:"../../src/controllerMyProfilePetLoad.php",
+			dataType: "json",
+			data: {user: user},
+			success: function(data){
+				var tab = $("#pet-images");
+				var html = tab.html();
+				var str = '';
+				image64 = [];
+				if(data[0].length != 0){
+					$("#pet-name").val(data[0][0]['name']);
+					$("#pet-breed").val(data[0][0]['breed']);
+					$("#pet-age").val(data[0][0]['age']);
+					$('#pet-type').val(data[0][0]['type']);
+					$('#pet-gender').val(data[0][0]['gender']);
+					if(data[0][0]['info'] != ''){
+						$('#self-introduction').text(data[0][0]['info']);
 					}
+					for (var i = 0; i <data[0].length; i++){
+						// get pet image	
+						for (var j = 0; j < data[1][i].length; j++){ 
+							str += '<div onmouseover="show_delete(this)" onmouseleave="hide_delete(this)" class="list-inline-item m-1 image_out" style="position:relative"><img width="56" height="56" src="' +data[1][i][j]["image"] +'"><a onclick="remove_image(this)" class="in-block-delete" align="center">--</div></img></a>';
+							image64.push(data[1][i][j]["image"]);
+						}
 
+					}
+					html = str + html;
+					tab.html(html);	
 				}
-				html = str + html;
-				tab.html(html);	
 			}
-		}
-	});
+		});
+	}
+}
+
+function myProfileAutoLoadFavorite(){
+	var role = $('#role').text();
+	if(role == 'adopter'){
+		var user = $('#user_name').text();
+		$.ajax({
+			type: 'POST',
+			url: '../../src/contorllerMyProfileFavoriteLoad.php',
+			dataType: 'json',
+			data: {user: user},
+			success: function(data){
+				var user_info = data[0];
+				var favorite_info = data[1]
+				var tab = $('#favorite-container');
+				var html = '';
+				for(var i = 0;i < favorite_info.length;i++){
+					html += '<div class="col-4" onclick="favorite_to_myProfile(\''+ user_info[i]["owner"] +'\')"><div class="img-thumbnail"><img style="margin:0 10px" width="56" height="56" src="' + favorite_info[i][0]["image"] + '"></img></div></div>';
+				}
+				tab.html(html);
+			}
+		});
+	}
 }
 
 
@@ -521,10 +571,21 @@ function to_myProfile(e, flag){
 	else{
 		username = $('#user_name').text();
 	}
-	console.log(username);
+
 	$.ajax({
 		type:"POST",
 		url:"../../src/controllerChangeSession.php",
+		dataType: "json",
+		data: {user: username},
+		success: function(data){}
+	});
+	window.location.href="myProfile.php";
+}
+
+function favorite_to_myProfile(username){
+	$.ajax({
+		type: "POST",
+		url: "../../src/controllerChangeSession.php",
 		dataType: "json",
 		data: {user: username},
 		success: function(data){}

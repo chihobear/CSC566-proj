@@ -18,7 +18,7 @@
 		<div>
 			<div class="float-left"><img class="rounded-circle" width="56" height="56" src="../source/1.jpeg"></img></div>
 			<div class="float-left ml-2">
-				<span class="myProfile-font strong">Hi I am <?php echo $_SESSION['user_name']?>!</span>
+				<span class="myProfile-font strong">Hi I am <?php echo $_SESSION['cur_user_name']?>!</span>
 				<table class="myProfile-font mt-2">
 					<tr>
 						<td>
@@ -57,11 +57,8 @@
 			</div>
 			<div class="clearfix"></div>
 		</div>
-		<!-- display pet on profile -->
-		<div id="Pet-block-display"> 
-		</div>
-		
-		<div id="Pet-block">
+		<!-- display pet on profile -->		
+		<div id="Pet-block"  style="display: none">
 			<div class="mt-2 pet-block">
 					<p class="mt-1 ml-1">I have a pet</p>
 					<div class = "row myProfile-font ml-3 mr-3">
@@ -91,11 +88,10 @@
 			</div>
 		</div>
 		
-		<div class="mt-2 favorite-block my-favorite">
+		<!-- Favorite-block -->
+		<div class="mt-2 favorite-block my-favorite" id="Favorite-block" style="display: none">
 			<p class="mt-1 ml-1">What is my favorite?</p>
-			<div class="row p-2">
-				<div class="col-4"><div class="img-thumbnail"><img style="margin:0 10px" width="56" height="56" src="../source/a.jpg"></img><div class="myProfile-font-small adjust mt-2">I have an apple that I bought yesterday</div></div></div>
-				<div class="col-4"><div class="img-thumbnail"><img style="margin:0 10px" width="56" height="56" src="../source/b.jpg"></img><div class="myProfile-font-small adjust mt-2">Hello world!</div></div></div>
+			<div class="row p-2" id="favorite-container">
 				<div class="col-4"><div class="img-thumbnail"><img style="margin:0 10px" width="56" height="56" src="../source/c.jpg"></img><div class="myProfile-font-small adjust mt-2">a</div></div></div>
 			</div>
 		</div>
@@ -212,7 +208,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		myProfileDataLoad();
-		myProfileAutoLoadPet();
 		myProfile();
 		myLocation();
 		displayStartChat();
