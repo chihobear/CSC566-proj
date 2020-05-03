@@ -341,6 +341,20 @@ class DatabaseAdaptor {
 		$stmt->execute();
 		return $stmt->fetchAll ( PDO::FETCH_ASSOC );
 	}
+
+	public function insertChat($from_user, $to_user, $message, $parent_ID){
+		$stmt = $this->DB->prepare("INSERT INTO chat (from_user, to_user, message, parent_ID) VALUES ('".$from_user."', '".$to_user."', '".$message."', ".$parent_ID.");");
+		$stmt->execute();
+		$ID = $this->DB->prepare("SELECT MAX(id),date, from_user from chat;");
+		$ID->execute();
+		return array($ID->fetchAll ( PDO::FETCH_ASSOC ), $from_user);
+	}
+
+	public function loadChat($user){
+		$stmt = $this->DB->prepare("select * from chat where from_user = '".$user."' or to_user = '".$user."';");
+		$stmt->execute();
+		return $stmt->fetchAll ( PDO::FETCH_ASSOC );
+	}
 	
 }
 ?>

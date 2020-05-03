@@ -5,9 +5,9 @@ session_start();
 include "DatabaseAdapter.php";
 $theDB = new DatabaseAdaptor();
 
-$from_user = $_POST["from_user"];
 
 
-echo json_encode($theDB ->chatDisplay($from_user));
-
+$user = $_SESSION['user_name'];
+echo json_encode($theDB ->loadChat($user)); 
+			   
 ?>  

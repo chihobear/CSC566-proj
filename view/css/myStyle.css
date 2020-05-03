@@ -220,7 +220,6 @@ hr{
 }
 
 .message{
-	display: block;
 	overflow: auto;
 	max-height: 50px;
 	margin-bottom: .75rem;

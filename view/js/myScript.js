@@ -396,9 +396,6 @@ function display_pets(){
 					else{
 						str += '<div class="mb-2"><span class="myProfile-font pet-description">' + element[i]["info"] + '</span></div>';
 					}
-					var to_user = data[0][i]["owner"];
-					var from_user = user_name.textContent;
-					str += '<div class="mb-2"><button type="button" id="testbtn" onclick="redirect(\''+from_user+'\',\''+to_user+'\')" value="a">Contact</button></div>';
 					str += '</div></div></div>';
 					
 					html += str;
@@ -407,10 +404,6 @@ function display_pets(){
 			}
 		}
 	});
-}
-
-function click_on_img(owner){
-	alert("redirect to the owner profile: " + owner);
 }
 
 // merged conflict here
@@ -619,143 +612,6 @@ function favorite(e){
 	}
 }
 
-function redirect(from_user,to_user){
-	//$('#chat_block').innerHTML += '<br> to ' +  to_user;
-	$.ajax({
-		type:"POST",
-		url:"../../src/controllerStartChat.php",
-		dataType: "json",
-		data: {from_user: from_user ,to_user: to_user },
-		success: function(data){
-			
-		}
-	});
-	window.location.href="myProfile.php";
-}
-
-
-
-function chat(from_user,to_user,id){
-	var d = new Date();
-	console.loge(from_user, to_user);
-    var messID = String(id.id);
-	console.log(id.id);
-	var message = document.getElementById(id.id).value;
-	$.ajax({
-		type:"POST",
-		url:"../../src/controllerChat.php",
-		dataType: "json",
-		data: { from_user : from_user , to_user: to_user,message:message, messID : messID},
-		success: function(data){
-		}
-	});
-	displayChat();
-	$('#message').val('');
-	
-}
-
-
-function displayStartChat(){
-	//$('#chat_block').innerHTML += '<br> to ' +  data;
-	var from_user = user_name.textContent;
-	console.log(from_user);
-	var str ="";
-	$.ajax({
-		type:"POST",
-		url:"../../src/controllerDisplayStartChat.php",
-		dataType: "json",
-		data: {from_user: from_user  },
-		success: function(data){
-			var size = data.length;
-			var tab = $("#chat_block");
-			for (var i =0; i< size; i++)
-			{
-				if (data[i]['from_user']===from_user) 
-				{
-					console.log("here");
-					var html = tab.html();
-					var temp_id = "mess"+i;	
-						//str += '<input type="'button'" ' + data[i]['to_user']+ '>';
-						str += ' <div>chat with '+ data[i]['to_user'] + '</div>'; 
-						var from_id = "from_id_" + i;
-						var to_id = "to_id_" + i;
-						str += ' <div id='+from_id+'></div>'; 
-						str += ' <div id='+to_id+'></div>'; 
-						str +=' <br>message <input type="text" id="'+ temp_id +'">';
-						str += '<div class="mb-2"><button type="button" id="testButton" onclick="chat(\''+data[i]['from_user']+'\',\''+data[i]['to_user']+'\',mess'+i+')" >'+ data[i]['to_user']+'</button></div>';
-
-						//console.log(data);
-						html = str + html;
-						
-				}
-				if (data[i]['to_user']===from_user) 
-				{console.log("here");
-					var html = tab.html();
-					var temp_id = "mess"+i;	
-						//str += '<input type="'button'" ' + data[i]['to_user']+ '>';
-						str += ' <div>chat with '+ data[i]['from_user'] + '</div>'; 
-						var from_id = "from_id_" + i;
-						var to_id = "to_id_" + i;
-						str += ' <div id='+from_id+'></div>'; 
-						str += ' <div id='+to_id+'></div>'; 
-						str +=' <br>message <input type="text" id="'+ temp_id +'">';
-						str += '<div class="mb-2"><button type="button" id="testButton" onclick="chat(\''+data[i]['to_user']+'\',\''+data[i]['from_user']+'\',mess'+i+')" >'+ data[i]['to_user']+'</button></div>';
-
-						//console.log(data);
-						html = str + html;
-				}
-			}
-				tab.html(html);	
-		}
-	});
-	displayChat();
-	var str ="";
-}
-/*
-function displayChat(){
-	var refresh=1000; // Refresh rate in milli seconds
-	mytime=setTimeout('chatMessage()',refresh);
-}
-*/
-function displayChat(){
-	// get session  data
-	var from_user = user_name.textContent;
-	//var idvalue = String("from_id_" + 0);
-	//var message = document.getElementById(idvalue);
-	//console.log(message);
-	var mess ="";
-	$.ajax({
-		type:"POST",
-		url:"../../src/controllerchatDisplay.php",
-		dataType: "json",
-		data: { from_user : from_user },
-		success: function(data){
-			//console.log(data);
-			for (var i =0; i<data.length;i++)
-			{
-				var mess1 = String("from_id_" + i);
-				var mess2 = String("to_id_" + i);
-				var str2 = "";
-				if (data[i]['from_user']===from_user)
-				{
-					
-					console.log(data[i]);
-					var str1 = "";
-					str1 += data[i]['from_user'] +" : ";
-					str1 += data[i]['message'] + "<br>";
-					document.getElementById(mess1).innerHTML +=str1 ;
-				}
-				if (data[i]['to_user']===from_user)
-				{
-					var str2 = "";
-					str2 += data[i]['to_user'] +" : ";
-					str2 += data[i]['message'] + "<br>";;
-					document.getElementById(mess2).innerHTML +=str2 ;
-				}
-			}
-		}
-	});
-}
 
 function checkUserType(from_user){
 	$.ajax({
@@ -778,6 +634,133 @@ function checkUserType(from_user){
 		}
 	});
 }
+
+
+function new_post(tab){
+	var message = $(tab).prev().val();
+	var to_user = $('#user_name').text();
+	if(message != ''){
+		$.ajax({
+			type: 'POST',
+			url: '../../src/controllerStoreChat.php',
+			dataType: 'json',
+			data: {to_user: to_user, message: message, parent_ID: -1},
+			success: function(data){
+				var ID = data[0][0]['MAX(id)'];
+				var from_user = data[0][0]['from_user'];
+				$(tab).prev().val('');
+				var chat_tab = $('#chat_block');
+				var html = chat_tab.html();
+				html = '<div class="row" id="'+ from_user + ' ' + ID +'">' +
+						'<div class="col-2"><img style="margin:0 10px" width="32" height="32" src="../source/2.jpg"></img></div>' + 
+						'<div class="col-10"><span class="myProfile-font message">' + message 
+						+ '</span><span class="myProfile-font message"> (by ' + data[1] + ' ' + data[0][0]['date'] +')</span></div></div><div class="row ml-3">'
+						+ '<div class="ml-5 mr-3 w-100"><input type="text" placeholder="Say something here..." class="myProfile-font-small adjust search pl-1" style="width: 70%"></input>'
+						+ '<span onclick="reply_chat(this)" class="myProfile-font-small mr-3" style="color: green;float: right;">Reply</span></div></div>'
+						+'<div class="m-2"><hr/></div>'
+						+ html;
+				chat_tab.html(html);
+			}
+		});
+	}
+}
+
+function reply_chat(tab){
+	var message = $(tab).prev().val();
+	var temp = $(tab).parent().parent().prev().attr('id').split(' ');
+	var parent_ID = parseInt(temp[1]);
+	var to_user = temp[0];
+	if(message != ''){
+		$.ajax({
+			type: 'POST',
+			url: '../../src/controllerStoreChat.php',
+			dataType: 'json',
+			data: {to_user: to_user, message: message, parent_ID: parent_ID},
+			success: function(data){
+				var ID = data[0][0]['MAX(id)'];
+				var from_user = data[0][0]['from_user'];
+				$(tab).prev().val('');
+				var html = '<div class="row ml-3" id = "' + from_user + ' ' + ID + '">';
+				html += '<div class="col-2"><img style="margin:0 10px" width="24" height="24" src="../source/1.jpeg"></img></div>';
+				html += '<div class="col-10 pl-0"><span class="myProfile-font-small message">' + message + '</span><span class="myProfile-font message"> (by ' + data[1] + ' ' + data[0][0]['date'] +')</span>';
+				html += '</div></div>';
+				
+				$(tab).parent().parent().before(html);			
+			}
+		});
+	}
+}
+
+
+function chatLoad(){
+	$.ajax({
+		type: 'POST',
+		url: '../../src/controllerLoadChat.php',
+		dataType: 'json',
+		data: {},
+		success: function(data){
+			parents = retrieveParent(data);
+			parents.reverse();
+			var chat_tab = $('#chat_block');
+			var html = chat_tab.html();
+			var str = '';
+			parents.forEach(e=>{
+				str += '<div class="row" id="'+ e['from_user'] + ' ' + e['id'] +'">' +
+						'<div class="col-2"><img style="margin:0 10px" width="32" height="32" src="../source/2.jpg"></img></div>' + 
+						'<div class="col-10"><span class="myProfile-font message">' + e['message'] 
+						+ '</span><span class="myProfile-font message"> (by ' + e['from_user'] + ' ' + e['date'] +')</span></div></div>';
+				childrens = retrieveChildren(data, e['id']);
+				children_str = '';
+				childrens.forEach(e=>{
+					children_str = '<div class="row ml-3" id = "' + e['from_user'] + ' ' + e['id'] + '">';
+					children_str += '<div class="col-2"><img style="margin:0 10px" width="24" height="24" src="../source/1.jpeg"></img></div>';
+					children_str += '<div class="col-10 pl-0"><span class="myProfile-font-small message">' + e['message'] + '</span><span class="myProfile-font message"> (by ' + e['from_user'] + ' ' + e['date'] +')</span>';
+					children_str += '</div></div>';
+				});
+
+				str += children_str;
+
+				str +=	'<div class="row ml-3"><div class="ml-5 mr-3 w-100"><input type="text" placeholder="Say something here..." class="myProfile-font-small adjust search pl-1" style="width: 70%"></input>'
+						+ '<span onclick="reply_chat(this)" class="myProfile-font-small mr-3" style="color: green;float: right;">Reply</span></div></div>'
+						+'<div class="m-2"><hr/></div>';
+			});
+			chat_tab.html(str + html);
+			
+		}
+	});
+}
+
+function retrieveParent(data){
+	var result = [];
+	data.forEach(e =>{
+		if(e['parent_ID'] == -1){
+			result.push(e);
+		}
+	});
+	return result;
+}
+
+function retrieveChildren(data, root_id){
+	var result = [];
+	var parent_id = root_id;
+	while(true){
+		var flag = true;
+		data.forEach(e=>{
+			if(e['parent_ID'] == parent_id){
+				flag = false;
+				parent_id = e['id'];
+				result.push(e);
+			}
+		});
+		if(flag == true){
+			break;
+		}
+	}
+	return result;
+	
+}
+
+
 /*
 function checkPasswordMatch() {
     var pwd = $("#pwd");
