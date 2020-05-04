@@ -184,6 +184,15 @@ function myProfileDataLoad(){
 
 				//age
 				$('#age').val(data['age']);
+				var role = $('#role').text();
+				if(role == "adopter"){
+					$('#Favorite-block').css('display', 'block');
+					myProfileAutoLoadFavorite();
+				}
+				else{
+					$('#Pet-block').css('display', 'block');
+					myProfileAutoLoadPet();
+				}
 	 		}
 		});
 	}
