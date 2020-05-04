@@ -131,7 +131,7 @@ function myProfileDataLoad(){
 		type: "POST",
 		url: "../../src/controllerMyProfile.php",
 		dataType: "json",
-		data: {user: user_name},
+		data: {user_name: user_name},
 		success: function(data){
 			data = data[0];
 			if(data['adopter'] == 1){
@@ -140,8 +140,13 @@ function myProfileDataLoad(){
 			else{
 				$('#role').text('sender');
 			}
-			$('#name').text(data['first_name'] + ' ' + data['last_name']);
+			var name = data['first'] + ' ' +  data['last'];
+			$("#name").text(name);
 			$('#contact').val(data['email']);
+
+			$("#cur_location").text('Location: ' + data['location']);
+			$('#age').val(data['age']);
+			$("#person_intro").val(data['info']);
 
 			var role = $('#role').text();
 			if(role == "adopter"){
@@ -225,7 +230,8 @@ function updateMyProfile(){
 		btn.text("Update");
 		$('#add_image').addClass("d-none");
 		store_person_myProfile();
-		if($('#role').text == 'sender'){
+		console.log($('#role').text());
+		if($('#role').text() == 'sender'){
 			submit_pet_profile();
 		}
 	}

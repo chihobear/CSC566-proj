@@ -279,7 +279,7 @@ class DatabaseAdaptor {
 			$flag = False;
 		}
 		if($flag){
-			$person = $this->DB->prepare("INSERT INTO person_info VALUES('" . $firstName . "', '" . $lastName . "', '" . $role . "', " . $age . ", '" . $contact . "', '" . $person_intro . "', 'text', '" . $location . "', '" . $userName . "');");
+			$person = $this->DB->prepare("INSERT INTO person_info (first, last, role, age, email, info, image, location, username) VALUES('" . $firstName . "', '" . $lastName . "', '" . $role . "', " . $age . ", '" . $contact . "', '" . $person_intro . "', 'text', '" . $location . "', '" . $userName . "');");
     		$result = $person->execute();
 		}
 		else{
