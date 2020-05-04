@@ -127,43 +127,36 @@ function submit_profile(){
 
 function myProfileDataLoad(){
 	var user_name = $('#user_name').text();
-	$.ajax({
-		type: "POST",
-		url: "../../src/controllerMyProfile.php",
-		dataType: "json",
-		data: {user_name: user_name},
-		success: function(data){
-			data = data[0];
-			if(data['adopter'] == 1){
-				$('#role').text('adopter');
-			}
-			else{
-				$('#role').text('sender');
-			}
-			var name = data['first'] + ' ' +  data['last'];
-			$("#name").text(name);
-			$('#contact').val(data['email']);
-
-			$("#cur_location").text('Location: ' + data['location']);
-			$('#age').val(data['age']);
-			$("#person_intro").val(data['info']);
-
-			var role = $('#role').text();
-			if(role == "adopter"){
-				$('#Favorite-block').css('display', 'block');
-				myProfileAutoLoadFavorite();
-			}
-			else{
-				$('#Pet-block').css('display', 'block');
-				myProfileAutoLoadPet();
-			}
-		}
-	});
 	if($('#type').text() == 'sign up' || $('#type').text() == 'display_my'){
+		$.ajax({
+			type: "POST",
+			url: "../../src/controllerMyProfile.php",
+			dataType: "json",
+			data: {user: user_name},
+			success: function(data){
+				data = data[0];
+				if(data['adopter'] == 1){
+					$('#role').text('adopter');
+				}
+				else{
+					$('#role').text('sender');
+				}
+				$('#name').text(data['first_name'] + ' ' + data['last_name']);
+				$('#contact').val(data['email']);
+
+				var role = $('#role').text();
+				if(role == "adopter"){
+					$('#Favorite-block').css('display', 'block');
+					myProfileAutoLoadFavorite();
+				}
+				else{
+					$('#Pet-block').css('display', 'block');
+					myProfileAutoLoadPet();
+				}
+			}
+		});
 		updateMyProfile();
 	}
-	
-	/*
 	else{
 		$.ajax({
 			type: "POST",
@@ -195,7 +188,7 @@ function myProfileDataLoad(){
 		});
 	}
 	
-	*/
+	
 }
 
 function myProfile(){
@@ -230,7 +223,6 @@ function updateMyProfile(){
 		btn.text("Update");
 		$('#add_image').addClass("d-none");
 		store_person_myProfile();
-		console.log($('#role').text());
 		if($('#role').text() == 'sender'){
 			submit_pet_profile();
 		}
