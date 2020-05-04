@@ -225,7 +225,9 @@ function updateMyProfile(){
 		btn.text("Update");
 		$('#add_image').addClass("d-none");
 		store_person_myProfile();
-		submit_pet_profile();
+		if($('#role').text == 'sender'){
+			submit_pet_profile();
+		}
 	}
 	else{
 		//Make all input label editable
