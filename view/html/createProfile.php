@@ -21,12 +21,12 @@
 	   		<tr class="background_gray">
 	   			<td>
 				
-	   				<div class="form_row"><input type="text" id="Fname" class="border-0 pl-1 w-100 h-100"  placeholder="First name" pattern = "[A-Z a-z]*" required ></input></div>
-	   				<div class="form_row"><input type="text" id="Lname" class="border-0 pl-1 w-100 h-100" placeholder="Last name" pattern = "[A-Z a-z]*" required ></input></div>
+	   				<div class="form_row"><input type="text" id="Fname" class="border-0 pl-1 w-100 h-100"  placeholder="First name" pattern = "[A-Z a-z]*" title="Must be a alphabet letter" required ></input></div>
+	   				<div class="form_row"><input type="text" id="Lname" class="border-0 pl-1 w-100 h-100" placeholder="Last name" pattern = "[A-Z a-z]*" title="Must be a alphabet letter" required ></input></div>
 	   				<div class="form_row"><input type="text" id="email" class="border-0 pl-1 w-100 h-100" placeholder="Email" "[A-Z a-z]*"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required ></input></div>
-	   				<div class="form_row"><input type="text" id="phone" class="border-0 pl-1 w-100 h-100" placeholder="Phone (optional)" pattern = "^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" ></input></div>
-	   				<div class="form_row"><input type="text" id="userName" class="border-0 pl-1 w-100 h-100" placeholder="Username" required ></input></div>
-	   				<div class="form_row"><input type="password" id="pwd" class="border-0 pl-1 w-100 h-100" placeholder="Password" required ></input></div>
+	   				<div class="form_row"><input type="text" id="phone" class="border-0 pl-1 w-100 h-100" placeholder="Phone (optional)" pattern = "^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" title="Must be in form of xxx xxx xxxx" ></input></div>
+	   				<div class="form_row"><input type="text" id="userName" class="border-0 pl-1 w-100 h-100" placeholder="Username" pattern=".{8,}" title="Eight or more characters" required ></input></div>
+	   				<div class="form_row"><input type="password" id="pwd" class="border-0 pl-1 w-100 h-100" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" required ></input></div>
 	   				<div class="form_row my-2"><input type="password" id="Rpwd"class="border-0 pl-1 w-100 h-100" placeholder="Retype your password"></input></div>
 					<div class="myProfile-font-small" style="color: red" id ="alert1"></div>
 
