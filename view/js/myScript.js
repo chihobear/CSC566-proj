@@ -721,7 +721,7 @@ function chatLoad(){
 				childrens = retrieveChildren(data, e['id']);
 				children_str = '';
 				childrens.forEach(e=>{
-					children_str = '<div class="row ml-3" id = "' + e['from_user'] + ' ' + e['id'] + '">';
+					children_str += '<div class="row ml-3" id = "' + e['from_user'] + ' ' + e['id'] + '">';
 					children_str += '<div class="col-2"><img style="margin:0 10px" width="24" height="24" src="../source/1.jpeg"></img></div>';
 					children_str += '<div class="col-10 pl-0"><span class="myProfile-font-small message">' + e['message'] + '</span><span class="myProfile-font message"> (by ' + e['from_user'] + ' ' + e['date'] +')</span>';
 					children_str += '</div></div>';
