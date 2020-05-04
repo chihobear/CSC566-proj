@@ -62,22 +62,22 @@
 			<div class="mt-2 pet-block">
 					<p class="mt-1 ml-1">I have a pet</p>
 					<div class = "row myProfile-font ml-3 mr-3">
-						<div class="col-6">Name: <input class="bg-white input-label not-clicked" type="text" id="pet-name"" style="width:50px"></input></div>
-						<div class="col-6">Breed: <input class="bg-white input-label not-clicked" type="text" id="pet-breed" style="width:50px"></input></div>
+						<div class="col-6">Name: <input class="bg-white input-label not-clicked" type="text" id="pet-name"" style="width:100px"></input></div>
+						<div class="col-6">Type: <input class="bg-white input-label not-clicked" type="text" id="pet-breed" style="width:50px"></input></div>
 						<div class="col-6">Age: 
 							<select id="pet-age" style="width: 100px" class="bg-white input-label not-clicked" type="text" style="width:80px">
 								<option value="0" selected="true">**</option>
 							</select>
 						</div>
-						<div class="col-6">Type: <input class="bg-white input-label not-clicked" type="text" id="pet-type" style="width:50px"></input></div>
+						<div class="col-6">Breed: <input class="bg-white input-label not-clicked" type="text" id="pet-type" style="width:100px"></input></div>
 						<div class="col-6">Gender: 
-							<select class="bg-white input-label not-clicked"  style="width:50px" id="pet-gender">
+							<select class="bg-white input-label not-clicked"  style="width:100px" id="pet-gender">
 								<option value="male" selected="true">male</option>
 								<option value="female">female</option>
 							</select>
 						</div>
 					</div>
-				<div class="col-6">Info: <input class="bg-white input-label" id="pet-info" type="text" style="width:100px"></input></div>
+				<div class="col-6">Info: </div>
 				<div class="p-2 slide" id = 'pet-images'>
 					<div id="add_image" class="list-inline-item m-1 image_out d-none" style="position:relative;"><img width="56" height="56" src="../source/plus.jpeg"><input onchange="upload_image(this)" type="file" id="file" accept="image/*" id="upload"/></img></div>
 				</div>

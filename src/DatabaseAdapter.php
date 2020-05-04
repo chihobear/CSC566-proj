@@ -61,7 +61,7 @@ class DatabaseAdaptor {
 		}
 		//Not empty, modify
 		else{
-			$stmt = $this->DB->prepare("update pet_info set name='". $petName . "', type='" . $petType . "', breed='" . $petBreed . "', age='" . $petAge . "', gender='" . $petGender . "', info='" . $petInfo . "';");
+			$stmt = $this->DB->prepare("update pet_info set name='". $petName . "', type='" . $petType . "', breed='" . $petBreed . "', age='" . $petAge . "', gender='" . $petGender . "', info='" . $petInfo . "' where owner = '".$petOwner."';");
 			$stmt->execute();
 		}
 					
@@ -350,8 +350,14 @@ class DatabaseAdaptor {
 		return array($ID->fetchAll ( PDO::FETCH_ASSOC ), $from_user);
 	}
 
-	public function loadChat($user){
-		$stmt = $this->DB->prepare("select * from chat where from_user = '".$user."' or to_user = '".$user."';");
+	public function loadChat($user, $username){
+		$stmt;
+		if($user == $username){
+			$stmt = $this->DB->prepare("select * from chat where from_user = '".$user."' or to_user = '".$user."';");
+		}
+		else{
+			$stmt = $this->DB->prepare("select * from chat where (from_user = '".$user."' and to_user = '".$username."') or (from_user = '".$username."' and to_user = '".$user."');");
+		}
 		$stmt->execute();
 		return $stmt->fetchAll ( PDO::FETCH_ASSOC );
 	}

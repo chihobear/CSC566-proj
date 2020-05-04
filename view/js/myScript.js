@@ -422,9 +422,12 @@ function submit_pet_profile(){
 	var petBreed = $("#pet-breed").val();
 	var petAge = $("#pet-age").val();
 	var petGender = $("#pet-gender").val();
-	var petInfo = $("#pet-info").val();
+	var petInfo = $("#self-introduction").text();
 	var petImage = JSON.stringify(image64);
 	var petOwner = $('#user_name').text();
+	if(petInfo == "You will know my features when you know me"){
+		petInfo = '';
+	}
 	$.ajax({
 		type:"POST",
 		url:"../../src/controllerPetSubmitProfile.php",
@@ -702,11 +705,12 @@ function reply_chat(tab){
 
 
 function chatLoad(){
+	var username = $('#user_name').text();
 	$.ajax({
 		type: 'POST',
 		url: '../../src/controllerLoadChat.php',
 		dataType: 'json',
-		data: {},
+		data: {username: username},
 		success: function(data){
 			parents = retrieveParent(data);
 			parents.reverse();
